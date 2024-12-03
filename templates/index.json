@@ -4,8 +4,8 @@
       "type": "image-banner",
       "settings": {
         "color_scheme": "scheme-6435fff7-fc48-4e8c-ad26-9ae1ca5e6e7e",
-        "image": "shopify://shop_images/PC_1",
-        "image_2": "shopify://shop_images/couverture_final_1",
+        "image": "shopify://shop_images/PC_1.webp",
+        "image_2": "shopify://shop_images/couverture_final_1.webp",
         "image_overlay_opacity": 0,
         "image_height": "medium",
         "adapt_height_first_image": true,
