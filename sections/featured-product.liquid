@@ -1,0 +1,4364 @@
+<script src="{{ 'stock-control.js' | asset_url }}" defer="defer"></script>
+
+<section class="color-{{ section.settings.color_scheme }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}{% if section.settings.offdesk %} offdesk{% endif %}{% if section.settings.offmob %} offmob{% endif %}" data-section="{{ section.id }}">
+  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'component-rte.css' | asset_url | stylesheet_tag }}
+  {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
+  {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+  {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'indicateur-stock.css' | asset_url | stylesheet_tag }}
+  {{ 'component-collec.css' | asset_url | stylesheet_tag }}
+  {{ 'component-variant-color-swatch.css' | asset_url | stylesheet_tag }}
+  {{ 'readmore.css' | asset_url | stylesheet_tag }}
+
+  {%- style -%}
+    {% render 'section-style' %}
+
+    {% render 'carrousel-style' %}
+
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+
+    {% for block in section.blocks %}
+      {% if block.type == "buy_buttons" %}
+        {% if block.settings.show_dynamic_checkout == false %}
+          .button-add-remove-wishlist {
+            margin-top: 0rem;
+          }
+          .custom_icon svg {
+            fill: rgb(var(--color-foreground))!important;
+          }
+        {% endif %}
+      {% endif %}
+      {% if block.type == "badge" %}
+        @media screen and (min-width: 750px) {
+          .card__badge.badge-product-info img {
+            width: {{ block.settings.image-width-desktop }}px;
+          }
+        }
+        @media screen and (max-width: 749px) {
+          .card__badge.badge-product-info img {
+            width: {{ block.settings.image-width-mobile }}px;
+          }
+        }
+      {% endif %}
+    {% endfor %}
+
+    {% if section.settings.enable_zoom %}
+      .section-{{ section.id }}-padding .product__media-toggle {
+        display: none !important;
+      }
+      .section-{{ section.id }}-padding .product__modal-opener .product__media-icon {
+        display: none !important;
+      }
+    {% endif %}
+  {%- endstyle -%}
+
+  {%- assign product = section.settings.product -%}
+
+  {%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
+  {%- if first_3d_model -%}
+    {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
+    <link id="ModelViewerStyle" rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
+    <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- endif -%}
+
+  {% if section.settings.breadcrumb != blank %}
+  <div class="breadcrumb-container">
+    <div class="breadcrumb {% if page %}breadcrump-bottom-padding{% endif %}">
+      <a href="/">Accueil</a>
+      <span class="divider"> | </span>
+      <a href="{{ section.settings.breadcrumb.url }}">
+        <span>{{ section.settings.breadcrumb.title }}</span>
+      </a>
+      <span class="divider"> | </span>
+      <span>{{ product.title }}</span>
+    </div>
+  </div>
+  {% endif %}
+
+  <div id="MainProduct-{{ section.id }}" class="page-width section-{{ section.id }}-padding{% if section.settings.secondary_background %} isolate{% endif %} {% if section.settings.identificateur != blank %}{{ identificateur }}{% endif %}">
+      {% comment %} Permet de récupérer la liste de variantes {% endcomment %}
+    <div class="featured-product product product--thumbnail_slider grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %} gradient color-{{ section.settings.color_scheme }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+      <div class="grid__item product__media-wrapper">
+        <media-gallery data-scrollback="true"  id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'product.media.gallery_viewer' | t }}" data-desktop-layout="thumbnail_slider">
+          <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
+          
+          <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
+
+            {% comment %} Début ~ Badge personnalisé {% endcomment %}
+            {% for block in section.blocks %}
+              {% if block.type == "badge" %}
+                {% if block.settings.badgeimg == blank and block.settings.badge == blank %}
+                {% else %}
+                  <div class="card__badge badge-product-info b-{{ block.settings.b-pos }}{% if block.settings.identificateur != blank %} {{ block.settings.identificateur }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                    {% if block.settings.badgeimg != blank %}
+                      <img
+                        srcset="{%- if block.settings.badgeimg.width >= 275 -%}{{ block.settings.badgeimg | image_url: width: 275 }} 275w,{%- endif -%}
+                        {%- if block.settings.badgeimg.width >= 550 -%}{{ block.settings.badgeimg | image_url: width: 550 }} 550w,{%- endif -%}
+                        {%- if block.settings.badgeimg.width >= 710 -%}{{ block.settings.badgeimg | image_url: width: 710 }} 710w,{%- endif -%}
+                        {%- if block.settings.badgeimg.width >= 1420 -%}{{ block.settings.badgeimg | image_url: width: 1420 }} 1420w,{%- endif -%}
+                        {{ block.settings.badgeimg | image_url }} {{ block.settings.badgeimg.width }}w"
+                        src="{{ block.settings.badgeimg | image_url: width: 550 }}"
+                        sizes="(min-width: 990px) 550px,
+                        (min-width: 750px) 550px,
+                        calc(100vw - 30px)"
+                        alt="{{ block.settings.badgeimg.alt }}"
+                        width="{{ block.settings.badgeimg.width }}"
+                        loading="lazy"
+                      >
+                    {% else %}
+                    <span class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}">{{ block.settings.badge }}</span>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            {% comment %} Fin ~ Badge personnalisé {% endcomment %}
+          
+            <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
+              {{ "accessibility.skip_to_product_info" | t }}
+            </a>
+            <ul id="Slider-Gallery-{{ section.id }}" class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile" role="list">
+              {%- liquid
+                assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+                assign media_count = product.media.size
+                if section.settings.hide_variants and media_count > 1
+                  assign media_count = media_count | minus: variant_images.size | plus: 1
+                endif
+
+                assign media_width = 0.45
+              -%}
+              {%- if product.selected_or_first_available_variant.featured_media != null -%}
+                {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+                <li id="Slide-{{ section.id }}-{{ featured_media.id }}" class="product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}">
+                  {%- assign media_position = 1 -%}
+                  {% render 'product-thumbnail', media: featured_media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}
+                </li>
+              {%- endif -%}
+              {%- for media in product.media -%}
+                {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+                  <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}">
+                    {%- liquid
+                      assign media_position = media_position | default: 0 | plus: 1
+                      assign lazy_load = false
+                      if media_position > 1
+                        assign lazy_load = true
+                      endif
+                      render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: lazy_load
+                    -%}
+                  </li>
+                {%- endunless -%}
+              {%- endfor -%}
+            </ul>
+            <div class="slider-buttons no-js-hidden quick-add-hidden{% if media_count < 2 or section.settings.mobile_thumbnails == 'show' or section.settings.mobile_thumbnails == 'points' %} small-hide{% endif %}">
+              <button type="button" class="slider-button slider-button--prev {% if section.settings.mobile_thumbnails == 'points' %}none_points{% endif %}" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
+              <div class="slider-counter caption">
+                <span class="slider-counter--current">1</span>
+                <span aria-hidden="true"> / </span>
+                <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+                <span class="slider-counter--total">{{ media_count }}</span>
+              </div>
+              <button type="button" class="slider-button slider-button--next {% if section.settings.mobile_thumbnails == 'points' %}none_points{% endif %}" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
+            </div>
+          </slider-component>
+          {%- if first_3d_model -%}
+            <button
+              class="button button--full-width product__xr-button"
+              type="button"
+              aria-label="{{ 'products.product.xr_button_label' | t }}"
+              data-shopify-xr
+              data-shopify-model3d-id="{{ first_3d_model.id }}"
+              data-shopify-title="{{ product.title | escape }}"
+              data-shopify-xr-hidden
+            >
+              {% render 'icon-3d-model' %}
+              {{ 'products.product.xr_button' | t }}
+            </button>
+          {%- endif -%}
+          {%- if media_count > 1 -%}
+            <slider-component id="GalleryThumbnails-{{ section.id }}" class="thumbnail-slider slider-mobile-gutter quick-add-hidden{% if section.settings.mobile_thumbnails == 'hide' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}">
+              <button type="button" class="slider-button slider-button--prev{% if section.settings.mobile_thumbnails == 'points' %} none_points{% endif %}{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}" aria-controls="GalleryThumbnails-{{ section.id }}" data-step="3">{% render 'icon-caret' %}</button>
+              <ul id="Slider-Thumbnails-{{ section.id }}" class="thumbnail-list {% if section.settings.mobile_thumbnails == 'points' %}thumbnail_points_wrapper {% endif %}list-unstyled slider slider--mobile slider--tablet-up">
+                {%- if featured_media != null -%}
+                  {%- liquid
+                    capture media_index
+                      if featured_media.media_type == 'model'
+                        increment model_index
+                      elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video'
+                        increment video_index
+                      elsif featured_media.media_type == 'image'
+                        increment image_index
+                      endif
+                    endcapture
+                    assign media_index = media_index | plus: 1
+                  -%}
+                  <li id="Slide-Thumbnails-{{ section.id }}-0" class="thumbnail-list__item {% if section.settings.mobile_thumbnails == 'points' %}thumbnail_points_contain {% endif %}slider__slide{% if section.settings.hide_variants and variant_images contains featured_media.src %} thumbnail-list_item--variant{% endif %}" data-target="{{ section.id }}-{{ featured_media.id }}" data-media-position="{{ media_index }}">
+                    <button class="thumbnail global-media-settings {% if section.settings.mobile_thumbnails == 'points' %}thumbnail_points {% endif %}global-media-settings--no-shadow {% if featured_media.preview_image.aspect_ratio > 1 %}thumbnail--wide{% else %}thumbnail--narrow{% endif %}"
+                      aria-label="{%- if featured_media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif featured_media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
+                      aria-current="true"
+                      aria-controls="GalleryViewer-{{ section.id }}"
+                      aria-describedby="Thumbnail-{{ section.id }}-0"
+                    >
+                      <img id="Thumbnail-{{ section.id }}-0" srcset="{% if featured_media.preview_image.width >= 54 %}{{ featured_media.preview_image | image_url: width: 54 }} 54w,{% endif %}
+                        {% if featured_media.preview_image.width >= 74 %}{{ featured_media.preview_image | image_url: width: 74 }} 74w,{% endif %}
+                        {% if featured_media.preview_image.width >= 104 %}{{ featured_media.preview_image | image_url: width: 104 }} 104w,{% endif %}
+                        {% if featured_media.preview_image.width >= 162 %}{{ featured_media.preview_image | image_url: width: 162 }} 162w,{% endif %}
+                        {% if featured_media.preview_image.width >= 208 %}{{ featured_media.preview_image | image_url: width: 208 }} 208w,{% endif %}
+                        {% if featured_media.preview_image.width >= 324 %}{{ featured_media.preview_image | image_url: width: 324 }} 324w,{% endif %}
+                        {% if featured_media.preview_image.width >= 416 %}{{ featured_media.preview_image | image_url: width: 416 }} 416w,{% endif %}
+                        {{ featured_media.preview_image | image_url }} {{ media.preview_image.width }}w"
+                        src="{{ featured_media | image_url: width: 416 }}"
+                        sizes="(min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4), (min-width: 990px) calc(({{ media_width | times: 100 }}vw - 4rem) / 4), (min-width: 750px) calc((100vw - 15rem) / 8), calc((100vw - 14rem) / 3)"
+                        alt="{{ featured_media.alt | escape }}"
+                        height="208"
+                        width="208"
+                        loading="lazy"
+                        {% if section.settings.mobile_thumbnails == 'points' %}class="none_points"{% endif %}
+                      >
+                    </button>
+                  </li>
+                {%- endif -%}
+                {%- for media in product.media -%}
+                  {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+                    {%- liquid
+                      capture media_index
+                        if media.media_type == 'model'
+                          increment model_index
+                        elsif media.media_type == 'video' or media.media_type == 'external_video'
+                          increment video_index
+                        elsif media.media_type == 'image'
+                          increment image_index
+                        endif
+                      endcapture
+                      assign media_index = media_index | plus: 1
+                    -%}
+                     <li id="Slide-Thumbnails-{{ section.id }}-{{ forloop.index }}" class="thumbnail-list__item {% if section.settings.mobile_thumbnails == 'points' %}thumbnail_points_contain {% endif %}slider__slide{% if section.settings.hide_variants and variant_images contains media.src %} thumbnail-list_item--variant{% endif %}" data-target="{{ section.id }}-{{ media.id }}"  data-media-position="{{ media_index }}">
+                      {%- if media.media_type == 'model' -%}
+                        <span class="thumbnail__badge" aria-hidden="true">
+                          {%- render 'icon-3d-model' -%}
+                        </span>
+                      {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}
+                        <span class="thumbnail__badge" aria-hidden="true">
+                          {%- render 'icon-play' -%}
+                        </span>
+                      {%- endif -%}
+                      <button class="thumbnail global-media-settings {% if section.settings.mobile_thumbnails == 'points' %}thumbnail_points{% endif %} global-media-settings--no-shadow {% if media.preview_image.aspect_ratio > 1 %}thumbnail--wide{% else %}thumbnail--narrow{% endif %}"
+                        aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
+                        {% if media == product.selected_or_first_available_variant.featured_media or product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} aria-current="true"{% endif %}
+                        aria-controls="GalleryViewer-{{ section.id }}"
+                        aria-describedby="Thumbnail-{{ section.id }}-{{ forloop.index }}"
+                      >
+                        <img id="Thumbnail-{{ section.id }}-{{ forloop.index }}"
+                          srcset="{% if media.preview_image.width >= 59 %}{{ media.preview_image | image_url: width: 59 }} 59w,{% endif %}
+                                  {% if media.preview_image.width >= 118 %}{{ media.preview_image | image_url: width: 118 }} 118w,{% endif %}
+                                  {% if media.preview_image.width >= 84 %}{{ media.preview_image | image_url: width: 84 }} 84w,{% endif %}
+                                  {% if media.preview_image.width >= 168 %}{{ media.preview_image | image_url: width: 168 }} 168w,{% endif %}
+                                  {% if media.preview_image.width >= 130 %}{{ media.preview_image | image_url: width: 130 }} 130w,{% endif %}
+                                  {% if media.preview_image.width >= 260 %}{{ media.preview_image | image_url: width: 260 }} 260w{% endif %}"
+                          src="{{ media | image_url: width: 84, height: 84 }}"
+                          sizes="(min-width: 1200px) calc((1200px - 19.5rem) / 12), (min-width: 750px) calc((100vw - 16.5rem) / 8), calc((100vw - 8rem) / 5)"
+                          alt="{{ media.alt | escape }}"
+                          height="200"
+                          width="200"
+                          loading="lazy"
+                          {% if section.settings.mobile_thumbnails == 'points' %}class="none_points"{% endif %}
+                        >
+                      </button>
+                    </li>
+                  {%- endunless -%}
+                {%- endfor -%}
+              </ul>
+              <button type="button" class="slider-button slider-button--next{% if section.settings.mobile_thumbnails == 'points' %} none_points{% endif %}{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}" name="next" aria-label="{{ 'general.slider.next_slide' | t }}" aria-controls="GalleryThumbnails-{{ section.id }}" data-step="3">{% render 'icon-caret' %}</button>
+            </slider-component>
+          {%- endif -%}
+        </media-gallery>
+      </div>
+      <div class="product__info-wrapper grid__item">
+        <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.center-content-desktop == "center" %} product-center-desktop{% endif %}{% if section.settings.center-content-mobile %} product-center-mobile{% endif %}">
+          {%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+
+            {% comment %} Application {% endcomment %}
+            {%- when '@app' -%}
+              {% render block %}
+
+            {% comment %} Réduction sur la quantité {% endcomment %}
+            {%- when 'pack' -%}
+              {% render 'quantity-breaks', block: block, product: product %}
+
+            {% comment %} Texte {% endcomment %}
+            {%- when 'text' -%}
+              <p class="product__text product-can-be-centered product-block-margin-{{ block.settings.margin }} {% if block.settings.class != blank %}{{ block.settings.class }}{% endif %} test--{{ block.id }} {% if block.settings.show_background_text %}color-{{ block.settings.color_scheme }} gradient{% endif %}{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}"
+              {% if block.settings.show_background_text %}
+                style="
+                  color: rgba(var(--color-foreground));
+                  border-radius: var(--variant-pills-radius);
+                  color: rgb(var(--color-foreground));
+                  display: inline-block;
+                  margin: 0.7rem 0.5rem 0.2rem 0;
+                  padding: 1rem 2rem;
+                  font-size: 1.2rem;
+                  letter-spacing: 0.1rem;
+                  line-height: 1;
+                "
+              {% endif %}
+              {{ block.shopify_attributes }}>
+                {% if block.settings.custom_icon == blank %}
+                <span style="fill:rgba(var(--color-foreground))">
+                   {% render 'icon-accordion', icon: block.settings.icon %}
+                </span>
+                {% elsif block.settings.custom_icon != blank %}
+                <span class="custom_icon color-foreground-{{ settings.accent_icons }}">
+                  {{ block.settings.custom_icon }}
+                </span>
+                {% endif %}
+                {{- block.settings.text -}}
+              </p>
+
+            {% comment %} Titre {% endcomment %}
+            {%- when 'title' -%}
+              <{{ block.settings.heading_tag }} class="product__title product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %} {{ block.settings.heading_size }}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" {{ block.shopify_attributes }}>
+                {%- if product.title != blank -%}
+                  {{ product.title | escape }} {{ block.settings.title-suite }}
+                {%- else -%}
+                  {{ 'onboarding.product_title' | t }}
+                {%- endif -%}
+              </{{ block.settings.heading_tag }}>
+
+            {% comment %} Texte enrichi {% endcomment %}
+            {%- when 'richtext' -%}
+              <div class="richtext-product product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" {{ block.shopify_attributes }}>
+                {% if block.settings.text != blank %}
+                  {{ block.settings.text }}
+                {% endif %}
+              </div>
+
+            {% comment %} Avis natif {% endcomment %}
+            {%- when 'rating-natif' -%}
+              <{% if block.settings.avis-lien != blank %}a href="{{ block.settings.avis-lien }}"{% else %}div{% endif %} class="product-can-be-centered product-block-margin-{{ block.settings.margin }} rating-natif-stars{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}{% if block.settings.identificateur != blank %} {{ block.settings.identificateur }}{% endif %}">
+              {% for i in (1..5) %}
+                {% if i <= block.settings.stars-num %}
+                <svg class="icon color-stars-yellow" style="fill: {{ block.settings.starscolor }}" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                  <path d="M10 2.62639L8.54072 7.33639C8.34848 7.95687 7.79714 8.37696 7.17504 8.37696H2.45272L6.27316 11.2879C6.77645 11.6714 6.98704 12.3511 6.7948 12.9716L5.33552 17.6816L9.15596 14.7706C9.65925 14.3872 10.3408 14.3872 10.844 14.7706L14.6645 17.6816L13.2052 12.9716C13.013 12.3511 13.2236 11.6714 13.7268 11.2879L17.5473 8.37696H12.825C12.2029 8.37696 11.6515 7.95687 11.4593 7.33639L10 2.62639ZM10.4552 0.846855C10.3119 0.384382 9.68806 0.384382 9.54477 0.846855L7.63027 7.02616C7.56619 7.23298 7.38241 7.37301 7.17504 7.37301H0.979572C0.515888 7.37301 0.323098 7.99527 0.698226 8.28109L5.71047 12.1001C5.87823 12.2279 5.94843 12.4545 5.88435 12.6613L3.96984 18.8406C3.82656 19.3031 4.33129 19.6877 4.70642 19.4019L9.71865 15.5828C9.88642 15.455 10.1136 15.455 10.2813 15.5828L15.2936 19.4019C15.6687 19.6877 16.1734 19.3031 16.0302 18.8406L14.1157 12.6613C14.0516 12.4545 14.1218 12.2279 14.2895 12.1001L19.3018 8.28109C19.6769 7.99527 19.4841 7.37301 19.0204 7.37301H12.825C12.6176 7.37301 12.4338 7.23298 12.3697 7.02616L10.4552 0.846855Z"/>
+                </svg>
+                {% else %}
+                  {% assign t = i | minus: 1 %}
+                  {% if block.settings.stars-num > t and block.settings.stars-num < i %}
+                  <svg class="icon color-stars-yellow" style="fill: {{ block.settings.starscolor }}" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                    <defs>
+                      <linearGradient id="grad">
+                        <stop offset="50%" stop-color="{{ block.settings.starscolor }}"/>
+                        <stop offset="50%" stop-color="{{ block.settings.starsoff }}"/>
+                      </linearGradient>
+                    </defs>
+                    <path fill="url(#grad)" d="M10 2.62639L8.54072 7.33639C8.34848 7.95687 7.79714 8.37696 7.17504 8.37696H2.45272L6.27316 11.2879C6.77645 11.6714 6.98704 12.3511 6.7948 12.9716L5.33552 17.6816L9.15596 14.7706C9.65925 14.3872 10.3408 14.3872 10.844 14.7706L14.6645 17.6816L13.2052 12.9716C13.013 12.3511 13.2236 11.6714 13.7268 11.2879L17.5473 8.37696H12.825C12.2029 8.37696 11.6515 7.95687 11.4593 7.33639L10 2.62639ZM10.4552 0.846855C10.3119 0.384382 9.68806 0.384382 9.54477 0.846855L7.63027 7.02616C7.56619 7.23298 7.38241 7.37301 7.17504 7.37301H0.979572C0.515888 7.37301 0.323098 7.99527 0.698226 8.28109L5.71047 12.1001C5.87823 12.2279 5.94843 12.4545 5.88435 12.6613L3.96984 18.8406C3.82656 19.3031 4.33129 19.6877 4.70642 19.4019L9.71865 15.5828C9.88642 15.455 10.1136 15.455 10.2813 15.5828L15.2936 19.4019C15.6687 19.6877 16.1734 19.3031 16.0302 18.8406L14.1157 12.6613C14.0516 12.4545 14.1218 12.2279 14.2895 12.1001L19.3018 8.28109C19.6769 7.99527 19.4841 7.37301 19.0204 7.37301H12.825C12.6176 7.37301 12.4338 7.23298 12.3697 7.02616L10.4552 0.846855Z" />
+                  </svg>
+                  {% else %}
+                  <svg class="icon color-stars-gray" style="fill: {{ block.settings.starsoff }}" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                    <path d="M10 2.62639L8.54072 7.33639C8.34848 7.95687 7.79714 8.37696 7.17504 8.37696H2.45272L6.27316 11.2879C6.77645 11.6714 6.98704 12.3511 6.7948 12.9716L5.33552 17.6816L9.15596 14.7706C9.65925 14.3872 10.3408 14.3872 10.844 14.7706L14.6645 17.6816L13.2052 12.9716C13.013 12.3511 13.2236 11.6714 13.7268 11.2879L17.5473 8.37696H12.825C12.2029 8.37696 11.6515 7.95687 11.4593 7.33639L10 2.62639ZM10.4552 0.846855C10.3119 0.384382 9.68806 0.384382 9.54477 0.846855L7.63027 7.02616C7.56619 7.23298 7.38241 7.37301 7.17504 7.37301H0.979572C0.515888 7.37301 0.323098 7.99527 0.698226 8.28109L5.71047 12.1001C5.87823 12.2279 5.94843 12.4545 5.88435 12.6613L3.96984 18.8406C3.82656 19.3031 4.33129 19.6877 4.70642 19.4019L9.71865 15.5828C9.88642 15.455 10.1136 15.455 10.2813 15.5828L15.2936 19.4019C15.6687 19.6877 16.1734 19.3031 16.0302 18.8406L14.1157 12.6613C14.0516 12.4545 14.1218 12.2279 14.2895 12.1001L19.3018 8.28109C19.6769 7.99527 19.4841 7.37301 19.0204 7.37301H12.825C12.6176 7.37301 12.4338 7.23298 12.3697 7.02616L10.4552 0.846855Z"/>
+                  </svg>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+              <span class="rating-natif-star-text">{{ block.settings.avis-texte }}</span>
+              </{% if block.settings.avis-lien != blank %}a{% else %}div{% endif %}>
+
+            {% comment %} Avis {% endcomment %}
+            {%- when 'rating' -%}
+              {%- if product.metafields.reviews.rating.value != blank -%}
+                {% liquid
+                  assign rating_decimal = 0
+                  assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+                  if decimal >= 0.3 and decimal <= 0.7
+                  assign rating_decimal = 0.5
+                elsif decimal > 0.7
+                  assign rating_decimal = 1
+                  endif
+                %}
+                <div class="product-can-be-centered rating product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }} {% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}">
+                  <span aria-hidden="true" class="rating-star color-icon-{{ settings.accent_icons }}" style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"></span>
+                </div>
+                <p class="product-can-be-centered rating-text product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }} {% endif %} caption{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                  <span aria-hidden="true">{{ product.metafields.reviews.rating.value }} / {{ product.metafields.reviews.rating.value.scale_max }}</span>
+                </p>
+                <p class="product-can-be-centered rating-count product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }} {% endif %} caption{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                  <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
+                  <span class="visually-hidden">{{ product.metafields.reviews.rating_count }} {{ "accessibility.total_reviews" | t }}</span>
+                </p>
+              {%- endif -%}
+            
+            {% comment %} Séparateur {% endcomment %}
+            {%- when 'separator' -%}
+              <div style=" 
+                border-bottom-style: solid;
+                border-bottom-width: {{ block.settings.bbwidth }}px;
+                width: {{ block.settings.bblength }}%;
+                height: 100%;
+                margin-top: {{ block.settings.mt }}px;
+                margin-bottom: {{ block.settings.mb }}px;
+                border-bottom-color: {{ block.settings.bordercolor }};"
+                class="product-can-be-centered{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}"
+              >
+              </div>
+
+            {% comment %} Prix {% endcomment %}
+            {%- when 'price' -%}
+              <div class="product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.offdesk-bloc %}offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}">
+                <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large', price_position: block.settings.price_position == 'first', price_position: block.settings.price_position == 'second' -%}
+                </div>
+                {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+                  {%- if block.settings.show_tax != true -%}
+                    <div class="product__tax caption rte{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                      {%- if shop.taxes_included -%}
+                        {{ 'products.product.include_taxes' | t }}
+                      {%- endif -%}
+                      {%- if shop.shipping_policy.body != blank -%}
+                        {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+                {%- if product != blank -%}
+                  <span {{ block.shopify_attributes }}>
+                    {%- form 'product', product -%}
+                    <input id="mainSelectedProduct" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                      {{ form | payment_terms }}
+                    {%- endform -%}
+                  </span>
+                {%- endif -%}
+              </div>
+
+            {% comment %} Pop-up {% endcomment %}
+            {%- when 'popup' -%}
+              <modal-opener class="product-popup-modal__opener product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %} no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
+                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.text | default: block.settings.page.title }}</button>
+              </modal-opener>
+              <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">{{ block.settings.text }}</a>
+
+            {% comment %} Variantes {% endcomment %}
+            {%- when 'variant_picker' -%}
+              {%- unless product.has_only_default_variant -%}
+                {%- if block.settings.picker_type == 'button' -%}
+                <variant-radios class="no-js-hidden product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %} variant-colorswatch" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                      <fieldset class="js product-form__input variant-colorswatch-container">
+                        {% unless block.settings.no-label %}
+                        <span class="form__label">{{ option.name }} :</span>
+                        {% endunless %}
+                        <div class="variant_group">
+                          {% assign optionName = option.name | downcase %}
+                          {% assign swatche = false %}
+                          {%- for productvariant in product.variants -%}
+                            {% if productvariant.metafields.color.hexcode != blank or productvariant.metafields.color.image != blank %}
+                                {% assign swatche = true %}
+                            {% endif %}
+                          {%- endfor -%}
+                          {% if swatche %}
+                            {% if optionName == "couleur" or optionName == "color" %}
+                              {% if option.values.size > 0 %}
+                                {%- for value in option.values -%}
+                                  {% assign forloopCustom = forloop.index0 %}
+                                  {% assign found = false %}
+                                  {%- for productvariant in product.variants -%}
+                                  {%- for variantoption in productvariant.options -%}
+                                      {% if variantoption == value and found == false %} 
+                                        {% assign found = true %}
+                                        <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloopCustom }}"
+                                              name="{{ option.name }}"
+                                              value="{{ value | escape }}"
+                                              form="{{ product_form_id }}"
+                                              {% if option.selected_value == value %}checked{% endif %}
+                                        >
+                                        {%- assign background = 'background-color: #f4f4f4' -%}
+                                        {% if productvariant.metafields.color.image != blank %}
+                                          {%- assign backgroundImage = productvariant.metafields.color.image | image_url: width: 100 -%}
+                                          {%- assign background = 'background-image: url(' | append: backgroundImage | append: ');' -%}
+                                        {% elsif productvariant.metafields.color.hexcode != blank %}
+                                          {%- assign background = 'background-color: ' | append: productvariant.metafields.color.hexcode -%}
+                                        {% endif %}
+
+                                        <label class="colorSwatch {% if productvariant.metafields.color.image != blank %}colorSwatch--with-image{% endif %}" for="{{ section.id }}-{{ option.position }}-{{ forloopCustom }}" style="{{ background }}">
+                                          <div class="colorSwatchContent"></div>
+                                          {% if productvariant.available == false %}<div class="colorSwatch-unavailable-border"></div>{% endif %}
+                                        </label>
+                                      {% endif %}
+                                    {%- endfor -%}
+                                  {%- endfor -%}
+                                {%- endfor -%}
+                              {% endif %}
+                            {% else %}
+                              {%- for value in option.values -%}
+                                <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                      name="{{ option.name }}"
+                                      value="{{ value | escape }}"
+                                      form="{{ product_form_id }}"
+                                      {% if option.selected_value == value %}checked{% endif %}
+                                >
+                                <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                                  {{ value }}
+                                </label>
+                              {%- endfor -%}
+                            {% endif %}
+                          {% else %}
+                            {%- for value in option.values -%}
+                              <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                    name="{{ option.name }}"
+                                    value="{{ value | escape }}"
+                                    form="{{ product_form_id }}"
+                                    {% if option.selected_value == value %}checked{% endif %}
+                              >
+                              <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                                {{ value }}
+                              </label>
+                            {%- endfor -%}
+                          {% endif %}
+                        </div>
+                      </fieldset>
+                    {%- endfor -%}
+                    <script type="application/json">
+                      {{ product.variants | json }}
+                    </script>
+                  </variant-radios>
+                {%- else -%}
+                  <variant-selects class="no-js-hidden product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" data-section="{{ section.id }}" data-url="{{ product.url }}" data-update-url="false" {{ block.shopify_attributes }}>
+                    {%- for option in product.options_with_values -%}
+                      <div class="product-form__input product-form__input--dropdown">
+                        {% unless block.settings.no-label %}
+                        <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                          {{ option.name }}
+                        </label>
+                        {% endunless %}
+                        <div class="select">
+                          <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                            class="select__select"
+                            name="options[{{ option.name | escape }}]"
+                            form="{{ product_form_id }}"
+                          >
+                            {%- for value in option.values -%}
+                              <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                {{ value }}
+                              </option>
+                            {%- endfor -%}
+                          </select>
+                          {% render 'icon-caret' %}
+                        </div>
+                      </div>
+                    {%- endfor -%}
+
+                    <script type="application/json">
+                      {{ product.variants | json }}
+                    </script>
+                  </variant-selects>
+                {%- endif -%}
+              {%- endunless -%}
+
+              <noscript class="product-form__noscript-wrapper-{{ section.id }}">
+                <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+                  {% unless block.settings.no-label %}
+                  <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
+                  {% endunless %}
+                  <div class="select">
+                    <select name="id" id="Variants-{{ section.id }}" class="select__select" form="{{ product_form_id }}">
+                      {%- for variant in product.variants -%}
+                        <option
+                          {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                          {% if variant.available == false %}disabled{% endif %}
+                          value="{{ variant.id }}"
+                        >
+                          {{ variant.title }}
+                          {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                          - {{ variant.price | money | strip_html }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                    {% render 'icon-caret' %}
+                  </div>
+                </div>
+              </noscript>
+
+            {% comment %} Quantité {% endcomment %}
+            {%- when 'quantity_selector' -%}
+              <div class="product-form__input product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %} product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" {{ block.shopify_attributes }}>
+                {% unless block.settings.no-label %}
+                <label class="form__label" for="Quantity-{{ section.id }}">
+                  {{ 'products.product.quantity.label' | t }}
+                </label>
+                {% endunless %}
+                <quantity-input class="quantity">
+                  <button class="quantity__button no-js-hidden" name="minus" type="button">
+                    <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                    {% render 'icon-minus' %}
+                  </button>
+                  <input class="quantity__input"
+                      type="number"
+                      name="quantity"
+                      id="Quantity-{{ section.id }}"
+                      min="1"
+                      value="1"
+                      form="{{ product_form_id }}"
+                    >
+                  <button class="quantity__button no-js-hidden" name="plus" type="button">
+                    <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                    {% render 'icon-plus' %}
+                  </button>
+                </quantity-input>
+              </div>
+
+            {% comment %} Indicateur de stock {% endcomment %}
+            {%- when 'stock' -%}
+              {% for variant in product.variants %}
+                <div class="product-variant" style="display:none"
+                     data-variant-id="{{ variant.id }}"
+                     data-variant-inventory-qty="{{ variant.inventory_quantity }}">
+                </div> 
+                {% endfor %}
+              <div class="stock-text-contents hidden">
+                <div class="stock-text-available">{{ block.settings.stock_available_text }}</div>
+                <div class="stock-text-before">{{ block.settings.stockavant }}</div>
+                <div class="stock-text-after">{{ block.settings.stockapres }}</div>
+                <div class="stock-text-outofstock">{{ block.settings.stock_outofstock_text }}</div>
+              </div>
+              <div id="unseenclass">{{ block.settings.stock_orange }}</div>
+              <div class="stock-disp-cont product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                {% assign variant = product.selected_or_first_available_variant %}
+                {% if variant.inventory_quantity > block.settings.stock_orange %}
+                <span class="stock-disp"> {{ block.settings.stock_available_text }}</span>
+                <div class="stock-indic"></div>
+              {% elsif variant.inventory_quantity <= block.settings.stock_orange and variant.inventory_quantity > 0 %}
+                <span class="stock-disp"> {{ block.settings.stockavant }} {{ variant.inventory_quantity }} {{ block.settings.stockapres }} </span>
+                <div class="stock-indic" style="background: orange;"></div>
+              {% elsif variant.inventory_quantity == 0 or variant.inventory_quantity < 0 %}
+                <div class="stock-indic" style="background: red;"></div>
+                <span class="stock-disp"> {{ block.settings.stock_outofstock_text }}</span>
+              {% endif %}
+              </div>
+
+            {% comment %} Boutons d'achat {% endcomment %}
+            {%- when 'buy_buttons' -%}
+              <div class="product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" {{ block.shopify_attributes }}>
+                {%- if product != blank -%}
+                  <product-form class="product-form">
+                    <div class="product-form__error-message-wrapper" role="alert" hidden>
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+                        <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+                        <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+                        <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+                        <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+                      </svg>
+                      <span class="product-form__error-message"></span>
+                    </div>
+
+                    {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+                      <div class="product-form__buttons">
+                        <button
+                          type="submit"
+                          name="add"
+                          id="productMainSubmit"
+                          class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                          {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                        >
+                          <div style="display: flex; align-items: center;">
+                            {%- if product.selected_or_first_available_variant.available -%}
+                              {% if block.settings.custom_icon != blank %}
+                                <span class="custom_icon color-foreground-{{ settings.accent_icons }}" style="display: flex;">
+                                  {{ block.settings.custom_icon }}
+                                </span>
+                              {% endif %}  
+                              <span class="addbtntext">{{ 'products.product.add_to_cart' | t }}</span>
+                            {%- else -%}
+                              <span class="addbtntext">{{ 'products.product.sold_out' | t }}</span>
+                            {%- endif -%}
+                          </div>
+                          <div class="loading-overlay__spinner hidden">
+                            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                            </svg>
+                          </div>
+                        </button>
+                        {%- if block.settings.show_dynamic_checkout -%}
+                          {{ form | payment_button }}
+                        {%- endif -%}
+                      </div>
+                    {%- endform -%}
+                  </product-form>
+                {%- else -%}
+                  <div class="product-form">
+                    <div class="product-form__buttons form">
+                      <button
+                        type="submit"
+                        name="add"
+                        class="product-form__submit button button--full-width button--primary"
+                        disabled
+                      >
+                        {{ 'products.product.sold_out' | t }}
+                      </button>
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+
+            {% comment %} Estimation de livraison {% endcomment %}
+            {% when 'estimation' %}
+              {%  include 'estimation' %}
+
+            {% comment %} Cross-sell à cocher {% endcomment %}
+            {%- when 'toggle_cross_sell' -%}
+              {% render 'toggle-cross-sell', block: block %}
+
+            {% comment %} Image {% endcomment %}
+            {%- when 'simple-image' -%}
+              <p class="product__image product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" {{ block.shopify_attributes }}>
+                <img
+                  srcset="{%- if block.settings.image.width >= 275 -%}{{ block.settings.image | image_url: width: 275 }} 275w,{%- endif -%}
+                  {%- if block.settings.image.width >= 550 -%}{{ block.settings.image | image_url: width: 550 }} 550w,{%- endif -%}
+                  {%- if block.settings.image.width >= 710 -%}{{ block.settings.image | image_url: width: 710 }} 710w,{%- endif -%}
+                  {%- if block.settings.image.width >= 1420 -%}{{ block.settings.image | image_url: width: 1420 }} 1420w,{%- endif -%}
+                  {{ block.settings.image | image_url }} {{ block.settings.image.width }}w"
+                  src="{{ block.settings.image | image_url: width: 550 }}"
+                  sizes="(min-width: 990px) {% if section.blocks.size <= 2 %}710px{% else %}550px{% endif %},
+                  (min-width: 750px) {% if section.blocks.size == 1 %}710px{% else %}550px{% endif %},
+                  calc(100vw - 30px)"
+                  alt="{{ block.settings.image.alt }}"
+                  width="{{ block.settings.image.width }}"
+                  loading="lazy"
+                  >
+              </p>
+
+            {% comment %} Rangée pliante {% endcomment %}
+            {%- when 'collapsible_tab' -%}
+              <div class="product__accordion product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %} accordion quick-add-hidden{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" {{ block.shopify_attributes }}>
+                <details id="Details-{{ block.id }}-{{ section.id }}" {% if block.settings.open-default %}open{% endif %}>
+                  <summary>
+                    <div class="summary__title">
+
+                      {% if block.settings.custom_icon == blank %}
+                        {% render 'icon-accordion', icon: block.settings.icon %}
+                      {% elsif block.settings.custom_icon != blank %}
+                      <span class="custom_icon color-foreground-{{ settings.accent_icons }}">
+                        {{ block.settings.custom_icon }}
+                      </span>
+                      {% endif %}
+
+                      <p class="accordion__title">
+                        {{ block.settings.heading | default: block.settings.page.title }}
+                      </p>
+                    </div>
+                    {% render 'icon-caret' %}
+                  </summary>
+                  <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+                    {{ block.settings.content }}
+                    {{ block.settings.page.content }}
+                  </div>
+                </details>
+              </div>
+
+            {% comment %} Description {% endcomment %}
+            {%- when 'description' -%}
+              {%- if product.description != blank -%}
+              {% unless block.settings.accordion %}
+              <div class="product__description product-block-margin-{{ block.settings.margin }} {% if block.settings.identificateur != blank %}{{ block.settings.identificateur }}{% endif %} rte quick-add-hidden{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                {% if block.settings.readmore %}
+                  {% style %}
+                  .read-more-checker-{{ block.id }} {
+                    opacity: 0;
+                    position: absolute;
+                  }
+                  .read-more-checker-{{ block.id }}:checked ~ .limited-readmore {
+                    max-height: none;
+                  }
+                  .read-more-checker-{{ block.id }}:checked ~ .limited-readmore .bottom-readmore {
+                    opacity: 0;
+                    transition: 0.3s;
+                  }
+                  .read-more-checker-{{ block.id }} ~ .read-more-button:before {
+                    content: "Voir plus";
+                  }
+                  .read-more-checker-{{ block.id }}:checked ~ .read-more-button:before {
+                    content: "Voir moins";
+                  }
+                  {% endstyle %}
+                <div class="holder-readmore">
+                <input type="checkbox" class="read-more-checker-{{ block.id }}" id="read-more-checker-{{ block.id }}" />
+                <div class="limited-readmore l-{{ block.settings.formread }}">
+                {% endif %}
+              
+                  {{ product.description }}
+              
+                {% if block.settings.readmore %}
+                <div class="bottom-readmore">&nbsp</div>
+                </div>
+                <label for="read-more-checker-{{ block.id }}" class="read-more-button link"></label>
+                </div>
+                {% endif %}
+              </div>
+              {% else %}
+              <div class="product__accordion product-block-margin-{{ block.settings.margin }} {% if block.settings.identificateur != blank %}{{ block.settings.identificateur }}{% endif %} accordion quick-add-hidden{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" {{ block.shopify_attributes }}>
+                <details id="Details-{{ block.id }}-{{ section.id }}" {% if block.settings.accordion-open %}open{% endif %}>
+                  <summary>
+                    <div class="summary__title">
+                      
+                      {% if block.settings.custom_icon == blank %}
+                        {% render 'icon-accordion', icon: block.settings.icon %}
+                      {% elsif block.settings.custom_icon != blank %}
+                      <span class="custom_icon color-foreground-{{ settings.accent_icons }}">
+                        {{ block.settings.custom_icon }}
+                      </span>
+                      {% endif %}
+  
+                      <p class="accordion__title">
+                        {{ block.settings.accordion-text }}
+                      </p>
+                    </div>
+                    {% render 'icon-caret' %}
+                  </summary>
+                  <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+                    {{ product.description }}
+                  </div>
+                </details>
+              </div>
+              {% endunless %}
+            {%- endif -%}
+
+            {% comment %} Offre groupée {% endcomment %}
+            {%- when 'bundle' -%}
+              {% render 'product-bundle',
+                product: section.settings.product,
+                title: block.settings.title,
+                button_text: block.settings.button_text,
+                meta: block.settings.meta,
+                class: block.settings.class,
+                margin: block.settings.margin,
+                offdesk: block.settings.offdesk-bloc,
+                offmob: block.settings.offmob-bloc
+              %}
+
+            {% comment %} Liquid personnalisé {% endcomment %}
+            {%- when 'custom_liquid' -%}
+              <div class="product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                {{ block.settings.custom_liquid }}
+              </div>
+
+            {% comment %} Texte défilant {% endcomment %}
+            {%- when 'scrolling_text' -%}
+              {% style %}
+                .big-text {
+                  display: inline-block;
+                  z-index: 0;
+                  animation: marquee {{ block.settings.speed }}s linear infinite;
+                }
+              {% endstyle %}
+              <div class="sliding-text-container color-{{ block.settings.color_scheme }} no-heading product-block-margin-{{ block.settings.margin }} {% if block.settings.identificateur != blank %}{{ block.settings.identificateur }}{% endif %} {% if block.settings.offdesk-bloc %}offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                <div class="page-width section-{{ block.id }}-padding isolate big-text">
+                  <{{ block.settings.heading_tag }} class="title">
+                    {{ block.settings.title }}
+                  </{{ block.settings.heading_tag }}>
+                </div>
+              </div>
+
+            {% comment %} Champ de texte personnalisé {% endcomment %}
+            {%- when 'custom_text' -%}
+            	<div class="text-field_container product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }} {% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                  <label class="form__label" for="childsName">{{ block.settings.edit }}</label>
+                  <div class="line-item-property__field field">
+                    <input id="childsName" type="text" class="field__input" name="properties[{{ block.settings.edit }}]" form="product-form-{{ section.id }}">
+                  </div>
+            	</div>
+
+            {% comment %} Collections personnalisées {% endcomment %}
+            {%- when 'collection_product' -%}
+              <div class="collection_product_container product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+                {% if block.settings.edit != blank %}<p class="form__label">{{ block.settings.edit }}</p>{% endif %}
+                <div class="collection_slider_product">
+                  {%- for collec-product in collections[block.settings.home_featured_products].products -%}
+                  <a href="{{ collec-product.url }}" >
+                    <div class="slider-card{% if collec-product.title == product.title %} selected-collec{% endif %}" style="{% if block.settings.swatches_type == "color" %}background: {{ collec-product.metafields.my_fields.color }}{% else %}background: url('{{ collec-product.featured_image | img_url: '1024x' }}');{% endif %}">
+                    </div>
+                  </a>
+                  {% endfor %}
+                </div>
+              </div>
+
+            {%- endcase -%}
+          {%- endfor -%}
+
+          {% if section.settings.view-details %}
+            <a{% if product == blank %} role="link" aria-disabled="true"{% else %} href="{{ product.url }}"{% endif %} class="link product__view-details animate-arrow">
+              {{ 'products.product.view_full_details' | t }}
+              {% render 'icon-arrow' %}
+            </a>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal media-modal">
+      <div class="product-media-modal__dialog" role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">
+        <button id="ModalClose-{{ section.id }}" type="button" class="product-media-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+
+        <div class="product-media-modal__content color-background-1 gradient" role="document" aria-label="{{ 'products.modal.label' | t }}" tabindex="0">
+          {%- liquid
+            if product.selected_or_first_available_variant.featured_media != null
+              assign media = product.selected_or_first_available_variant.featured_media
+              render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants
+            endif
+          -%}
+
+          {%- for media in product.media -%}
+            {%- liquid
+              if section.settings.hide_variants and media_to_render contains media.id
+                assign variant_image = true
+              else
+                assign variant_image = false
+              endif
+
+              unless media.id == product.selected_or_first_available_variant.featured_media.id
+                render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image
+              endunless
+            -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </product-modal>
+      
+    {% assign popups = section.blocks | where: "type", "popup" %}
+    {%- for block in popups -%}
+      <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+        <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+          <button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+          <div class="product-popup-modal__content-info">
+            <h1 class="h2">{{ block.settings.page.title }}</h1>
+            {{ block.settings.page.content }}
+          </div>
+        </div>
+      </modal-dialog>
+    {%- endfor -%}
+      
+    {% if product.media.size > 0 %}
+      <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+    {% endif %}
+      
+    <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+    {%- if first_3d_model -%}
+      <script type="application/json" id="ProductJSON-{{ product.id }}">
+        {{ product.media | where: 'media_type', 'model' | json }}
+      </script>
+      <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+    {%- endif -%}
+          
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        function isIE() {
+          const ua = window.navigator.userAgent;
+          const msie = ua.indexOf('MSIE ');
+          const trident = ua.indexOf('Trident/');
+
+          return (msie > 0 || trident > 0);
+        }
+
+        if (!isIE()) return;
+        const hiddenInput = document.querySelector('#{{ product_form_id }} input[name="id"]');
+        const noScriptInputWrapper = document.createElement('div');
+        const variantSwitcher = document.querySelector('variant-radios[data-section="{{ section.id }}"]') || document.querySelector('variant-selects[data-section="{{ section.id }}"]');
+        noScriptInputWrapper.innerHTML = document.querySelector('.product-form__noscript-wrapper-{{ section.id }}').textContent;
+        variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
+
+        document.querySelector('#Variants-{{ section.id }}').addEventListener('change', function(event) {
+          hiddenInput.value = event.currentTarget.value;
+        });
+      });
+    </script>  
+    
+    {%- liquid
+      if product.selected_or_first_available_variant.featured_media
+        assign seo_media = product.selected_or_first_available_variant.featured_media
+      else
+        assign seo_media = product.featured_media
+      endif
+    -%}
+      
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Product",
+        "name": {{ product.title | json }},
+        "url": {{ request.origin | append: product.url | json }},
+        {% if seo_media -%}
+          "image": [
+            {{ seo_media | image_url: width: seo_media.preview_image.width | prepend: "https:" | json }}
+          ],
+        {%- endif %}
+        "description": {{ product.description | strip_html | json }},
+        {% if product.selected_or_first_available_variant.sku != blank -%}
+          "sku": {{ product.selected_or_first_available_variant.sku | json }},
+        {%- endif %}
+        "brand": {
+          "@type": "Brand",
+          "name": {{ product.vendor | json }}
+        },
+        "offers": [
+          {%- for variant in product.variants -%}
+            {
+              "@type" : "Offer",
+              {%- if variant.sku != blank -%}
+                "sku": {{ variant.sku | json }},
+              {%- endif -%}
+              {%- if variant.barcode.size == 12 -%}
+                  "gtin12": {{ variant.barcode }},
+              {%- endif -%}
+              {%- if variant.barcode.size == 13 -%}
+                "gtin13": {{ variant.barcode }},
+              {%- endif -%}
+              {%- if variant.barcode.size == 14 -%}
+                "gtin14": {{ variant.barcode }},
+              {%- endif -%}
+              "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+              "price" : {{ variant.price | divided_by: 100.00 | json }},
+              "priceCurrency" : {{ cart.currency.iso_code | json }},
+              "url" : {{ request.origin | append: variant.url | json }}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+    
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.featured-product.name",
+  "tag": "section",
+  "class": "section section-featured-product",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "text",
+      "name": "t:sections.main-product.blocks.text.name",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_background_text",
+          "default": false,
+          "label": "Activer un fond de couleur"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Nuancier de couleurs",
+          "default": "scheme-1"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Bloc de texte",
+          "label": "t:sections.main-product.blocks.text.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__1.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__2.label"
+            },
+            {
+              "value": "uppercase",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__3.label"
+            }
+          ],
+          "default": "body",
+          "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+            },
+            {
+              "value": "apple",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+            },
+            {
+              "value": "banana",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+            },
+            {
+              "value": "carrot",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+            },
+            {
+              "value": "pepper",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+            },
+            {
+              "value": "serving_dish",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            }
+          ],
+          "default": "none",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "Icône personnalisé",
+          "info": "Ajouter le code SVG, sinon laisser vide."
+        },
+        {
+          "type":"paragraph",
+          "content":"Librairie Radix Icons : [Icône personnalisé](https://icons.radix-ui.com/)"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "name": "Texte enrichi",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Annoncez tout ce que vous voulez</p>",
+          "label": "t:sections.main-product.blocks.text.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+  	{
+      "type": "scrolling_text",
+      "name": "Texte défilant",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Nuancier de couleurs",
+          "default": "scheme-1"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "t:sections.multicolumn.settings.title.label",
+    	    "default": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "options": [
+            {
+              "value": "h1",
+              "label": "h1"
+            },
+            {
+              "value": "h2",
+              "label": "h2"
+            },
+            {
+              "value": "h3",
+              "label": "h3"
+            },
+            {
+              "value": "span",
+              "label": "Aucune"
+            }
+          ],
+          "default": "h2",
+          "label": "Balise titre (SEO)"
+        },
+        {
+          "type": "range",
+          "id": "speed",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "s",
+          "label": "Vitesse de défilement",
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "t:sections.all.padding.section_padding_heading"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "none",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk",
+          "default": false,
+          "label": "Cacher la section"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob",
+          "default": false,
+          "label": "Cacher la section"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "t:sections.main-product.blocks.description.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Contenu caché"
+        },
+        {
+          "type": "checkbox",
+          "id": "readmore",
+          "default": false,
+          "label": "Activer le contenu caché (Voir plus)"
+        },
+        {
+          "type": "range",
+          "id": "formread",
+          "min": 100,
+          "max": 400,
+          "step": 100,
+          "unit": "px",
+          "label": "À partir de...",
+          "default": 200
+        },
+        {
+          "type": "header",
+          "content": "Contenu réductible"
+        },
+        {
+          "type": "checkbox",
+          "id": "accordion",
+          "default": false,
+          "label": "Activer le contenu réductible",
+          "info": "Non compatible avec le contenu caché"
+        },
+        {
+          "type": "checkbox",
+          "id": "accordion-open",
+          "default": false,
+          "label": "Ouvrir par défaut"
+        },
+        {
+          "type": "text",
+          "id": "accordion-text",
+          "default": "Description",
+          "label": "Titre du contenu réductible"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+            },
+            {
+              "value": "apple",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+            },
+            {
+              "value": "banana",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+            },
+            {
+              "value": "carrot",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+            },
+            {
+              "value": "pepper",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+            },
+            {
+              "value": "serving_dish",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            }
+          ],
+          "default": "none",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "Icône personnalisé",
+          "info": "Ajouter le code SVG, sinon laisser vide."
+        },
+        {
+          "type": "header",
+          "content": "Marges"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main-product.blocks.title.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title-suite",
+          "label": "Complément du titre"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "options": [
+            {
+              "value": "h1",
+              "label": "h1"
+            },
+            {
+              "value": "h2",
+              "label": "h2"
+            },
+            {
+              "value": "h3",
+              "label": "h3"
+            },
+            {
+              "value": "span",
+              "label": "Aucune"
+            }
+          ],
+          "default": "h1",
+          "label": "Balise titre (SEO)"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "simple-image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "separator",
+      "name": "Séparateur",
+      "settings": [
+        {
+          "type": "range",
+          "id": "bbwidth",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Épaisseur de la barre",
+          "default": 3
+        },
+        {
+          "type": "range",
+          "id": "bblength",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Taille de la barre",
+          "default": 10
+        },
+        {
+          "id": "bordercolor",
+          "type": "color",
+          "label": "Couleur de barre",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "mt",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Marge du haut",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "mb",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Marge du bas",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "collapsible_tab",
+      "name": "t:sections.main-product.blocks.collapsible_tab.name",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "open-default",
+          "default": false,
+          "label": "Ouvrir par défaut"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Rangée pliante",
+          "info": "t:sections.main-product.blocks.collapsible_tab.settings.heading.info",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+            },
+            {
+              "value": "apple",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+            },
+            {
+              "value": "banana",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+            },
+            {
+              "value": "carrot",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+            },
+            {
+              "value": "pepper",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+            },
+            {
+              "value": "serving_dish",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            }
+          ],
+          "default": "check_mark",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "Icône personnalisé",
+          "info": "Ajouter le code SVG, sinon laisser vide. Un tutoriel est à votre disposition : [Voir la vidéo](https://vimeo.com/747273604/e87026d172)"
+        },
+        {
+          "type":"paragraph",
+          "content":"Librairie Radix Icons : [Icône personnalisé](https://icons.radix-ui.com/)"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.content.label"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.page.label"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "none",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Badge personnalisé",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge",
+          "default": "Badge d'image",
+          "label": "Texte"
+        },
+        {
+          "type": "image_picker",
+          "id": "badgeimg",
+          "label": "Image",
+          "info": "L'image prendra le dessus sur le texte"
+        },
+        {
+          "type": "select",
+          "id": "b-pos",
+          "options": [
+            {
+              "value": "top-right",
+              "label": "En haut à droite"
+            },
+            {
+              "value": "bottom-left",
+              "label": "En bas à gauche"
+            },
+            {
+              "value": "bottom-right",
+              "label": "En bas à droite"
+            }
+          ],
+          "default": "top-right",
+          "label": "Position du badge par rapport à l'image"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "range",
+          "id": "image-width-desktop",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "label": "Taille de l'image",
+          "default": 80
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "range",
+          "id": "image-width-mobile",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "label": "Taille de l'image",
+          "default": 50
+        }
+      ]
+    },
+    {
+      "type": "rating-natif",
+      "name": "Étoiles (Natif)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Comment créer un lien interne à la page pour descendre jusqu’aux avis. [En savoir plus](https://the-deployer.notion.site/Comment-cr-er-un-lien-interne-la-page-pour-descendre-jusqu-aux-avis-8fb992e660354d2b856a3dc7b66813a5)."
+        },
+        {
+          "type": "range",
+          "id": "stars-num",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "unit": "⭐️",
+          "label": "Nombre d'étoiles",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "avis-texte",
+          "label": "Texte d'avis",
+          "default": "(132 Avis)"
+        },
+        {
+          "type": "url",
+          "id": "avis-lien",
+          "label": "Lien d'avis"
+        },
+        {
+          "type": "paragraph",
+          "content": "Couleurs"
+        },
+        {
+          "type": "color",
+          "id": "starscolor",
+          "label": "Couleur des étoiles actives",
+          "default": "#f2cb04"
+        },
+        {
+          "type": "color",
+          "id": "starsoff",
+          "label": "Couleur des étoiles inactives",
+          "default": "#eeeeee"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "t:sections.main-product.blocks.rating.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-product.blocks.rating.settings.paragraph.content"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "popup",
+      "name": "t:sections.main-product.blocks.popup.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Lien texte du popup",
+          "label": "t:sections.main-product.blocks.popup.settings.link_label.label"
+        },
+        {
+          "id": "page",
+          "type": "page",
+          "label": "t:sections.main-product.blocks.popup.settings.page.label"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+  	{
+      "type": "collection_product",
+      "name": "Collection personnalisé",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Un tutoriel est à votre disposition : [Voir la vidéo](https://vimeo.com/743503717/c1e0f12e54)"
+        },
+        {
+          "type": "text",
+          "id": "edit",
+          "label": "Titre",
+          "default": "Collection personnalisée"
+        },
+        {
+          "type": "collection",
+          "id": "home_featured_products",
+          "label": "Collection"
+        },
+        {
+          "type": "select",
+          "id": "swatches_type",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image produit"
+            },
+            {
+              "value": "color",
+              "label": "Couleur"
+            }
+          ],
+          "default": "image",
+          "label": "Type de collection"
+        },
+        {
+          "type": "paragraph",
+          "content": "Pour activer les pastilles de couleurs, ajouter un champ méta « produit » avec la clé « my_fields.color ». [Tutoriel](https://vimeo.com/743503717/c1e0f12e54)"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "stock",
+      "name": "Urgence de stock",
+      "settings": [
+        {
+          "type": "number",
+          "id": "stock_orange",
+          "label": "Afficher le stock à partir de :",
+  		    "info": "Ce chiffre représente une unité de stock, à partir de laquelle l'urgence s'active.",
+          "default": 15
+        },
+        {
+          "type": "text",
+          "id": "stock_available_text",
+          "label": "Texte quand disponible",
+          "default": "En stock"
+        },
+  		  {
+          "type": "text",
+          "id": "stockavant",
+          "label": "Texte « Avant »",
+          "default": "Attention, il ne reste plus que"
+        },
+  		  {
+          "type": "text",
+          "id": "stockapres",
+          "label": "Texte « Après »",
+          "default": "articles en stock !"
+        },
+        {
+          "type": "text",
+          "id": "stock_outofstock_text",
+          "label": "Texte quand indisponible",
+          "default": "Victime de son succès"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "estimation",
+      "name": "Estimation livraison",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Traductions"
+        },
+        {
+          "type": "text",
+          "id": "debut",
+          "default": "Livraison estimée entre le",
+          "label": "Début du texte"
+        },
+        {
+          "type": "text",
+          "id": "fin",
+          "default": "et le",
+          "label": "Milieu du texte"
+        },
+        {
+          "type": "header",
+          "content": "Délai de livraison"
+        },
+        {
+          "type": "number",
+          "id": "min",
+          "default": 3,
+          "label": "Nombre de jours minimum jusqu'à livraison"
+        },
+        {
+          "type": "number",
+          "id": "max",
+          "default": 5,
+          "label": "Nombre de jours maximum jusqu'à livraison"
+        },
+        {
+          "type": "header",
+          "content": "Personnalisation"
+        },
+        {
+          "type": "select",
+          "id": "date_format",
+          "options": [
+            {
+              "value": "europe",
+              "label": "JJ/MM"
+            },
+            {
+              "value": "us",
+              "label": "MM/JJ"
+            }
+          ],
+          "default": "europe",
+          "label": "Format de la date"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+            },
+            {
+              "value": "apple",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+            },
+            {
+              "value": "banana",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+            },
+            {
+              "value": "carrot",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+            },
+            {
+              "value": "pepper",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+            },
+            {
+              "value": "serving_dish",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            }
+          ],
+          "default": "check_mark",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+  	{
+      "type": "custom_text",
+      "name": "Champ texte personnalisé",
+      "settings": [
+        {
+          "type": "text",
+          "id": "edit",
+          "label": "Titre",
+          "default": "Texte personnalisé",
+          "info": "N'utilisez pas d'espaces"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "t:sections.main-product.blocks.price.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Comment changer le format de devise sur Shopify. [En savoir plus](https://the-deployer.notion.site/Comment-diter-les-formats-de-devise-c6f427ec9b844567940e1e94c5c1e20e)."
+        },
+        {
+          "type": "select",
+          "id": "price_position",
+          "options": [
+            {
+              "value": "first",
+              "label": "Devant"
+            },
+            {
+              "value": "second",
+              "label": "Derrière"
+            }
+          ],
+          "default": "second",
+          "label": "Position du prix « barré »"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tax",
+          "label": "Cacher la mention « taxes incluses »",
+          "default": false
+  		  },
+        {
+          "type": "checkbox",
+          "id": "show_badges",
+          "label": "Afficher badge",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "price_weight",
+          "label": "Prix en gras",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+  		  {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "variant_picker",
+      "name": "t:sections.main-product.blocks.variant_picker.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "picker_type",
+          "options": [
+            {
+              "value": "dropdown",
+              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__1.label"
+            },
+            {
+              "value": "button",
+              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__2.label"
+            }
+          ],
+          "default": "button",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
+        },
+        {
+          "type": "paragraph",
+          "content": "Pour activer les pastilles de couleurs, ajouter un champ méta « variante » avec la clé « color.hexcode » (couleur) ou la clé « color.image » (image). [Tutoriel](https://the-deployer.notion.site/Comment-param-trer-les-pastilles-de-couleur-color-swatches-a86b073aa08b4faa8b8ac878583acf1e)"
+        },
+        {
+          "type": "checkbox",
+          "id": "no_label",
+          "default": false,
+          "label": "Retirer les labels de variante"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_variant_value_in_label",
+          "default": true,
+          "label": "Afficher la valeur de la variante dans le label"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "quantity_selector",
+      "name": "t:sections.main-product.blocks.quantity_selector.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "no_label",
+          "default": false,
+          "label": "Retirer les labels de variante"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "t:sections.main-product.blocks.buy_buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "Icône personnalisé",
+          "info": "Ajouter le code SVG, sinon laisser vide."
+        },
+        {
+          "type":"paragraph",
+          "content":"Librairie Radix Icons : [Icône personnalisé](https://icons.radix-ui.com/)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "Barre d'ajout au panier"
+        },
+        {
+          "type": "checkbox",
+          "id": "sticky",
+          "default": false,
+          "label": "Activer le bouton collant",
+          "info": "Visible seulement sur mobile."
+        },
+        {
+          "type": "checkbox",
+          "id": "sticky-prix",
+          "default": false,
+          "label": "Afficher le prix"
+        },
+        {
+          "type": "checkbox",
+          "id": "sticky-titre",
+          "default": false,
+          "label": "Afficher le nom du produit"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "pack",
+      "name": "Pack quantité",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Paramètres généraux"
+        },
+        {
+          "type": "paragraph",
+          "content": "Un Guide est à votre disposition : [Voir le guide](https://the-deployer.notion.site/Comment-param-trer-les-packs-de-produits-Version-1-0-8-et-61a0cccd71914d6aaf09fb1083edf3ba?pvs=4)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Quantité:"
+        },
+        {
+          "type": "select",
+          "id": "display_mode",
+          "label": "Mode d'affichage",
+          "options": [
+            {
+              "value": "column",
+              "label": "En colonne"
+            },
+            {
+              "value": "row",
+              "label": "En ligne"
+            }
+          ],
+          "default": "column"
+        },
+        {
+          "type": "select",
+          "id": "variant_picker",
+          "label": "Sélecteur de variante",
+          "options": [
+            {
+              "value": "none",
+              "label": "Aucun"
+            },
+            {
+              "value": "dropdown",
+              "label": "Activer"
+            }
+          ],
+          "default": "none",
+          "info": "Mode d'affichage recommandé : 'En ligne'. Cacher le bloc 'Sélecteur de variante'"
+        },
+        {
+          "type": "select",
+          "id": "quantity_selected_by_default",
+          "label": "Quantité sélectionnée par défaut",
+          "options": [
+            {
+              "value": "1",
+              "label": "Quantité 1"
+            },
+            { 
+              "value": "2",
+              "label": "Quantité 2" 
+            },
+            {
+              "value": "3",
+              "label": "Quantité 3"
+            }
+          ],
+          "default": "2",
+          "info": "Si la quantité sélectionnée par défaut n'est pas disponible, la première quantité disponible sera sélectionnée."
+        },
+        {
+          "type": "header",
+          "content": "Bannières de promotion"
+        },
+        {
+          "type": "select",
+          "id": "banner_position",
+          "label": "Position des bannières",
+          "options": [
+            {
+              "value": "top",
+              "label": "En haut"
+            },
+            {
+              "value": "bottom",
+              "label": "En bas"
+            }
+          ],
+          "default": "top"
+        },
+        {
+          "type": "checkbox",
+          "id": "banner_overlap",
+          "label": "Bannière en superposition",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Encarts d'offre"
+        },
+        {
+          "type": "text",
+          "id": "product_small_title",
+          "label": "Nom du produit",
+          "default": "article"
+        },
+        {
+          "type": "text",
+          "id": "product_small_title_plural",
+          "label": "Nom du produit au pluriel",
+          "default": "articles"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_images",
+          "label": "Afficher les images",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image_badge",
+          "label": "Afficher le badge sur l'image",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "badge_position",
+          "label": "Position du badge",
+          "options": [
+            {
+              "value": "topright",
+              "label": "En haut à droite"
+            },
+            {
+              "value": "topleft",
+              "label": "En haut à gauche"
+            },
+            {
+              "value": "bottomright",
+              "label": "En bas à droite"
+            },
+            {
+              "value": "bottomleft",
+              "label": "En bas à gauche"
+            }
+          ],
+          "default": "bottomright"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_unit_price",
+            "label": "Afficher le prix par unité",
+            "default": false
+        },
+        {
+            "type": "text",
+            "id": "unit_price_text",
+            "label": "Label du prix par unité",
+            "default": "par article"
+        },
+        {
+          "type": "header",
+          "content": "Quantité 1"
+        },
+        {
+          "type": "number",
+          "id": "quantity_1",
+          "label": "Quantité",
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "discount_value_1",
+          "label": "Réduction (€)",
+          "info": "Format: 10,00"
+        },
+        {
+          "type": "number",
+          "id": "discount_percentage_1",
+          "label": "Réduction (%)",
+          "info": "La réduction en euro est prioritaire ce paramètre"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "banner_1",
+          "label": "Texte bannière"
+        },
+        {
+          "type": "header",
+          "content": "Quantité 2"
+        },
+        {
+          "type": "number",
+          "id": "quantity_2",
+          "label": "Quantité",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "discount_value_2",
+          "label": "Réduction (€)",
+          "info": "Format: 10,00"
+        },
+        {
+          "type": "number",
+          "id": "discount_percentage_2",
+          "label": "Réduction (%)",
+          "default": 5,
+          "info": "La réduction en euro est prioritaire ce paramètre"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "banner_2",
+          "label": "Texte bannière",
+          "default": "5% de réduction"
+        },
+        {
+          "type": "header",
+          "content": "Quantité 3"
+        },
+        {
+          "type": "number",
+          "id": "quantity_3",
+          "label": "Quantité",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "discount_value_3",
+          "label": "Réduction (€)",
+          "info": "Format: 10,00"
+        },
+        {
+          "type": "number",
+          "id": "discount_percentage_3",
+          "label": "Réduction (%)",
+          "default": 10,
+          "info": "La réduction en euro est prioritaire ce paramètre"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "banner_3",
+          "label": "Texte bannière",
+          "default": "10% de réduction"
+        },
+        {
+          "type": "select",
+          "id": "margin", 
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "bundle",
+      "name": "Offre groupée",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Un tutoriel est à votre disposition : [Voir la vidéo](https://vimeo.com/747273693/2976664572)"
+        },
+        {
+          "type": "product",
+          "id": "meta",
+          "label": "Produit ou champ meta"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Offre groupée !"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Texte du bouton",
+          "default": "Commander"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "toggle_cross_sell",
+      "name": "Cross-sell à cocher",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Choisissez des options"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Personnalisez votre produit en ajoutant des options</p>"
+        },
+        {
+          "type": "product_list",
+          "id": "product_list",
+          "label": "Liste de produits"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_image",
+          "label": "Afficher les images produit",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "margin", 
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    },
+    {
+      "type": "web_stories",
+      "name": "🔒 Stories by The Deployer",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Module natif de Stories by The Deployer"
+        },
+        {
+          "type": "paragraph",
+          "content": "✅ Stories communes ou propre à un produit en particulier"
+        },
+        {
+          "type": "paragraph",
+          "content": "✅ Jusqu'à 9 medias par stories, stories illimtées par pages"
+        },
+        {
+          "type": "paragraph",
+          "content": "✅ Accès à vie, intégré sous 24 heures ouvrées"
+        },
+        {
+          "type": "paragraph",
+          "content": "✅ Intégration par nos développeurs inclue"
+        },
+        {
+          "type": "paragraph",
+          "content": "[🔐 Débloquer le module de Stories](https://app.themefullstack.com/web-stories)"
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "t:sections.main-product.blocks.custom_liquid.name",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "t:sections.main-product.blocks.custom_liquid.settings.custom_liquid.label",
+          "info": "t:sections.main-product.blocks.custom_liquid.settings.custom_liquid.info"
+        },
+        {
+          "type": "select",
+          "id": "margin",
+          "options": [
+            {
+              "value": "avec",
+              "label": "Marge haut - bas"
+            },
+            {
+              "value": "avec-haut",
+              "label": "Marge en haut"
+            },
+            {
+              "value": "avec-bas",
+              "label": "Marge en bas"
+            },
+            {
+              "value": "none",
+              "label": "Aucune marge"
+            }
+          ],
+          "default": "avec",
+          "label": "Marges du bloc"
+        },
+        {
+          "type": "header",
+          "content": "A/B TEST"
+        },
+        {
+          "type": "text",
+          "id": "identificateur",
+          "label": "Identificateur de bloc",
+          "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.featured-product.settings.product.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Nuancier de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "secondary_background",
+      "default": false,
+      "label": "t:sections.featured-product.settings.secondary_background.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "view-details",
+      "default": false,
+      "label": "Afficher le lien vers la fiche produit"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_variants",
+      "default": false,
+      "label": "t:sections.main-product.settings.hide_variants.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "default": false,
+      "label": "t:sections.featured-product.settings.enable_video_looping.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_zoom",
+      "default": false,
+      "label": "Désactiver le zoom au clic sur l'image"
+    },
+    {
+      "type": "header",
+      "content": "Fil d'ariane"
+    },
+    {
+      "type": "collection",
+      "id": "breadcrumb",
+      "label": "Collection parente",
+      "info": "Affichera si défini : 'Accueil | Collection en question | Produit' en haut de l'image"
+    },
+    {
+      "type": "header",
+      "content": "A/B TEST"
+    },
+    {
+      "type": "text",
+      "id": "identificateur",
+      "label": "Identificateur de section",
+      "default": "class",
+      "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Ordinateur"
+    },
+    {
+      "type": "select",
+      "id": "center-content-desktop",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ],
+      "default": "left",
+      "label": "Alignement du contenu"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_info",
+      "default": true,
+      "label": "Activer le carousel d'image collant"
+    },
+    {
+      "type": "checkbox",
+      "id": "offdesk",
+      "default": false,
+      "label": "Cacher la section"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "center-content-mobile",
+      "default": false,
+      "label": "Centrer le contenu"
+    },
+    {
+      "type": "select",
+      "id": "mobile_thumbnails",
+      "options": [
+        {
+          "value": "show",
+          "label": "t:sections.main-product.settings.mobile_thumbnails.options__1.label"
+        },
+        {
+          "value": "hide",
+          "label": "t:sections.main-product.settings.mobile_thumbnails.options__2.label"
+        },
+        {
+          "value": "points",
+          "label": "Points"
+        }
+      ],
+      "default": "hide",
+      "label": "Mise en page"
+    },
+    {
+      "type": "checkbox",
+      "id": "offmob",
+      "default": false,
+      "label": "Cacher la section"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-product.presets.name",
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle"
+          }
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variant_picker"
+        },
+        {
+          "type": "quantity_selector"
+        },
+        {
+          "type": "buy_buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

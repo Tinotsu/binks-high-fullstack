@@ -1,0 +1,141 @@
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- style -%}
+  {% render 'section-style' %}
+
+  .author-adv-{{ section.settings.heading_alignment }} {
+    display: flex;
+    align-items: center;
+    {% if section.settings.heading_alignment == "center" %}
+      justify-content: center;
+    {% endif %}
+    gap: 10px;
+  }
+
+  .author-adv-{{ section.settings.heading_alignment }} img {
+    width: 50px;
+    border-radius: 50px;
+  }
+
+  .author-adv-{{ section.settings.heading_alignment }} p {
+    margin: 0;
+  }
+  
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="page-width {% if section.settings.active_narrow != false %}page-width--narrow{% endif %} section-{{ section.id }}-padding author-adv-{{ section.settings.heading_alignment }}">
+  {% if section.settings.pic != blank %}
+    <img class="img-author" src="{{ section.settings.pic.src | img_url:'200x' }}" alt="{{ section.settings.pic.alt }}">
+  {% else %}
+    <img class="img-author" src="https://media.istockphoto.com/photos/studio-portrait-of-attractive-19-year-old-woman-with-brown-hair-picture-id1344327532?b=1&k=20&m=1344327532&s=170667a&w=0&h=aqh_117UeU73q6fdesYZlI1X6p1dULM33gKo3RBP-xs=" alt="default-advertorial-profile-picture">
+  {% endif %}
+  <p>{{ section.settings.before-name }} <b>{{ section.settings.name }}</b> {{ section.settings.after-name }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Advertorial Author",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "center",
+          "label": "Au centre"
+        }
+      ],
+      "default": "left",
+      "label": "Alignement du titre"
+    },
+    {
+      "type": "image_picker",
+      "id": "pic",
+      "label": "Image de l'auteur"
+    },
+    {
+      "type": "text",
+      "id": "before-name",
+      "label": "Avant Contenu",
+      "default": "Par"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Contenu",
+      "default": "John doe"
+    },
+    {
+      "type": "text",
+      "id": "after-name",
+      "label": "Après Contenu",
+      "default": " - Le 28/8/2022"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Ordinateur"
+    },
+    {
+      "type": "checkbox",
+      "id": "offdesk",
+      "default": false,
+      "label": "Cacher la section"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "offmob",
+      "default": false,
+      "label": "Cacher la section"
+    }
+  ]
+}
+{% endschema %}

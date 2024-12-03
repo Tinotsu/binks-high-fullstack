@@ -1,0 +1,66 @@
+{% assign canonic_defined = false %}
+
+{%- for block in section.blocks -%}
+    {%- case block.type -%}
+        {%- when 'noindex'-%}
+            {%- if request.path contains block.settings.title -%}
+                <meta name="robots" content="noindex,nofollow">
+            {%- endif -%}
+        {%- when 'canonical'-%}
+            {%- if request.path contains block.settings.title -%}
+                {% assign canonic_defined = true %}
+                <link rel="canonical" href="{{ block.settings.url }}">
+            {%- endif -%}
+    {%- endcase -%}
+{%- endfor -%}
+
+{% unless canonic_defined %}
+  <link rel="canonical" href="{{ canonical_url }}">
+{% endunless %}
+
+{% schema %}
+{
+  "name": "SEO Personnalisé",
+  "blocks": [
+    {
+      "name": "No-Index",
+      "type": "noindex",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nom de la page a mettre en noindex",
+          "default": "page-de-votre-choix"
+        },
+        {
+          "type": "paragraph",
+          "content": "ℹ️ Découvrez le tutoriel complet ici [En savoir plus](https://the-deployer.notion.site/Comment-passer-une-page-en-no-index-087dcdbfb3f846dcabd4d6aa073cec41?pvs=4)"
+        }
+      ]
+    },
+    {
+      "name": "Canonical",
+      "type": "canonical",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nom de la page sur laquelle appliquer une canonical personnalisée",
+          "info": "Exemple : questions-frequentes",
+          "default": "page-de-votre-choix"
+        },
+        {
+          "type": "text",
+          "id": "url",
+          "label": "URL d'origine de la page",
+          "info": "Renseignez l'url complète. Exemple : https://thèmefullstack.com/pages/faq"
+        },
+        {
+          "type": "paragraph",
+          "content": "ℹ️ Découvrez le tutoriel complet ici [En savoir plus](https://the-deployer.notion.site/Comment-changer-la-balise-canonique-canonical-d-une-page-2ae6dfb7e9f2458cb2fb8a492f49c241?pvs=4)"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

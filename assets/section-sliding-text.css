@@ -1,0 +1,28 @@
+.sliding-text-container {
+  width: 100%;
+  text-transform: uppercase;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.sliding-text-container .title {
+  margin: 0;
+}
+
+.sliding-text-container .title.bordered-text {
+  -webkit-text-fill-color: rgb(var(--color-background));
+  -webkit-text-stroke-color: rgb(var(--color-foreground));
+  -webkit-text-stroke-width: 1px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

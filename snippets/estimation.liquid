@@ -1,0 +1,55 @@
+{% style %}
+.livraison-estime-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.livraison-estime-container {
+  fill: black;
+}
+{% endstyle %}
+
+<div class="livraison-estime-container product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.class != blank %} {{ block.settings.class }}{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+{% render 'icon-accordion', icon: block.settings.icon %}
+<div class="livraison-estime-content">
+    <div id="livraison-estime" style="margin: 0;"><p id="livraison-estime-inner" style="margin: 0;display: block;"></p></div>   
+</div>
+    
+</div>
+
+<script>
+    Date.prototype.addDays = function (days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+    var date = new Date();
+
+    function formatDate(date) {
+        var month = addZero(date.getMonth() + 1);
+        var day = addZero(date.getDate());
+        {% if block.settings.date_format == "europe" %}
+          let formatted_date = day + "/" + month
+        {% else %}
+          let formatted_date = month + "/" + day
+        {% endif %}
+        return formatted_date;
+    }
+
+    function addZero(number) {
+        if (String(number).length == 1) {
+            number = "0" + number;
+        }
+        return number;
+    }
+    document.getElementById('livraison-estime-inner').innerHTML = "{{ block.settings.debut }} :&nbsp;" + `<strong style="margin-right: 3px;font-weight:bold;"> ${formatDate(date.addDays({{ block.settings.min }}))}</strong> ` + " {{ block.settings.fin }} " + `<strong style="margin-left: 3px;font-weight:bold;">${formatDate(date.addDays({{ block.settings.max }}))}</strong>`;
+
+    document.querySelector('.delivery-guide').addEventListener('click', function () {
+        document.querySelector('.livraison').click();
+    });
+</script>

@@ -1,0 +1,294 @@
+{%- render 'cart-drawer' -%}
+
+{% schema %}
+{
+  "name": "Panier coulissant 🟢",
+  "settings": [
+    {
+      "type": "header",
+      "content": "A/B TEST"
+    },
+    {
+      "type": "text",
+      "id": "identificateur",
+      "label": "Identificateur de section",
+      "default": "class",
+      "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+    },
+    {
+      "type": "paragraph",
+      "content": "Éditer ou supprimer la mention 'taxes incluses...' [Tutoriel](https://the-deployer.notion.site/Comment-diter-ou-supprimer-le-texte-Taxes-incluses-4e38034c3be84065969caf0a2db5ea65)."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Nuancier de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Carte de produit"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_margin",
+      "label": "Marge horizontale",
+      "unit": "px",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "vertical_margin",
+      "label": "Marge verticale",
+      "unit": "px",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "default": 15
+    }
+  ],
+  "blocks": [
+    {
+      "type": "timer",
+      "name": "Compte à rebours",
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Nuancier de couleurs",
+          "default": "scheme-1"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte",
+          "default": "Votre panier est réservé pendant :"
+        },
+        {
+          "type": "range",
+          "id": "timer_minutes",
+          "label": "Minutes",
+          "unit": "min",
+          "min": 5,
+          "max": 30,
+          "step": 5,
+          "default": 10
+        }
+      ]
+    },
+    {
+      "type": "annonce",
+      "name": "Barre d'annonces",
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Nuancier de couleurs",
+          "default": "scheme-1"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte de l'annonce",
+          "default": "<p>Insérez un message ici</p>"
+        }
+      ]
+    },
+    {
+      "type": "upsell",
+      "name": "Cross-sell en un clic",
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Nuancier de couleurs",
+          "default": "scheme-2"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Produit"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "info": "Remplace le titre du produit."
+        },
+        {
+          "type": "text",
+          "id": "atc_content",
+          "label": "Contenu du bouton",
+          "default": "Ajouter"
+        }
+      ]
+    },
+    {
+      "type": "banner",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "progress",
+      "name": "Barre de progression",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "ℹ️ Comment paramétrer le cadeau offert dans la Jauge dynamique ? [Voir le tutoriel](https://the-deployer.notion.site/Comment-param-trer-le-cadeau-offert-dans-la-Jauge-dynamique-b5f5a9771d76492b893d99f040ed133a)"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "default": "scheme-1",
+          "label": "t:sections.all.colors.label"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Progression basée sur",
+          "options": [
+            {
+              "value": "montant",
+              "label": "le montant total du panier"
+            }
+          ],
+          "default": "montant"
+        },
+        {
+          "type": "header",
+          "content": "Phrase par défaut",
+          "info": "Affichée si tous les paliers sont atteints"
+        },
+        {
+          "type": "text",
+          "id": "step0_text",
+          "label": "Phrase par défaut",
+          "default": "Félicitations ! Livraison + cadeau offerts"
+        },
+        {
+          "type": "header",
+          "content": "Premier palier"
+        },
+        {
+          "type": "text",
+          "id": "step1_label",
+          "label": "Nom du palier",
+          "default": "Livraison offerte"
+        },
+        {
+          "type": "number",
+          "id": "step1_value",
+          "label": "Premier palier atteint si égal à",
+          "default": 30,
+          "info": "Nombre d'article OU montant du panier (€)"
+        },
+        {
+          "type": "text",
+          "id": "step1_text1",
+          "label": "Phrase 1/2",
+          "default": "Plus que"
+        },
+        {
+          "type": "text",
+          "id": "step1_text2",
+          "label": "Phrase 2/2",
+          "default": "et la livraison est offerte !"
+        },
+        {
+          "type": "header",
+          "content": "Deuxième palier"
+        },
+        {
+          "type": "text",
+          "id": "step2_label",
+          "label": "Nom du palier",
+          "default": "Cadeau offert"
+        },
+        {
+          "type": "number",
+          "id": "step2_value",
+          "label": "Deuxième palier atteint si égal à",
+          "default": 60,
+          "info": "Nombre d'article OU montant du panier (€)"
+        },
+        {
+          "type": "text",
+          "id": "step2_text1",
+          "label": "Phrase 1/2",
+          "default": "Félicitations ! Dépensez"
+        },
+        {
+          "type": "text",
+          "id": "step2_text2",
+          "label": "Phrase 2/2",
+          "default": "supplémentaire et on vous offre un cadeau !"
+        },
+        {
+          "type": "header",
+          "content": "Troisième palier"
+        },
+        {
+          "type": "text",
+          "id": "step3_label",
+          "label": "Nom du palier"
+        },
+        {
+          "type": "number",
+          "id": "step3_value",
+          "label": "Troisième palier atteint si égal à",
+          "info": "Nombre d'article OU montant du panier (€)"
+        },
+        {
+          "type": "text",
+          "id": "step3_text1",
+          "label": "Phrase 1/2"
+        },
+        {
+          "type": "text",
+          "id": "step3_text2",
+          "label": "Phrase 2/2"
+        }
+      ]
+    },
+    {
+      "type": "discount_code",
+      "name": "Code promo",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Ce bloc ne permet pas de cumuler plusieurs codes de réduction dûe à une limitation de Shopify."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Texte du bouton",
+          "default": "Appliquer"
+        },
+        {
+          "type": "text",
+          "id": "button_text_remove",
+          "label": "Texte du bouton de suppression de code de réduction",
+          "default": "Retirer"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder du champ",
+          "default": "Code de réduction"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,100 @@
+{% if section.settings.multitabs_bottom_menu != false %}
+  #multitabs .list-menu__item--active {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 0.2rem;
+  }
+  #multitabs .list-menu__item--active:hover {
+    text-decoration-thickness: 0.2rem;
+  }
+  #multitabs .list-menu__item--active {
+    transition: text-decoration-thickness var(--duration-short) ease;
+    color: rgb(var(--color-foreground));
+    text-decoration-thickness: 0.2rem;
+    font-weight: 700;
+  }
+  @media screen and (min-width: 750px) {
+    #multitabs .list-menu__item--active:hover {
+      text-decoration-thickness: 0.2rem;
+    }
+  }
+{% endif %}
+
+{% if section.settings.multitabs_animation_hover != false %}
+  {% if section.settings.multitabs_style_hover == "classic" %}
+    /* ••••• Footer ••••• */
+    @media screen and (min-width: 750px) {
+      #multitabs .list-menu__item--link:hover {
+        color: rgb(var(--color-foreground));
+        text-decoration: underline;
+        text-underline-offset: 0.3rem;
+        text-decoration-thickness: 0.2rem;
+      }
+      #multitabs .list-menu__item--active:hover {
+        text-decoration-thickness: 0.2rem;
+      }
+    }
+    {% elsif section.settings.multitabs_style_hover== "animation" %}
+    /* ••••• Animation générique ••••• */
+    #multitabs .underline {
+      position: relative;
+    }
+    #multitabs .underline::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      bottom: 7px;
+      background-color: rgb(var(--color-foreground));
+      height: 2px; /* Option */
+      {% if section.settings.multitabs_type_animation == "animation-1" %}
+        right: 0;
+        transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      {% elsif section.settings.multitabs_type_animation == "animation-2" %}
+        transition: all .3s;
+      {% endif %}
+    }
+    @media (hover: hover) and (any-pointer: fine) {
+      #multitabs .underline:hover::before {
+        {% if section.settings.multitabs_type_animation == "animation-1" %}
+          left: 0;
+          right: auto;
+        {% endif %}
+        width: 100%;
+      }
+    }
+    @media screen and (max-width:749px) {
+      #multitabs .underline::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        background-color: rgb(var(--color-foreground));
+        height: 2px;
+        transition: all .3s;
+        bottom: 12.5px;
+        {% if section.settings.multitabs_type_animation == "animation-1" %}
+          right: 0;
+          transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        {% elsif section.settings.multitabs_type_animation == "animation-2" %}
+          transition: all .3s;
+        {% endif %}
+      }
+      #multitabs .underline:hover::before {
+        {% if section.settings.multitabs_type_animation == "animation-1" %}
+          left: 0;
+          right: auto;
+        {% endif %}
+        width: 80%;
+      }
+    }
+
+    /* ••••• Footer ••••• */
+    #multitabs .list-menu__item--active {
+      color: rgb(var(--color-foreground));
+    }
+    @media screen and (min-width: 750px) {
+      #multitabs .list-menu__item--link:hover {
+        color: rgb(var(--color-foreground));
+      }
+    }
+  {% endif %}
+{% endif %}

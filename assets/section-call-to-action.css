@@ -1,0 +1,43 @@
+.cta-content-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 20px 0;
+}
+  
+.cta-entoure-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  max-width: 400px;
+  margin: 0;
+}
+
+.cta-content-container {
+    padding: 1.5rem;    
+}
+
+.cta-button {
+    color: rgb(var(--color-button-text)) !important;
+}
+
+.cta_subcontent {
+    display: block;
+}
+
+.cta-entoure-image {
+  background-size: cover;
+  background-position: center;
+  min-height: 200px;
+}
+
+@media screen and (max-width: 750px) {
+  .cta-content-wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 25px 0;
+  }
+  .cta-content-wrapper .btn {
+    width: 100%;
+  }
+}

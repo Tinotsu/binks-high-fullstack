@@ -1,0 +1,442 @@
+{{ 'section-multicolumn.css' | asset_url | stylesheet_tag }}
+{{ 'section-brands.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .brand__description.active {
+    display: block;
+    text-align: center;
+  }
+
+  .brand__description.hidden {
+    display: none;
+  }
+
+  .brand__input {
+    display: none;
+  }
+
+  .brand__input:checked + .brand__image {
+    opacity: 1;
+    filter: grayscale(0);
+  }
+
+  {% if section.settings.no_space_between_text_image %}
+    .background-none .multicolumn-card__image-wrapper + .multicolumn-card__info {
+      padding-top: 0 !important;
+    }
+
+    .multicolumn-card__info p {
+      font-size: 1.2rem;
+    }
+  {% endif %}
+  @media screen and (max-width:768px){
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .logolist-list {
+    {% if section.settings.col-width == "space-btw" %}
+      justify-content: space-between;
+    {% endif %}
+    }
+  }
+
+  #Logolist-{{ section.id }} .title-wrapper-with-link,
+  #Logolist-{{ section.id }} .section-description {
+      justify-content: {{ section.settings.heading_align }};
+  }
+
+  {% if section.settings.heading_align == "center" %}
+    #Logolist-{{ section.id }} .title,
+    #Logolist-{{ section.id }} .section-description {
+      text-align: center;
+    }
+  {% endif %}
+{%- endstyle -%}
+
+{%- liquid
+  assign columns_mobile_int = section.settings.columns_mobile | plus: 0
+  assign show_mobile_slider = false
+  if section.settings.swipe_on_mobile and section.blocks.size > columns_mobile_int
+    assign show_mobile_slider = true
+  endif
+-%}
+
+<div id="Logolist-{{ section.id }}" class="multicolumn color-{{ section.settings.color_scheme }} gradient{% if section.settings.title == blank %} no-heading{% endif %} {% if section.settings.identificateur != blank %}{{ section.settings.identificateur }}{% endif %} {% if section.settings.offdesk %} offdesk {% endif %} {% if section.settings.offmob %} offmob {% endif %}">
+  <div class="page-width section-{{ section.id }}-padding isolate">
+    {%- unless section.settings.title == blank -%}
+      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin {% if section.settings.description != blank %}title-wrapper--small-margin{% endif %}">
+        <{{ section.settings.heading_tag }} class="title {{ section.settings.heading_size }}">
+          {{ section.settings.title | escape }}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endunless -%}
+    {%- if section.settings.description != blank -%}
+      <div class="section-description {{ section.settings.description_style }}">{{ section.settings.description }}</div>
+    {%- endif -%}
+
+    <logo-list-2 class="brands-wrapper" section-speed="{{ section.settings.speed | times: 1000 }}">
+      {% for block in section.blocks %}
+        <div class="brand__description {% if forloop.first %} active {% else %} hidden {% endif %}" data-id="{{ block.id }}">
+          <p class="{{ section.settings.text_size }}">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+      <div class="brands-container">
+        {% for block in section.blocks %}
+          <div class="brand">
+            {% if block.settings.image != blank %}
+              <input
+                type="radio"
+                name="brand__checkbox-{{ section.id }}"
+                class="brand__input {% if forloop.first %} active {% else %} hidden {% endif %}"
+                {% if forloop.first %}
+                  checked
+                {% endif %}
+                id="{{ block.id }}"
+              >
+              <label id="brand__image-{{ block.id }}" class="brand__image" for="{{ block.id }}">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 300 }}" loading="lazy" width="150" height="80" alt="{{ block.settings.title | escape }}">
+                {% endif %}
+              </label>
+              <style>
+                #brand__image-{{ block.id }} img {
+                  width: {{ block.settings.width }}px;
+                  height: auto;
+                }
+              </style>
+            {% endif %}
+            {% if block.settings.svg_src != blank %}
+              <input
+                type="radio"
+                name="brand__checkbox-{{ section.id }}"
+                class="brand__input  {% if forloop.first %} active {% else %} hidden {% endif %}"
+                {% if forloop.first %}
+                  checked
+                {% endif %}
+                id="{{ block.id }}"
+              >
+              <label id="brand__image-container-{{ block.id }}" class="brand__image" for="{{ block.id }}">
+                {% if block.settings.svg_src != blank %}
+                  {{ block.settings.svg_src }}
+                {% endif %}
+              </label>
+              <style>
+                #brand__image-container-{{ block.id }} svg {
+                  width: {{ block.settings.width }}px;
+                }
+              </style>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </logo-list-2>
+    <div class="center">
+      {%- if section.settings.button_label != blank -%}
+        <a
+          class="button button--primary"
+          {% if section.settings.button_link == blank %}
+            role="link" aria-disabled="true"
+          {% else %}
+            href="{{ section.settings.button_link }}"
+          {% endif %}
+        >
+          <span>{{ section.settings.button_label | escape }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Liste de logo défilants",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Nuancier de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "span",
+          "label": "Aucune"
+        }
+      ],
+      "default": "h2",
+      "label": "Balise titre (SEO)"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "options": [
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "flex-start",
+          "label": "Gauche"
+        },
+        {
+          "value": "flex-end",
+          "label": "Droite"
+        }
+      ],
+      "default": "flex-start",
+      "label": "Alignement du titre"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "select",
+      "id": "description_style",
+      "label": "Style de la description",
+      "options": [
+        {
+          "value": "body",
+          "label": "Corp"
+        },
+        {
+          "value": "subtitle",
+          "label": "Sous-titre"
+        },
+        {
+          "value": "uppercase",
+          "label": "Majuscule"
+        }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.multicolumn.settings.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.multicolumn.settings.button_link.label"
+    },
+    {
+      "type": "header",
+      "content": "Citation"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "none",
+          "label": "Aucune"
+        }
+      ],
+      "default": "h3",
+      "label": "Taille du texte"
+    },
+    {
+      "type": "header",
+      "content": "A/B TEST"
+    },
+    {
+      "type": "text",
+      "id": "identificateur",
+      "label": "Identificateur de section",
+      "default": "class",
+      "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Ordinateur"
+    },
+    {
+      "type": "checkbox",
+      "id": "offdesk",
+      "default": false,
+      "label": "Cacher le bloc"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_carrousel_mobile",
+      "default": true,
+      "label": "Cacher les paginations"
+    },
+    {
+      "type": "checkbox",
+      "id": "offmob",
+      "default": false,
+      "label": "Cacher le bloc"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "ms",
+      "label": "Vitesse de défilement",
+      "default": 6
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "svg_src",
+          "label": "Image Source SVG",
+          "info": "Ne pas entrer un svg ET une image",
+          "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 728.31 128.08\"><defs><style>.e794fa1c-081b-4445-832b-cb89be0c9a20{fill:#f2cb0a;}.e33b727e-f23a-4fe7-a4c3-f13a79a11833{fill:#421b91;}</style></defs><g id=\"f7ba0193-d27b-49cd-ae51-16fcc03d1769\" data-name=\"Calque 2\"><g id=\"f7d901ac-5381-480e-90d7-ba3f8919150d\" data-name=\"Calque 1\"><rect class=\"e794fa1c-081b-4445-832b-cb89be0c9a20\" x=\"0.09\" y=\"0.57\" width=\"111.27\" height=\"23.67\"></rect><rect class=\"e33b727e-f23a-4fe7-a4c3-f13a79a11833\" x=\"34.3\" y=\"34.93\" width=\"111.27\" height=\"23.67\"></rect><rect class=\"e794fa1c-081b-4445-832b-cb89be0c9a20\" y=\"69.7\" width=\"111.27\" height=\"23.67\"></rect><rect class=\"e33b727e-f23a-4fe7-a4c3-f13a79a11833\" x=\"34.21\" y=\"104.07\" width=\"111.27\" height=\"23.67\"></rect><path d=\"M188.49,1.31h44.94V14.87H204.57V31.38h24.71V44.94H204.57V72.6H188.49Z\"></path><path d=\"M273.89,73.91q-13.89,0-21.21-8.2t-7.33-26.13V1.31h16.18V41.22q0,10.5,3.17,14.65T273.89,60q6,0,9.29-4.16t3.28-14.65V1.31H302V39.58q0,17.94-7.16,26.13T273.89,73.91Z\"></path><path d=\"M318.5,1.31h16.07V59h28.21V72.6H318.5Z\"></path><path d=\"M375.14,1.31h16.07V59h28.21V72"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Entrez une phrase à mettre en avant depuis un media",
+          "label": "Citation"
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "min": 10,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "default": 100,
+          "label": "Largeur en pixel"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Liste de logo défilants",
+      "blocks": [
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

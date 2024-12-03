@@ -1,0 +1,202 @@
+{{ 'component-quantity-breaks.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quantity-breaks.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  #quantity-breaks-{{ block.id }} .quantity-break_image-badge {
+    {% if block.settings.badge_position == "topright" %}
+      top: calc(25% - 15px);
+      left: calc(75% - 15px);
+    {% elsif block.settings.badge_position == "topleft" %}
+      top: calc(25% - 15px);
+      left: calc(25% - 15px);
+    {% elsif block.settings.badge_position == "bottomright" %}
+      top: calc(75% - 15px);
+      left: calc(75% - 15px);
+    {% elsif block.settings.badge_position == "bottomleft" %}
+      top: calc(75% - 15px);
+      left: calc(25% - 15px);
+    {% endif %}
+  }
+{%- endstyle -%}
+
+<quantity-breaks
+  id="quantity-breaks-{{ block.id }}"
+  class="product-block-margin-{{ block.settings.margin }}{% if block.settings.identificateur != blank %} {{ block.settings.identificateur }}{% endif %}{% if block.settings.show_background_text %} color-{{ block.settings.color_scheme }} gradient{% endif %}{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}"
+  data-section-id="{{ section.id }}"
+  data-default-variant-id="{{ product.selected_or_first_available_variant.id }}"
+  {% if block.settings.variant_picker != 'none' %}
+    class="quantity-breaks-with-variants" data-show-variant-picker="true"
+  {% else %}
+    data-show-variant-picker="false"
+  {% endif %}
+>
+  {%- if block.settings.label != blank -%}
+    <span class="quantity-label">{{ block.settings.label }}</span>
+  {%- endif -%}
+
+  {%- assign default_selected_quantity = 1 -%}
+  {% for i in (1..3) %}
+    {% assign quantity_key = 'quantity_' | append: i %}
+    {% assign quantity = block.settings[quantity_key] %}
+    {%- assign index_string = i | append: '' -%}
+    {%- if block.settings.quantity_selected_by_default == index_string and product.selected_or_first_available_variant.available and product.selected_or_first_available_variant.inventory_quantity >= quantity -%}
+      {%- assign default_selected_quantity = i -%}
+    {%- endif -%}
+  {% endfor %}
+
+  <div class="quantity-breaks-container quantity-breaks-container-{{ block.settings.display_mode }}{% if block.settings.banner_position == "top" %} quantity-breaks-container-top{% endif %}{% if block.settings.banner_position == "bottom" %} quantity-breaks-container-bottom{% endif %}">
+    {% for i in (1..3) %}
+      {% assign quantity_key = 'quantity_' | append: i %}
+      {% assign discount_value_key = 'discount_value_' | append: i %}
+      {% assign discount_percentage_key = 'discount_percentage_' | append: i %}
+      {% assign banner_text_key = 'banner_' | append: i %}
+      {% assign product_image_key = 'image_' | append: i %}
+
+      {% assign quantity = block.settings[quantity_key] %}
+      {% assign discount_value = block.settings[discount_value_key] %}
+      {% assign discount_percentage = block.settings[discount_percentage_key] %}
+      {% assign banner_text = block.settings[banner_text_key] %}
+      {% assign product_image = block.settings[product_image_key] %}
+
+      {%- capture banner -%}
+        <div class="quantity-break_banner{% if block.settings.banner_position == "top" %} quantity-break_banner-top{% endif %}{% if block.settings.banner_position == "bottom" %} quantity-break_banner-bottom{% endif %}{% if block.settings.banner_overlap %} quantity-break_banner-overlap{%- endif -%}">
+          <span>{{ banner_text }}</span>
+        </div>
+      {%- endcapture -%}
+
+      {% if quantity != blank %}
+        <div
+          class="quantity-break{%if i == default_selected_quantity %} selected-quantity-break{% endif %}{% if product.selected_variant.available == false or product.selected_variant.inventory_quantity < quantity %} disabled-quantity-break{% endif %}{% if block.settings.banner_overlap %} quantity-break_no-overflow{%- endif -%}"
+          data-quantity="{{ quantity }}"
+        >
+          {%- if banner_text != blank and block.settings.banner_position == 'top' -%}
+            {{ banner }}
+          {%- endif -%}
+
+          <div class="quantity-break_main-content">
+            {% if block.settings.show_images %}
+              {%- assign quantity_image = product.featured_image -%}
+              {%- if product_image != blank -%}
+                {%- assign quantity_image = product_image -%}
+              {%- endif -%}
+              <div class="quantity-break_image-container">
+                <img src="{{ quantity_image | image_url: width: '200' }}" alt="{{ quantity_image.alt | escape }}" height="auto" width="200" loading="lazy">
+                {% if block.settings.show_image_badge %}
+                  <span class="quantity-break_image-badge">x{{ quantity }}</span>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <div class="quantity-break_price-and-title-container">
+              <h3>
+                {{ quantity }}
+                {%- if quantity != 1 -%}
+                  {{- block.settings.product_small_title_plural }}
+                {% else -%}
+                  {{- block.settings.product_small_title -}}
+                {%- endif %}
+              </h3>
+
+              <div class="quantity-break_price-container">
+                {%- assign quantity_break_price = product.selected_or_first_available_variant.price | times: quantity -%}
+                {%- assign quantity_break_compare_at_price = product.selected_or_first_available_variant.compare_at_price | times: quantity -%}
+
+                {%- if quantity_break_compare_at_price == 0 -%}
+                  {%- assign quantity_break_compare_at_price = quantity_break_price -%}
+                {%- endif -%}
+
+                {%- if discount_value != blank -%}
+                  {%- assign discount_modified = discount_value | replace: ',', '.' | times: 100.00 -%}
+                  {%- assign quantity_break_price = quantity_break_price | minus: discount_modified -%}
+                {%- elsif discount_percentage != blank -%}
+                  {%- assign discount_modified = discount_percentage | divided_by: 100.0 -%}
+                  {%- assign discount_total_value = product.selected_or_first_available_variant.price | divided_by: 100.0 | times: discount_modified | times: 100 | split: '.' | first | times: quantity -%}
+                  {%- assign quantity_break_price = quantity_break_price | minus: discount_total_value -%}
+                {%- endif -%}
+
+                {%- if quantity_break_price != quantity_break_compare_at_price -%}
+                  <p class="quantity-break_price-container_compare-at-price">{{ quantity_break_compare_at_price | money | remove: ',00' }}</p>
+                  <p class="quantity-break_price-container_price">{{ quantity_break_price | money | remove: ',00' }}</p>
+                {%- else -%}
+                  <p class="quantity-break_price-container_price">{{ quantity_break_price | money | remove: ',00' }}</p>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.show_unit_price -%}
+                <div class="quantity-break_price-container">
+                  <p class="quantity-break_price-container_unit-price">
+                    {{ quantity_break_price | divided_by: quantity | money | remove: ',00' }}
+                    {{ block.settings.unit_price_text }}
+                  </p>
+                </div>
+              {%- endif -%}
+
+              {% if block.settings.variant_picker != 'none' %}
+                {% assign quantity_as_integer = quantity | plus: 0 %}
+                {%- liquid
+                  assign variants_available_arr = product.variants | map: 'available'
+                  assign variants_option1_arr = product.variants | map: 'option1'
+                  assign variants_option2_arr = product.variants | map: 'option2'
+                  assign variants_option3_arr = product.variants | map: 'option3'
+                -%}
+
+                <div class="quantity-break_variant-picker-container">
+                  {% for i in (1..quantity_as_integer) %}
+                    <quantity-break-variant-picker data-section-id="{{ section.id }}" data-id="{{ product.selected_or_first_available_variant.id }}" data-available="{{ product.selected_or_first_available_variant.available }}">
+                      {% for option in product.options_with_values %}
+                        <div data-option-position="{{ option.position }}" class="quantity-break_variant-picker-container__option--{{ block.settings.variant_picker }}">
+                          <label class="form__label" for="{{ option.name }}-{{ quantity }}-{{ i }}">{{ option.name }}:</label>
+                          <div class="select">
+                            <select id="{{ option.name }}-{{ quantity }}-{{ i }}" class="select__select select__select--small quantity-break_variant-picker--select" name="{{ option.name }}-{{ quantity }}-{{ i }}">
+                              {% for value in option.values %}
+                                {%- liquid
+                                  assign option_disabled = true
+                                  for option1_name in variants_option1_arr
+                                    case option.position
+                                      when 1
+                                        if variants_option1_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+                                          assign option_disabled = false
+                                        endif
+                                      when 2
+                                        if option1_name == product.selected_or_first_available_variant.option1 and variants_option2_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+                                          assign option_disabled = false
+                                        endif
+                                      when 3
+                                        if option1_name == product.selected_or_first_available_variant.option1 and variants_option2_arr[forloop.index0] == product.selected_or_first_available_variant.option2 and variants_option3_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+                                          assign option_disabled = false
+                                        endif
+                                    endcase
+                                  endfor
+                                -%}
+                                <option
+                                  value="{{ value | escape }}"
+                                  data-name="{{ value.name }}"
+                                  class="{% if option_disabled %}disabled{% endif %}"
+                                >
+                                  {{ value.name }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                            {% render 'icon-caret' %}
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </quantity-break-variant-picker>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          {%- if banner_text != blank and block.settings.banner_position == 'bottom' -%}
+            {{ banner }}
+          {%- endif -%}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <script type="application/json">
+    {{ product.variants | json }}
+  </script>
+</quantity-breaks>

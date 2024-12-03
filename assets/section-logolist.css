@@ -1,0 +1,25 @@
+.logolist-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  gap: 10px;
+}
+
+.logolist-list li .multicolumn-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logolist-list .multicolumn-card-spacing {
+  padding-top: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .logolist-list li {
+    width: 48%;
+    text-align: center;
+    min-height: 5em;
+  }
+}

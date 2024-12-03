@@ -1,0 +1,19 @@
+<div class="card card-between-products{% if block.settings.cart_height == "full" %} btwn_full_height{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+    {% if block.settings.url != blank %}
+        <a href="{{ block.settings.url }}">
+    {% endif %}
+
+        {% if block.settings.image != blank %}
+            <img class="card-between-products__image" src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.image.alt }}" width="500" height="auto" loading="lazy" alt="">
+        {% endif %}
+
+        {% if block.settings.text != blank %}
+            <div class="card-between-products__text" style="background-color: rgba(0, 0, 0, {{ block.settings.opacity | divided_by: 100.0 }});">
+                {{ block.settings.text }}
+            </div>    
+        {% endif %}
+
+    {% if block.settings.url != blank %}
+        </a>
+    {% endif %}
+</div>

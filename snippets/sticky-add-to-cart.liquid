@@ -1,0 +1,50 @@
+{{ 'component-sticky-add-cart.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sticky-add-cart.js' | asset_url }}" defer="defer"></script>
+
+<sticky-add-cart>
+  <div id="stickyAddtocartContainer">
+    {% if block.settings['sticky-prix'] or block.settings['sticky-titre'] %}
+      <div class="delivery-text-container">
+        {% if block.settings['sticky-titre'] %}
+          <div class="sticky-title-container">
+            <h3>{{ product.title }}</h3>
+          </div>
+        {% endif %}
+        {% if block.settings['sticky-prix'] %}
+          {%- render 'price', product: product, use_variant: true -%}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <button
+      type="submit"
+      name="add"
+      id="productMainSubmit"
+      class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+      {% if block.settings['sticky-prix'] == false and block.settings['sticky-titre'] == false %}
+        style="width: 100%;max-width: unset;"
+      {% endif %}
+      {% if product.selected_or_first_available_variant.available == false %}
+        disabled
+      {% endif %}
+    >
+      <div style="display: flex; align-items: center;">
+        {%- if product.selected_or_first_available_variant.available -%}
+          {% if block.settings.custom_icon != blank %}
+            <span class="custom_icon color-foreground-{{ settings.accent_icons }}" style="display: flex;">
+              {{ block.settings.custom_icon }}
+            </span>
+          {% endif %}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </div>
+      <div class="loading-overlay__spinner hidden">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </div>
+    </button>
+  </div>
+</sticky-add-cart>

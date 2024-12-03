@@ -1,0 +1,366 @@
+{{ 'section-multicolumn.css' | asset_url | stylesheet_tag }}
+{{ 'section-logolist.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  {% render 'section-style' %}
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .logolist-list {
+    {% if section.settings.col-width == "space-btw" %}
+      justify-content: space-between;
+    {% endif %}
+    }
+  }
+
+  #Logolist-{{ section.id }} .title-wrapper-with-link,
+  #Logolist-{{ section.id }} .section-description {
+      justify-content: {{ section.settings.heading_align }};
+  }
+
+  {% if section.settings.heading_align == "center" %}
+    #Logolist-{{ section.id }} .title,
+    #Logolist-{{ section.id }} .section-description {
+      text-align: center;
+    }
+  {% endif %}
+{%- endstyle -%}
+
+<div id="Logolist-{{ section.id }}" class="multicolumn color-{{ section.settings.color_scheme }} gradient{% if section.settings.title == blank %} no-heading{% endif %} {% if section.settings.identificateur != blank %}{{ section.settings.identificateur }}{% endif %}">
+  <div class="page-width section-{{ section.id }}-padding isolate">
+    {%- unless section.settings.title == blank -%}
+      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin {% if section.settings.description != blank %}title-wrapper--small-margin{% endif %}">
+        <{{ section.settings.heading_tag }} class="title {{ section.settings.heading_size }}">
+          {{ section.settings.title | escape }}
+        </{{ section.settings.heading_tag }}>
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="link underlined-link large-up-hide">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    {%- endunless -%}
+    {%- if section.settings.description != blank -%}
+      <div class="section-description {{ section.settings.description_style }}">{{ section.settings.description }}</div>
+    {%- endif -%}
+    <logolist-component>
+      <ul class="multicolumn-list logolist-list contains-content-container" role="list">
+        {%- for block in section.blocks -%}
+          <li class="multicolumn-list__item{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}" {{ block.shopify_attributes }}>
+            <div class="multicolumn-card content-container">
+              {% if block.settings.custom_icon != blank %}
+                <span class="logo-svg-{{ block.id }}">{{ block.settings.custom_icon }}</span>
+                <style>
+                  .logo-svg-{{ block.id }} svg {
+                    width: {{ block.settings.width }}px;
+                  }
+                </style>
+              {% else %}
+                {%- if block.settings.image != blank -%}
+                  <div class="multicolumn-card__image-wrapper multicolumn-card-spacing">
+                    <div class="media media--transparent">
+                      {% assign width = block.settings.width | times: 1.5 %}
+                      {% assign id = 'logolist__image-' | append: block.id %}
+                      {%- capture sizes -%}(min-width: 990px) {% if section.blocks.size <= 2 %}710px{% else %}550px{% endif %}, (min-width: 750px) {% if section.blocks.size == 1 %}710px{% else %}550px{% endif %}, calc(100vw - 30px){%- endcapture -%}
+                      {{ block.settings.image | image_url: width: width | image_tag: loading: 'lazy', sizes: sizes, widths: '275, 550, 710, 1420', class: 'multicolumn-card__image', id: id }}
+                    </div>
+                  </div>
+                  <style>
+                    #logolist__image-{{ block.id }} {
+                      max-width: {{ block.settings.width }}px;
+                      position: relative
+                    }
+                  </style>
+                {%- endif -%}
+              {% endif %}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </logolist-component>
+    <div class="center">
+      {%- if section.settings.button_label != blank -%}
+        <a
+          class="button button--primary"
+          {% if section.settings.button_link == blank %}
+            role="link" aria-disabled="true"
+          {% else %}
+            href="{{ section.settings.button_link }}"
+          {% endif %}
+        >
+          <span>{{ section.settings.button_label | escape }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Liste de logo",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Nuancier de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Liste de logo",
+      "label": "Titre"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "span",
+          "label": "Aucune"
+        }
+      ],
+      "default": "h2",
+      "label": "Balise titre (SEO)"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "options": [
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "flex-start",
+          "label": "Gauche"
+        },
+        {
+          "value": "flex-end",
+          "label": "Droite"
+        }
+      ],
+      "default": "flex-start",
+      "label": "Alignement du titre"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "select",
+      "id": "description_style",
+      "label": "Style de la description",
+      "options": [
+        {
+          "value": "body",
+          "label": "Corp"
+        },
+        {
+          "value": "subtitle",
+          "label": "Sous-titre"
+        },
+        {
+          "value": "uppercase",
+          "label": "Majuscule"
+        }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "select",
+      "id": "col-width",
+      "options": [
+        {
+          "value": "center",
+          "label": "Centré"
+        },
+        {
+          "value": "space-btw",
+          "label": "Espacé"
+        }
+      ],
+      "default": "center",
+      "label": "Placement des logos"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Découvrir",
+      "label": "t:sections.multicolumn.settings.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.multicolumn.settings.button_link.label"
+    },
+    {
+      "type": "header",
+      "content": "A/B TEST"
+    },
+    {
+      "type": "text",
+      "id": "identificateur",
+      "label": "Identificateur de section",
+      "default": "class",
+      "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Ordinateur"
+    },
+    {
+      "type": "checkbox",
+      "id": "offdesk",
+      "default": false,
+      "label": "Cacher le bloc"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_carrousel_mobile",
+      "default": true,
+      "label": "Cacher les paginations"
+    },
+    {
+      "type": "checkbox",
+      "id": "offmob",
+      "default": false,
+      "label": "Cacher le bloc"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "Logo svg",
+          "info": "Ajouter le code SVG, sinon laisser vide."
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "min": 10,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "default": 100,
+          "label": "Largeur en pixel"
+        },
+        {
+          "type": "header",
+          "content": "Ordinateur"
+        },
+        {
+          "type": "checkbox",
+          "id": "offdesk-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "offmob-bloc",
+          "default": false,
+          "label": "Cacher le bloc"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Liste de logo",
+      "blocks": [
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

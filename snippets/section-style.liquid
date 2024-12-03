@@ -1,0 +1,38 @@
+/* Ordinateur */
+@media screen and (min-width: 750px) {
+  {% if section.settings.offdesk %}
+    #shopify-section-{{ section.id }} {
+      display: none;
+    }
+  {% endif %}
+}
+
+/* Mobile */
+@media screen and (max-width: 749px) {
+  {% if section.settings.offmob %}
+    #shopify-section-{{ section.id }} { 
+      display: none;
+    }
+  {% endif %}
+}
+
+/* Blocs */
+{% for block in section.blocks %}
+  /* Ordinateur */
+  @media screen and (min-width: 750px) {
+    {% if block.settings.offdesk-bloc %}
+      #shopify-section-{{ block.id }} {
+        display: none;
+      }
+    {% endif %}
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 749px) {
+    {% if block.settings.offmob-bloc %}
+      #shopify-section-{{ block.id }} { 
+        display: none;
+      }
+    {% endif %}
+  }
+{% endfor %}

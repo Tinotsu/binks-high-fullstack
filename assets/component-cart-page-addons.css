@@ -1,0 +1,49 @@
+.block-container>div,
+.block-container .progressContainer {
+    margin: 1.5rem 0;
+}
+
+.block-container .cardscounter,
+.block-container .annonceContainer,
+.block-container .progressContainer {
+    padding: 1.5rem
+}
+
+.block-container .annonceContainer p {
+    margin: 0;
+}
+
+.block-container .progressContainer {
+    border-bottom: 0;
+}
+
+.block-container .banner_image {
+    width: 100%;
+}
+
+.banner_image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+}
+
+.block-container .cardscounter {
+    width: 100%;
+}
+
+.block-container .cart-drawer-upsell_container {
+    border: 0;
+    padding-right: 1.5rem
+}
+
+.banner_image-container .banner_image {
+    max-width: 36rem;
+}
+
+@media screen and (min-width: 768px) {
+  .block-container .cart-drawer-upsell_image-container,
+  .block-container img.cart-drawer-upsell_image {
+      width: 100px;
+      height: 100px;
+  }
+}

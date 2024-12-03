@@ -1,0 +1,410 @@
+{% liquid
+  assign product_img_width  = 120
+  assign product_img_height = 120
+  assign product_img_size = product_img_width | append: 'x' | append: product_img_height
+%}
+
+{% comment %}theme-check-disable{% endcomment %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap-utilities.min.css" integrity="sha256-SYZ4TAMHw3/Lv45coEH6k+nJj3Z/cDrNxDLT/srSQ/g=" crossorigin="anonymous">
+{% comment %}theme-check-enable{% endcomment %}
+
+{{ 'component-wishlist.css' | asset_url | stylesheet_tag }}
+
+<div 
+  id="eg-wishlist-drawer" 
+  class="offcanvas offcanvas-end color-{{ settings.wishlist_color_scheme }} gradient" 
+  tabindex="-1"
+  aria-labelledby="eg-wishlist-drawer-label"
+  data-display-btn-pdp="{{ settings.display_btn_pdp }}"
+  data-display-btn-lists="{{ settings.display_btn_lists }}"
+  data-img-width="{{ product_img_width }}"
+  data-img-height="{{ product_img_height }}"
+  data-img-size="{{ product_img_size }}"
+  data-text-wishlist="{{ settings.text_wishlist }}"
+  data-text-add="{{ settings.text_add }}"
+  data-text-remove="{{ settings.text_remove }}"
+  data-text-empty="{{ settings.text_empty }}"
+  data-money-format="{{ shop.money_format }}"
+  >
+  <div class="offcanvas-header border-bottom drawer__header">
+    <span class="drawer__heading h2">{{ settings.header_title }}</span>
+    <button class="btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close">{% render 'icon-close' %}</button>
+  </div>
+  <div class="offcanvas-body">
+    <div id="eg-wishlist-drawer-empty" class="h-100" style="display: none;">
+      <p class="d-flex justify-content-center flex-column align-items-center h-100 m-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-wishlist bi bi-heart" viewBox="0 0 16 16">
+            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+        </svg>
+        {{ settings.text_empty }} 
+      </p>
+    </div>
+    <ul id="eg-wishlist-drawer-product-list" class="product-list list-unstyled mb-0" style="display: none;">
+      {% comment %} Injectected via JavaScript {% endcomment %}
+    </ul>
+  </div>
+  <div class="offcanvas-footer py-4 px-4">
+    <button
+      type="button"
+      id="button-continue-shopping"
+      class="button{% if settings.wishlist_button_style_secondary %} button--secondary{% else %} button--primary{% endif %} w-100 d-flex align-items-center justify-content-center"
+      data-bs-dismiss="offcanvas">
+      {{ 'general.continue_shopping' | t }}
+    </a>
+  </div>
+</div>
+
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+  const egWishlistDrawerElem = document.querySelector('#eg-wishlist-drawer')
+  const localStorageKey = 'eg_wishlist_v1';
+
+  // Init Bootstrap script if 
+  const initBootstrapScript = () => {
+      if (!document.querySelector('#bootstrap-js')) {
+          const script = document.createElement('script')
+          script.setAttribute('id', 'bootstrap-js')
+          script.setAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js')
+          script.setAttribute('integrity', 'sha256-cMPWkL3FzjuaFSfEYESYmjF25hCIL6mfRSPnW8OVvM4=')
+          script.setAttribute('crossorigin', 'anonymous')
+          document.head.appendChild(script)
+      }
+  }
+  initBootstrapScript()
+
+  // Open the wishlist drawer by URL if contains '#wishlist'
+  if (window.location.hash.includes('#wishlist')) {
+      setTimeout(() => {
+          const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(egWishlistDrawerElem)
+          offcanvas.show()
+      }, 200)
+  }
+
+  // Shopify resize image (helper function)
+  // https://gist.github.com/DanWebb/cce6ab34dd521fcac6ba
+  const egWishlistResizeImageHelper = (src, size, crop = '') => src.replace(/_(pico|icon|thumb|small|compact|medium|large|grande|original|1024x1024|2048x2048|master)+\./g, '.')
+  .replace(/\.jpg|\.png|\.gif|\.jpeg/g, (match) => {
+      if (crop.length) {
+          // eslint-disable-next-line no-param-reassign
+          crop = `_crop_${crop}`;
+      }
+      return `_${size}${crop}${match}`;
+  });
+
+  // Shopify format money (helper function)
+  // https://gist.github.com/stewartknapman/8d8733ea58d2314c373e94114472d44c
+  const egWishlistFormatMoneyHelper = (cents, format) => {
+      if (typeof cents === 'string') {
+          // eslint-disable-next-line no-param-reassign
+          cents = cents.replace('.', '');
+      }
+      let value = '';
+      const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+      const formatString = (format || document.querySelector('#eg-wishlist-drawer').dataset.moneyFormat);
+
+      function defaultOption(opt, def) {
+          return (typeof opt === 'undefined' ? def : opt);
+      }
+
+      function formatWithDelimiters(number, precision, thousands, decimal) {
+          // eslint-disable-next-line no-param-reassign
+          precision = defaultOption(precision, 2);
+          // eslint-disable-next-line no-param-reassign
+          thousands = defaultOption(thousands, ',');
+          // eslint-disable-next-line no-param-reassign
+          decimal = defaultOption(decimal, '.');
+
+          if (Number.isNaN(number) || number == null) { return 0; }
+
+          // eslint-disable-next-line no-param-reassign
+          number = (number / 100.0).toFixed(precision);
+
+          const parts = number.split('.');
+          // eslint-disable-next-line prefer-template
+          const dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands);
+          // eslint-disable-next-line no-param-reassign
+          cents = parts[1] ? (decimal + parts[1]) : '';
+
+          return dollars + cents;
+      }
+
+      // eslint-disable-next-line default-case
+      switch (formatString.match(placeholderRegex)[1]) {
+      case 'amount': value = formatWithDelimiters(cents, 2); break;
+      case 'amount_no_decimals': value = formatWithDelimiters(cents, 0); break;
+      case 'amount_with_comma_separator': value = formatWithDelimiters(cents, 2, '.', ','); break;
+      case 'amount_no_decimals_with_comma_separator': value = formatWithDelimiters(cents, 0, '.', ','); break;
+      }
+
+      return formatString.replace(placeholderRegex, value);
+  };
+
+
+  // Dynamically add wishlist icons in the header
+  const insertWishlistIconsHeader = () => {
+      const htmlToInsert = `
+          <a 
+              id="wishlist-icon-bubble" 
+              class="header__icon header__icon--wishlist link focus-inset small-hide medium-hide"
+              href="#eg-wishlist-drawer" 
+              role="button" 
+              data-bs-toggle="offcanvas" 
+              aria-controls="eg-wishlist-drawer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-wishlist bi bi-heart" viewBox="0 0 16 16" style="fill: currentColor;">
+                  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+              </svg>
+              <span class="visually-hidden">
+                  ${egWishlistDrawerElem.dataset.textWishlist}
+              </span>
+              <div 
+                  class="wishlist-count-bubble" 
+                  style="display: none;" 
+                  aria-hidden="true">
+              </div>
+          </a>
+      `
+      const cartIcon = document.querySelector('#cart-icon-bubble')
+      const menuTogglerIcon = document.querySelector('#Details-menu-drawer-container')
+
+      if (cartIcon) {
+          cartIcon.insertAdjacentHTML('beforebegin', htmlToInsert)
+      }
+
+      if (menuTogglerIcon) {
+          menuTogglerIcon.insertAdjacentHTML('afterend', htmlToInsert)
+      }
+  }
+  insertWishlistIconsHeader()
+
+  // Dynamically add the wishlist button in the PDP (product page)
+  const insertWishlistBtnPdp = () => {
+      if (egWishlistDrawerElem.dataset.displayBtnPdp === 'false') {
+          return;
+      }
+      const htmlToInsert = `
+          <button 
+              class="button-add-remove-wishlist button button--full-width button--tertiary" 
+              type="button"
+              onclick="onClickEgWishlistButton(this, event)"
+              style="display: none;">
+              <span data-add>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon icon-wishlist bi bi-heart" viewBox="0 0 16 16">
+                      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                  </svg>
+                  ${egWishlistDrawerElem.dataset.textAdd}
+              </span>
+              <span data-remove>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon icon-wishlist bi bi-heart-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                  </svg>
+                  ${egWishlistDrawerElem.dataset.textRemove}
+              </span>
+          </button>
+      `
+      const productForm = document.querySelector('.product .product-form')
+
+      if (productForm) {
+          productForm.insertAdjacentHTML('afterend', htmlToInsert)
+      }
+  }
+  insertWishlistBtnPdp()
+
+  // Dynamically add the wishlist buttons in the product list items
+  const insertWishlistBtnLists = () => {
+      if (egWishlistDrawerElem.dataset.displayBtnLists === 'false') {
+          return;
+      }
+      const htmlToInsert = `
+          <button 
+              class="button-add-remove-wishlist button button--tertiary" 
+              type="button"
+              onclick="onClickEgWishlistButton(this, event)"
+              style="display: none;">
+              <span data-add>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon icon-wishlist bi bi-heart" viewBox="0 0 16 16">
+                      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                  </svg>
+                  <span class="visually-hidden">
+                      ${egWishlistDrawerElem.dataset.textAdd}
+                  </span>
+              </span>
+              <span data-remove>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon icon-wishlist bi bi-heart-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                  </svg>
+                  <span class="visually-hidden">
+                      ${egWishlistDrawerElem.dataset.textRemove}
+                  </span>
+              </span>
+          </button>
+      `
+      document.querySelectorAll('.product-grid .card__inner').forEach((cardInner) => {
+          cardInner.insertAdjacentHTML('beforeend', htmlToInsert)
+      })
+        // Inject the buttons again if the url changes (handle Shopify's ajax for filters)
+      const lastUrl = location.href; 
+      new MutationObserver(() => {
+          if (location.href !== lastUrl) {
+              document.querySelectorAll('.product-grid .card__inner').forEach((cardInner) => {
+                  if (!cardInner.querySelector('.button-add-remove-wishlist')) {
+                      cardInner.insertAdjacentHTML('beforeend', htmlToInsert)
+                  }
+              })
+              initWishlist()
+          }
+      }).observe(document, {subtree: true, childList: true});
+  }
+  insertWishlistBtnLists()
+
+  // Init Wishlist
+  const initWishlist = () => {
+      const wishlist = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+
+      document.querySelectorAll('.button-add-remove-wishlist').forEach((btn) => {
+          const productHandle = btn.closest('[data-product-handle]')?.dataset.productHandle
+
+          if (!productHandle?.length) {
+              console.log('%c You have not correctly implemented the Wishlist changes. Please contact us at EcomGradautes.com', 'color: red')
+          }
+
+          const isWishlisted = wishlist.some((elem) => elem.handle === productHandle)
+
+          if (isWishlisted) {
+              btn.querySelector('[data-add]').style.display = 'none'
+              btn.querySelector('[data-remove]').style.display = 'inline-flex'
+          } else {
+              btn.querySelector('[data-add]').style.display = 'inline-flex'
+              btn.querySelector('[data-remove]').style.display = 'none'
+          }
+
+          btn.style.display = 'flex'
+      });
+
+      document.querySelectorAll('.wishlist-count-bubble').forEach((bubble) => {
+          if (wishlist.length === 0) {
+              bubble.style.display = 'none'
+          } else {
+              bubble.style.display = 'flex'
+              bubble.textContent = wishlist.length
+          }
+      });
+  };
+  initWishlist();
+
+  // Wishlist Buttons
+  window.onClickEgWishlistButton = async (btn, event) => {
+      event.preventDefault();
+
+      const productHandle = btn.closest('[data-product-handle]')?.dataset.productHandle
+
+      let wishlist = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+      const isWishlisted = wishlist.some((elem) => elem.handle === productHandle)
+
+      if (isWishlisted) {
+          wishlist = wishlist.filter((elem) => elem.handle !== productHandle)
+      } else {
+          const response = await fetch(`/products/${productHandle}.js`)
+          const product = await response.json()
+
+          wishlist.push({
+              id: product.id,
+              handle: productHandle,
+              url: product.url,
+              title: product.title,
+              compare_at_price: product.compare_at_price,
+              compare_at_price_variese: product.compare_at_price_varies,
+              price: product.price,
+              featured_image: product.featured_image,
+              vendor: product.vendor,
+              time: Date.now()
+          })
+      }
+
+      localStorage.setItem(localStorageKey, JSON.stringify(wishlist))
+      initWishlist()
+      buildWishlistDrawer()
+  };
+
+  // Build Wishlist Drawer
+  const buildWishlistDrawer = () => {
+      const drawer = document.querySelector('#eg-wishlist-drawer')
+
+      let wishlist = JSON.parse(localStorage.getItem(localStorageKey)) || []
+      const drawerEmpty = drawer.querySelector('#eg-wishlist-drawer-empty')
+      const drawerProductList = drawer.querySelector('#eg-wishlist-drawer-product-list')
+
+      drawerProductList.innerHTML = ''
+
+      if (wishlist.length === 0) {
+          drawerEmpty.style.display = 'block'
+          drawerProductList.style.display = 'none'
+      } else {
+          let buildProductListItems = '';
+
+          wishlist.forEach((product) => {
+              buildProductListItems += `
+                  <li class="product-list-item">
+                      <div class="d-flex align-items-center mx-n3 py-3">
+                          <a href="${product.url}" class="d-block flex-shrink-0 me-3">
+                              <img 
+                                  class="cart-item__image img__wishlist img-fluid" 
+                                  src="${egWishlistResizeImageHelper(product.featured_image || 'no-image.gif', `${drawer.dataset.imgWidth}x${drawer.dataset.imgHeight}`, 'center')}"
+                                  alt="" 
+                                  width="${drawer.dataset.imgWidth}"
+                                  height="${drawer.dataset.imgHeight}"
+                                  style="display: block" 
+                                  loading="lazy">
+                          </a>
+                          <div class="w-100">
+                              <a href="${product.url}" class="cart-item__name h4 break mb-1">
+                                  ${product.title}
+                              </a>
+                              <div class="product-price-container product-option mb-2">
+                                  <s class="product-price-compare me-2" style="${product.compare_at_price > product.price ? '' : 'display: none;'}">
+                                      <span class="visually-hidden">
+                                          Old price
+                                      </span>
+                                      ${egWishlistFormatMoneyHelper(product.compare_at_price)}
+                                  </s>
+                                  <span class="product-price-final">
+                                      ${egWishlistFormatMoneyHelper(product.price)}
+                                  </span>
+                              </div>
+                          </div>
+                          <button 
+                              class="btn-remove-from-wishlist button button--tertiary px-2 ms-3"
+                              aria-label="${drawer.dataset.textRemove}"
+                              data-product-handle="${product.handle}">
+                              <svg width="15" height="15" class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true" focusable="false" role="presentation" class="icon icon-remove">
+                                  <path d="M14 3h-3.53a3.07 3.07 0 00-.6-1.65C9.44.82 8.8.5 8 .5s-1.44.32-1.87.85A3.06 3.06 0 005.53 3H2a.5.5 0 000 1h1.25v10c0 .28.22.5.5.5h8.5a.5.5 0 00.5-.5V4H14a.5.5 0 000-1zM6.91 1.98c.23-.29.58-.48 1.09-.48s.85.19 1.09.48c.2.24.3.6.36 1.02h-2.9c.05-.42.17-.78.36-1.02zm4.84 11.52h-7.5V4h7.5v9.5z" fill="currentColor"></path>
+                                  <path d="M6.55 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5zM9.45 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5z" fill="currentColor"></path>
+                              </svg>
+                          </button>
+                      </div>
+                  </li>
+              `;
+          });
+
+          drawerProductList.insertAdjacentHTML('afterbegin', buildProductListItems);
+
+          drawerEmpty.style.display = 'none'
+          drawerProductList.style.display = 'block'
+
+          document.querySelectorAll('.btn-remove-from-wishlist:not(.init)').forEach((btn) => {
+              btn.addEventListener('click', (e) => {
+                  e.preventDefault();
+
+                  btn.classList.add('init');
+
+                  wishlist = wishlist.filter((elem) => elem.handle !== btn.dataset.productHandle);
+                  localStorage.setItem(localStorageKey, JSON.stringify(wishlist));
+
+                  initWishlist();
+                  buildWishlistDrawer();
+              });
+          });
+      }
+  };
+  buildWishlistDrawer();
+})
+</script>

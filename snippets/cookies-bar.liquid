@@ -1,0 +1,150 @@
+<style>
+  .cookie-popup {
+    left: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    min-width: 300px;
+    border-radius: 5px;
+    position: fixed;
+    box-shadow: 0 0 90px #0000002e;
+  }
+  .container-cook {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .container-cook p {
+    margin: 0 auto;
+    font-style: normal;
+    padding-left: 30px;
+    padding-right: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    width: 70%;
+  }
+  .container-cook a {
+    color: inherit;
+  }
+  .buttons-cook {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: flex-end;
+    margin-right: 20px;
+  }
+  .buttons-cook .button {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  /* Mobile */
+  @media only screen and (max-width: 768px) {
+    .cookie-popup {
+      width: 100%;
+      min-width: 100%;
+    }
+    .container-cook {
+      flex-direction: column;
+    }
+    .buttons-cook {
+      padding-left: 0;
+      margin: auto;
+      width: 100%;
+      justify-content: center;
+    }
+    .cookie-popup p {
+      width: 90%;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-bottom: 20px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
+
+  /* Tablette */
+  @media only screen and (min-width: 769px) {
+    .cookie-popup {
+      left: 3.88%;
+      bottom: 3.88%;
+      width: 75%;
+    }
+  }
+
+  /* Ordinateur */
+  @media only screen and (min-width: 1200px) {
+    .cookie-popup {
+      width: 45%;
+    }
+  }
+</style>
+
+<cookie-banner>
+  <div class="cookie-popup color-{{ settings.color_scheme_cooks }} gradient" id="cookie-banner">
+    <div class="container-cook">
+      <p>
+        {{ settings.cookstxt }}
+        <a href="{{ settings.url_more }}">{{ settings['cookstxt-more'] }}</a>
+      </p>
+      <div class="buttons-cook">
+        <button id="refuse-cook" class="button button--secondary">{{ settings['cookstxt-refuse'] }}</button>
+        <button id="accept-cook" class="button button--primary">{{ settings['cookstxt-agree'] }}</button>
+      </div>
+    </div>
+  </div>
+</cookie-banner>
+
+<script>
+  class CookieBanner extends HTMLElement {
+    constructor() {
+      super();
+
+      this.acceptBtn = this.querySelector('#accept-cook');
+      this.refuseBtn = this.querySelector('#refuse-cook');
+      this.cookieBanner = this.querySelector('#cookie-banner');
+
+      this.acceptBtn.addEventListener('click', () => this.setCookie('cookiesAccepted', 'true', {{ settings.cookie_storage_duration }}));
+      this.refuseBtn.addEventListener('click', () => this.setCookie('cookiesAccepted', 'false', {{ settings.cookie_storage_duration }}));
+
+      this.checkCookie();
+    }
+
+    setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "; expires=" + date.toUTCString();
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+      this.cookieBanner.style.display = 'none';
+    }
+
+    getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    checkCookie() {
+      const cookiesAccepted = this.getCookie("cookiesAccepted");
+      if (cookiesAccepted === "true" || cookiesAccepted === "false") {
+        this.cookieBanner.style.display = "none";
+      }
+    }
+  }
+
+  customElements.define('cookie-banner', CookieBanner);
+</script>

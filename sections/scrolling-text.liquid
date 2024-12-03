@@ -1,0 +1,180 @@
+{{ 'section-sliding-text.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  {% render 'section-style' %}
+
+  .big-text {
+    display: inline-block;
+    z-index: 0;
+    animation: marquee {{ section.settings.speed }}s linear infinite;
+  }
+
+  .sliding-text-container .title {
+    font-size: {{ section.settings.heading_size_mob }}px;
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .sliding-text-container .title {
+      font-size: {{ section.settings.heading_size }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="sliding-text-container color-{{ section.settings.color_scheme }}{% if section.settings.title == blank %} no-heading{% endif %} {% if section.settings.identificateur != blank %}{{ section.settings.identificateur }}{% endif %}">
+  <div class="page-width section-{{ section.id }}-padding isolate big-text">
+    <{{ section.settings.heading_tag }} class="title {% if section.settings.bordered-text %} bordered-text{% endif %}">
+      {{ section.settings.title }}
+    </{{ section.settings.heading_tag }}>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Texte défilant",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Nuancier de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "t:sections.multicolumn.settings.title.label",
+      "default": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "span",
+          "label": "Aucune"
+        }
+      ],
+      "default": "h2",
+      "label": "Balise titre (SEO)"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "s",
+      "label": "Vitesse de défilement",
+      "default": 30
+    },
+    {
+      "type": "checkbox",
+      "id": "bordered-text",
+      "label": "Activer la bordure de texte",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "A/B TEST"
+    },
+    {
+      "type": "text",
+      "id": "identificateur",
+      "label": "Identificateur de section",
+      "default": "class",
+      "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Ordinateur"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 18,
+      "label": "Taille du texte"
+    },
+    {
+      "type": "checkbox",
+      "id": "offdesk",
+      "default": false,
+      "label": "Cacher la section"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "label": "Taille du texte"
+    },
+    {
+      "type": "checkbox",
+      "id": "offmob",
+      "default": false,
+      "label": "Cacher la section"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Texte défilant"
+    }
+  ]
+}
+{% endschema %}

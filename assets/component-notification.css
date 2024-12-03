@@ -1,0 +1,66 @@
+.notification_popup {
+  right: 0;
+  min-width: 20em !important;
+  width: unset !important;
+  padding: 0 !important;
+  max-height: 22em;
+  overflow-y: auto;
+}
+
+.notification_a_tag {
+  width: max-content;
+  padding: 1rem !important;
+}
+
+.notification_popup li:not(:last-child) .notification_a_tag {
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.notification_a_tag img {
+  max-width: 70px;
+  width: 100%;
+}
+
+.header__icon--notif .header__submenu .header__menu-item {
+  margin: 0 !important;
+}
+
+.bubble_notif {
+  top: 3px;
+  left: 15px !important;
+  width: 8px;
+  height: 8px;
+}
+
+.sommaire_notif {
+  display: flex;
+  padding: 0;
+}
+
+.notification_image {
+  width: 100%;
+  max-width: 70px;
+}
+
+.notification_text {
+  width: 12em;
+  padding-left: 5px;
+}
+
+.offnotif {
+  display: none;
+}
+
+@media screen and (max-width: 747px) {
+  .header__icon--notif {
+    width: 30px;
+  }
+
+  .offnotif {
+    display: block;
+  }
+
+  .offnotifmobile {
+    display: none;
+  }
+}

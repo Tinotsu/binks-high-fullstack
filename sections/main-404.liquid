@@ -1,0 +1,80 @@
+<style type="text/css">
+  .template-404 {
+    padding-top: 2rem;
+  }
+
+  .template-404 .title + * {
+    margin-top: 1rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .template-404 .title + * {
+      margin-top: 2rem;
+    }
+  }
+</style>
+
+{% style %}
+  {% render 'section-style' %}
+{% endstyle %}
+
+<div class="color-{{ section.settings.color_scheme }}">
+  <div class="template-404 page-width center {% if section.settings.identificateur != blank %}{{ section.settings.identificateur }}{% endif %}">
+    <p>
+      {{ 'templates.404.subtext' | t }}
+    </p>
+    <h1 class="title">
+      {{ 'templates.404.title' | t }}
+    </h1>
+    <a href="{{ routes.all_products_collection_url }}" class="button">
+      {{ 'general.continue_shopping' | t }}
+    </a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Erreur 404",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Nuancier de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "A/B TEST"
+    },
+    {
+      "type": "text",
+      "id": "identificateur",
+      "label": "Identificateur de section",
+      "default": "class",
+      "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+    },
+    {
+      "type": "header",
+      "content": "Ordinateur"
+    },
+    {
+      "type": "checkbox",
+      "id": "offdesk",
+      "default": false,
+      "label": "Cacher la section"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "offmob",
+      "default": false,
+      "label": "Cacher la section"
+    }
+  ]
+}
+{% endschema %}

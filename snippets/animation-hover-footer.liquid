@@ -1,0 +1,102 @@
+{% if section.settings.footer_bottom_menu != false %}
+  footer .list-menu__item--active {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 0.2rem;
+  }
+  footer .list-menu__item--active:hover {
+    text-decoration-thickness: 0.2rem;
+  }
+  .footer-block__details-content .list-menu__item--active {
+    transition: text-decoration-thickness var(--duration-short) ease;
+    color: rgb(var(--color-foreground));
+    text-decoration-thickness: 0.2rem;
+    font-weight: 700;
+  }
+  @media screen and (min-width: 750px) {
+    .footer-block__details-content .list-menu__item--active:hover {
+      text-decoration-thickness: 0.2rem;
+    }
+  }
+{% endif %}
+
+{% if section.settings.footer_style_hover != "none" %}
+  {% if section.settings.footer_style_hover == "classic" %}
+    /* ••••• Footer ••••• */
+    @media screen and (min-width: 750px) {
+      .footer-block__details-content .list-menu__item--link:hover,
+      .copyright__content a:hover {
+        color: rgb(var(--color-foreground));
+        text-decoration: underline;
+        text-underline-offset: 0.3rem;
+        text-decoration-thickness: 0.2rem;
+      }
+      .footer-block__details-content .list-menu__item--active:hover {
+        text-decoration-thickness: 0.2rem;
+      }
+    }
+    {% elsif section.settings.footer_style_hover== "animation-1" %}
+      /* ••••• Animation générique ••••• */
+      footer .underline {
+        position: relative;
+      }
+      footer .underline::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        bottom: 7px;
+        background-color: rgb(var(--color-foreground));
+        height: 2px; /* Option */
+        right: 0;
+        transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      @media (hover: hover) and (any-pointer: fine) {
+        footer .underline:hover::before {
+          left: 0;
+          right: auto;
+          width: 100%;
+        }
+      }
+  
+      /* ••••• Footer ••••• */
+      .footer-block__details-content .list-menu__item--active {
+        color: rgb(var(--color-foreground));
+      }
+      @media screen and (min-width: 750px) {
+        .footer-block__details-content .list-menu__item--link:hover,
+        .copyright__content a:hover {
+          color: rgb(var(--color-foreground));
+        }
+      }
+    {% elsif section.settings.footer_style_hover== "animation-2" %}
+      /* ••••• Animation générique ••••• */
+      footer .underline {
+        position: relative;
+      }
+      footer .underline::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        bottom: 7px;
+        background-color: rgb(var(--color-foreground));
+        height: 2px; /* Option */
+        transition: all .3s;
+      }
+      @media (hover: hover) and (any-pointer: fine) {
+        footer .underline:hover::before {
+          width: 100%;
+        }
+      }
+  
+      /* ••••• Footer ••••• */
+      .footer-block__details-content .list-menu__item--active {
+        color: rgb(var(--color-foreground));
+      }
+      @media screen and (min-width: 750px) {
+        .footer-block__details-content .list-menu__item--link:hover,
+        .copyright__content a:hover {
+          color: rgb(var(--color-foreground));
+        }
+      }
+  {% endif %}
+{% endif %}

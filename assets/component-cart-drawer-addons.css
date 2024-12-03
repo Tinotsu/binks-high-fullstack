@@ -1,0 +1,218 @@
+/* --- REDESIGN NATIVE CART --- */
+
+.cart-items thead {
+  display: none;
+}
+
+.drawer__footer > details {
+  margin-top: 0;
+}
+
+.drawer__inner {
+  padding: 0;
+}
+
+.drawer__header {
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
+}
+
+.drawer__heading {
+  margin: 0;
+}
+
+.drawer__close {
+  right: 10px;
+}
+
+/* --- ANNOUNCE BAR --- */
+
+/* .annonceContainer {
+  margin-left: -1.5rem !important;
+  width: calc(100% + 3rem);
+} */
+
+.annonceContainer {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.annonceContainer p {
+  margin: 0;
+}
+
+/* --- TIMER --- */
+
+.cardscounter {
+  padding: 5px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: -1.5rem;
+  width: calc(100% + 3rem);
+  margin-top: 1.5rem;
+}
+
+.cardscounter #clockdiv {
+  margin-left: 5px;
+}
+
+/* --- IMAGE BANNER --- */
+
+.banner_image {
+  width: 100%;
+}
+
+/* --- UPSELL CLASSIC --- */
+
+.cart-drawer-upsell-wrapper {
+  display: -ms-grid;
+  display: grid;
+  width: calc(100% + 3rem);
+  overflow: hidden;
+  position: relative;
+  margin-left: -1.5rem;
+  padding: 0 1.5rem;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
+}
+
+.sliderButton {
+  cursor: pointer;
+  position: absolute;
+  top: calc(50% - 30px);
+  z-index: 1000;
+  border: none;
+  background-color: transparent;
+  height: 4rem;
+  width: 100px;
+  padding: 0;
+}
+
+.sliderButton#sliderPrev {
+  left: -30px;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+}
+
+.sliderButton#sliderNext {
+  right: -30px;
+  transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+}
+
+.sliderButton#sliderPrev:hover {
+  left: -31px;
+}
+
+.sliderButton#sliderNext:hover {
+  right: -31px;
+}
+
+.sliderButton svg {
+  width: 15px;
+}
+
+.cart-drawer-upsell_atc {
+  padding: 0 1.8rem;
+  min-width: auto;
+}
+
+.cart-drawer-upsell_left form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.cart-drawer-upsell_image-container {
+  width: 70px;
+  height: 70px;
+}
+
+img.cart-drawer-upsell_image {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 70px;
+  height: 70px;
+}
+
+.cart-drawer-upsell_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.cart-drawer-upsell_content {
+  margin-left: 10px;
+}
+
+p.cart-drawer-upsell_title {
+  font-weight: 700;
+}
+
+p.cart-drawer-upsell_title,
+p.cart-drawer-upsell_price {
+  line-height: 1.3;
+  margin: 0;
+}
+
+select#upsell-variant-selector {
+  padding: 3px;
+  width: 100%;
+  outline: none;
+  border: 1px solid lightgrey;
+}
+
+.cart-drawer-upsell_right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.cart-drawer-upsell_text {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+}

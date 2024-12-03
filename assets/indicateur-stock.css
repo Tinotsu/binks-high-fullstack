@@ -1,0 +1,23 @@
+.stock-disp-cont {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.stock-indic {
+  width: 8px;
+  height: 8px;
+  display: block !important;
+  background: green;
+  border-radius: 50%;
+  margin-left: 7px;
+  margin-right: 6px;
+  margin-top: -2px;
+}
+span.stock-disp {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+#unseenclass {
+  display: none;
+}

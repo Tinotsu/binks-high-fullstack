@@ -1,0 +1,317 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    z-index: 1;
+  }
+  .sticky-homepage {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: {{ section.settings.button_position }};
+  }
+  .homepage-sticky-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      {% if section.settings.icon != 'none' %}
+          gap: 10px;
+      {% endif %}
+  }
+  .homepage-sticky-content .custom_icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  {% unless section.settings.button_style_secondary %}
+    .homepage-sticky-content .custom_icon svg {
+        fill: inherit;
+    }
+  {% endunless %}
+{% endstyle %}
+
+<div class="homepage-sticky-btn">
+  {%- if section.settings.text != blank -%}
+    <a
+      {% if section.settings.link == blank %}
+        role="link" aria-disabled="true"
+      {% else %}
+        href="{{ section.settings.link }}"
+      {% endif %}
+      class="button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %} color-{{ section.settings.color_scheme }}{% if section.settings.offdesk-bloc %} offdesk{% endif %}{% if section.settings.offmob-bloc %} offmob{% endif %}"
+      {{ section.shopify_attributes }}
+    >
+      <div class="homepage-sticky-content">
+        {% if section.settings.icon != blank %}
+          <span class="color-background-{{ settings.accent_icons }}">
+            {% render 'icon-accordion', icon: section.settings.icon %}
+          </span>
+        {% endif %}
+        {{ section.settings.text | escape }}
+      </div>
+    </a>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Bouton flottant",
+  "tag": "section",
+  "class": "section sticky-homepage",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Nuancier de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Contenu du bouton flottant"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texte du bouton",
+      "default": "Bouton flottant"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__1.label"
+        },
+        {
+          "value": "apple",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__2.label"
+        },
+        {
+          "value": "banana",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__3.label"
+        },
+        {
+          "value": "bottle",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__4.label"
+        },
+        {
+          "value": "box",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__5.label"
+        },
+        {
+          "value": "carrot",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__6.label"
+        },
+        {
+          "value": "chat_bubble",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__7.label"
+        },
+        {
+          "value": "check_mark",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__8.label"
+        },
+        {
+          "value": "clipboard",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__9.label"
+        },
+        {
+          "value": "dairy",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__10.label"
+        },
+        {
+          "value": "dairy_free",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__11.label"
+        },
+        {
+          "value": "dryer",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__12.label"
+        },
+        {
+          "value": "eye",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__13.label"
+        },
+        {
+          "value": "fire",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__14.label"
+        },
+        {
+          "value": "gluten_free",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__15.label"
+        },
+        {
+          "value": "heart",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__16.label"
+        },
+        {
+          "value": "iron",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__17.label"
+        },
+        {
+          "value": "leaf",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__18.label"
+        },
+        {
+          "value": "leather",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__19.label"
+        },
+        {
+          "value": "lightning_bolt",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__20.label"
+        },
+        {
+          "value": "lipstick",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__21.label"
+        },
+        {
+          "value": "lock",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__22.label"
+        },
+        {
+          "value": "map_pin",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__23.label"
+        },
+        {
+          "value": "nut_free",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__24.label"
+        },
+        {
+          "value": "pants",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__25.label"
+        },
+        {
+          "value": "paw_print",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__26.label"
+        },
+        {
+          "value": "pepper",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__27.label"
+        },
+        {
+          "value": "perfume",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__28.label"
+        },
+        {
+          "value": "plane",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__29.label"
+        },
+        {
+          "value": "plant",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__30.label"
+        },
+        {
+          "value": "price_tag",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__31.label"
+        },
+        {
+          "value": "question_mark",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__32.label"
+        },
+        {
+          "value": "recycle",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__33.label"
+        },
+        {
+          "value": "return",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__34.label"
+        },
+        {
+          "value": "ruler",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__35.label"
+        },
+        {
+          "value": "serving_dish",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__36.label"
+        },
+        {
+          "value": "shirt",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__37.label"
+        },
+        {
+          "value": "shoe",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__38.label"
+        },
+        {
+          "value": "silhouette",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__39.label"
+        },
+        {
+          "value": "snowflake",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__40.label"
+        },
+        {
+          "value": "star",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__41.label"
+        },
+        {
+          "value": "stopwatch",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__42.label"
+        },
+        {
+          "value": "truck",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__43.label"
+        },
+        {
+          "value": "washing",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__44.label"
+        }
+      ],
+      "default": "none",
+      "label": "Icone"
+    },
+    {
+      "type": "header",
+      "content": "Style du bouton flottant"
+    },
+    {
+      "type": "select",
+      "id": "button_position",
+      "label": "Position du bouton",
+      "default": "center",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "flex-end",
+          "label": "Droite"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Ordinateur"
+    },
+    {
+      "type": "checkbox",
+      "id": "offdesk-bloc",
+      "default": false,
+      "label": "Cacher le bloc"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "offmob-bloc",
+      "default": false,
+      "label": "Cacher le bloc"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bouton flottant"
+    }
+  ]
+}
+{% endschema %}

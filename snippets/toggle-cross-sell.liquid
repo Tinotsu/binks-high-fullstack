@@ -1,0 +1,77 @@
+{%- assign product_list_length = 0 -%}
+{%- for product in block.settings.product_list -%}
+  {%- if product.available -%}
+    {%- assign product_list_length = product_list_length | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if product_list_length > 0 -%}
+  {{ 'component-toggle-cross-sell.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'toggle-cross-sell.js' | asset_url }}" defer></script>
+
+  <toggle-cross-sell class="product-block-margin-{{ block.settings.margin }}{% if block.settings.identificateur != blank %} {{ block.settings.identificateur }}{% endif %}{% if block.settings.show_background_text %} color-{{ block.settings.color_scheme }} gradient{% endif %}{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+    <div class="toggle-cross-sell__content">
+      <h3 class="toggle-cross-sell__title">{{ block.settings.title }}</h3>
+
+      <div class="toggle-cross-sell__description">
+        {{ block.settings.description }}
+      </div>
+    </div>
+
+    <div class="toggle-cross-sell__products">
+      {%- for product in block.settings.product_list -%}
+        {%- if product.available -%}
+          <div class="toggle-cross-sell__product">
+            <div class="toggle-cross-sell__product-content">
+              {%- if block.settings.show_product_image -%}
+                <div class="toggle-cross-sell__product-image">
+                  <img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.featured_image.alt }}" width="60" height="auto">
+                </div>
+              {%- endif -%}
+
+              <div class="toggle-cross-sell__product-title-and-price">
+                <h4 class="toggle-cross-sell__product-title">{{ product.title }}</h4>
+
+                <span class="toggle-cross-sell__product-price-container">
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="toggle-cross-sell__product-compare-at-price">+{{ product.compare_at_price | money_without_trailing_zeros }}</span>
+                  {%- endif -%}
+                  <span class="toggle-cross-sell__product-price">+{{ product.price | money_without_trailing_zeros }}</span>
+                  {%- if product.compare_at_price > product.price -%}
+                    {%- assign discount_percentage = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                    <span class="toggle-cross-sell__product-badge-discount">-{{ discount_percentage }}%</span>
+                  {%- endif -%}
+                </span>
+
+                {%- if product.variants.size > 1 -%}
+                  <select class="toggle-cross-sell__variant-select">
+                    {%- for variant in product.variants -%}
+                      <option
+                        value="{{ variant.id }}"
+                        {%- if variant.featured_image != blank -%}
+                          data-variant-image="{{ variant.featured_image | image_url: width: 200 }}"
+                        {%- endif -%}
+                        data-price="+{{ variant.price | money_without_trailing_zeros }}"
+                        {%- if variant.compare_at_price > variant.price -%}
+                          data-compare-at-price="+{{ variant.compare_at_price | money_without_trailing_zeros }}"
+                          data-discount-percentage="-{{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}%"
+                        {%- endif -%}
+                        {% if variant.available == false %}
+                          disabled
+                        {% endif %}
+                      >
+                        {{ variant.title }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                {%- endif -%}
+              </div>
+            </div>
+
+            <input type="checkbox" class="toggle-cross-sell__product-checkbox" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </toggle-cross-sell>
+{%- endif -%}

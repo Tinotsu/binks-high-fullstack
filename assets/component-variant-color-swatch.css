@@ -1,0 +1,62 @@
+.colorSwatch {
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+}
+
+.colorSwatch--with-image {
+  background-size: cover;
+  background-position: center;
+}
+
+.product-form__input input[type="radio"] + .colorSwatch {
+  border: 1px solid white;
+}
+
+.product-form__input input[type="radio"]:checked + .colorSwatch {
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px #000;
+}
+
+.card__colorSwatch {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.card__colorSwatch.swatch-collection-centered {
+  justify-content: center;
+}
+
+.colorSwatch-mini {
+  width: 22px;
+  height: 22px;
+  padding: 0 !important;
+  border-radius: 100px;
+  display: block !important;
+  z-index: 2;
+  position: relative;
+}
+
+.colorSwatch-mini--with-image {
+  background-size: cover;
+  background-position: center;
+}
+
+.colorSwatch-mini:hover {
+  border: 1px solid black;
+}
+
+.colorSwatch-unavailable-border {
+  display: block !important;
+  width: 100%;
+  pointer-events: none;
+  cursor: not-allowed;
+  height: 2px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%) rotate(45deg);
+}

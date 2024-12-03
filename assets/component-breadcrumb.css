@@ -1,0 +1,21 @@
+.breadcrumb-container .breadcrumb {
+  padding: 0 0 5px 0px;
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground),.5);
+}
+
+.breadcrumb-container .breadcrump-bottom-padding {
+  padding: 3rem 0;
+}
+
+.breadcrumb-container a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.breadcrumb-container .breadcrumb a:hover {
+  padding: 0 0 5px 0px;
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground),.8);
+  cursor: pointer;
+}

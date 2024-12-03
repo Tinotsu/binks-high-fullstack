@@ -1,0 +1,71 @@
+/* Style du carrousel */
+
+#shopify-section-{{ section.id }} .slider-button {
+  {% if settings.background_carrousel %}
+    color: rgba(var(--color-button-text), 0.75);
+    background: rgba(var(--color-button), var(--alpha-button-background));
+    margin: 0 5px;
+  {% endif %}
+  width: {{ settings.size_background_carrousel }}px;
+  height: {{ settings.size_background_carrousel }}px;
+}
+
+#shopify-section-{{ section.id }} .slider-button .icon {
+  height: {{ settings.size_icon_carrousel }}px;
+}
+
+#shopify-section-{{ section.id }} .slideshow__autoplay path {
+  fill: rgba(var(--color-button-text), 1);
+}
+
+#shopify-section-{{ section.id }} .slideshow__autoplay:hover path {
+  fill: rgba(var(--color-button-text), 0.75);
+}
+
+#shopify-section-{{ section.id }} .slider-button:not([disabled]):hover {
+  {% if settings.background_carrousel %}
+    color: rgb(var(--color-button-text));
+  {% endif %}
+}
+
+#shopify-section-{{ section.id }} .slider-button[disabled] .icon {
+  {% if settings.background_carrousel %}
+    color: rgba(var(--color-button-text), 0.3);
+  {% endif %}
+}
+
+#shopify-section-{{ section.id }} .slider-buttons {
+  {% if settings.alignment_carrousel == 'gauche' %}
+    justify-content: flex-start;
+    padding-left: 20px;
+  {% elsif settings.alignment_carrousel == 'centre' %}
+    justify-content: center;
+  {% elsif settings.alignment_carrousel == 'droite' %}
+    justify-content: flex-end;
+    padding-right: 20px;
+  {% else %}
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+  {% endif %}
+}
+
+/* Responsive sur mobile */
+
+@media screen and (max-width: 749px) {
+  #shopify-section-{{ section.id }} .slider-button {
+    {% if settings.show_carrousel_mobile %}
+      display: none;
+    {% endif %}
+  }
+}
+
+/* Ajout du carrousel sur ordinateur */
+
+#shopify-section-{{ section.id }} slider-component {
+  --desktop-margin-left-first-item: max(5rem, calc((100vw - var(--page-width) + 10rem - var(--grid-desktop-horizontal-spacing)) / 4));
+}
+
+#shopify-section-{{ section.id }} .slider--everywhere + .slider-buttons {
+  display: flex!important;
+}

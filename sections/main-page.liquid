@@ -1,0 +1,178 @@
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- style -%}
+  {% render 'section-style' %}
+
+  {% if section.settings.hide-head %}
+    .header-wrapper, .announcement-bar, .shopify-section-group-header-group { display:none; }
+  {% endif %}
+
+  {% if section.settings.hide-foot %}
+    footer, .shopify-section-group-footer-group { display:none; }
+  {% endif %}
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }}">
+  <div class="page-width {% if section.settings.active_narrow != false %}page-width--narrow{% endif %} section-{{ section.id }}-padding {% if section.settings.identificateur != blank %}{{ section.settings.identificateur }}{% endif %}">
+    <{{ section.settings.heading_tag }} class="main-page-title page-title h1 {{ section.settings.heading_alignment }}">
+      {{ page.title | escape }}
+    </{{ section.settings.heading_tag }}>
+    <div class="rte">
+      {{ page.content }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "ℹ️ Vous souhaitez avoir une structure de page différente d'une page à une autre ? [En savoir plus](https://the-deployer.notion.site/Comment-cr-er-un-mod-le-de-page-3f832d03a26843688b87e306c7cf5734)"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "span",
+          "label": "Aucune"
+        }
+      ],
+      "default": "h2",
+      "label": "Balise titre (SEO)"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "center",
+          "label": "Au centre"
+        }
+      ],
+      "default": "left",
+      "label": "Alignement du titre"
+    },
+    {
+      "type": "header",
+      "content": "Structure de page"
+    },
+    {
+      "type": "checkbox",
+      "id": "active_narrow",
+      "default": true,
+      "label": "Désactiver la mise en page",
+      "info": "Réduit la largeur de la page."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide-head",
+      "default": false,
+      "label": "Cacher le header"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide-foot",
+      "default": false,
+      "label": "Cacher le footer"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Nuancier de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "A/B TEST"
+    },
+    {
+      "type": "text",
+      "id": "identificateur",
+      "label": "Identificateur de section",
+      "default": "class",
+      "info": "Vidéo explicative. [En savoir plus](https://vimeo.com/746917250/4db13ac9eb)."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Ordinateur"
+    },
+    {
+      "type": "checkbox",
+      "id": "offdesk",
+      "default": false,
+      "label": "Cacher la section"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "offmob",
+      "default": false,
+      "label": "Cacher la section"
+    }
+  ]
+}
+{% endschema %}

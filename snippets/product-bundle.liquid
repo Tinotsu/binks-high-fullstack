@@ -1,0 +1,103 @@
+{% assign product_upsell = meta %}
+
+{% if product_upsell %}
+
+{{ 'component-product-bundle.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-bundle.js' | asset_url }}" defer="defer"></script>
+
+<product-bundle-form class="{% if block.settings.identificateur != blank %}{{ block.settings.identificateur }}{% endif %} {% if offdesk %} offdesk{% endif %}{% if offmob %} offmob{% endif %}">
+  <div class="product-block-margin-{{ margin }}">
+      
+    <div class="bundle-container">
+      <p class="bundle-title">{{ title }}</p>
+      <div class="bundle-items">
+        <div class="bundle-item">
+          <a class="bundle-image-container" href="{{ product.url }}">
+            <img
+              srcset="{%- if product.featured_media.preview_image.width >= 275 -%}{{ product.featured_media.preview_image | image_url: width: 275 }} 275w,{%- endif -%}
+              {%- if product.featured_media.preview_image.width >= 550 -%}{{ product.featured_media.preview_image | image_url: width: 550 }} 550w,{%- endif -%}
+              {%- if product.featured_media.preview_image.width >= 710 -%}{{ product.featured_media.preview_image | image_url: width: 710 }} 710w,{%- endif -%}
+              {%- if product.featured_media.preview_image.width >= 1420 -%}{{ product.featured_media.preview_image | image_url: width: 1420 }} 1420w,{%- endif -%}
+              {{ product.featured_media.preview_image | image_url }} {{ product.featured_media.preview_image.width }}w"
+              src="{{ product.featured_media.preview_image | image_url: width: 550 }}"
+              sizes="(min-width: 990px) {% if section.blocks.size <= 2 %}710px{% else %}550px{% endif %},
+              (min-width: 750px) {% if section.blocks.size == 1 %}710px{% else %}550px{% endif %},
+              calc(100vw - 30px)"
+              alt="{{ product.featured_media.preview_image.alt }}"
+              width="{{ product.featured_media.preview_image.width }}"
+              loading="lazy"
+              class="bundle-product-image"
+            >
+          </a>
+          <div class="bundle-item-datas">
+            <a href="{{ product.url }}"><p class="bundle-product-title">{{ product.title }}</p></a>
+            <p class="bundle-product-price">{{ product.price | money_with_currency }}</p>
+            {% if product.variants.size > 1 %}
+              <select name="id" class="bundle-select" data-type="main">
+                {% for variant in product.variants %}
+                  {% if variant.available %}
+                    <option value="{{ variant.id }}" data-variant-price="{{ variant.price | money_with_currency }}" data-variant-imgsrc="{{ variant.featured_image | img_url: '100x100' }}">{{ variant.title }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            {% endif %}
+          </div>
+        </div>
+        <div>
+          <p class="bundle-plus-icon">+</p>
+        </div>
+        <div class="bundle-item">
+          <a class="bundle-image-container" href="{{ product_upsell.url }}">
+            <img
+              srcset="{%- if product_upsell.featured_media.preview_image.width >= 275 -%}{{ product_upsell.featured_media.preview_image | image_url: width: 275 }} 275w,{%- endif -%}
+              {%- if product_upsell.featured_media.preview_image.width >= 550 -%}{{ product_upsell.featured_media.preview_image | image_url: width: 550 }} 550w,{%- endif -%}
+              {%- if product_upsell.featured_media.preview_image.width >= 710 -%}{{ product_upsell.featured_media.preview_image | image_url: width: 710 }} 710w,{%- endif -%}
+              {%- if product_upsell.featured_media.preview_image.width >= 1420 -%}{{ product_upsell.featured_media.preview_image | image_url: width: 1420 }} 1420w,{%- endif -%}
+              {{ product_upsell.featured_media.preview_image | image_url }} {{ product_upsell.featured_media.preview_image.width }}w"
+              src="{{ product_upsell.featured_media.preview_image | image_url: width: 550 }}"
+              sizes="(min-width: 990px) {% if section.blocks.size <= 2 %}710px{% else %}550px{% endif %},
+              (min-width: 750px) {% if section.blocks.size == 1 %}710px{% else %}550px{% endif %},
+              calc(100vw - 30px)"
+              alt="{{ product_upsell.featured_media.preview_image.alt }}"
+              width="{{ product_upsell.featured_media.preview_image.width }}"
+              loading="lazy"
+              class="bundle-product-image"
+            >
+          </a>
+          <div class="bundle-item-datas">
+            <a href="{{ product_upsell.url }}"><p class="bundle-product-title">{{ product_upsell.title }}</p></a>
+            <p class="bundle-product-price">{{ product_upsell.price | money_with_currency }}</p>
+            {% if product_upsell.variants.size > 1 %}
+              <select name="id" class="bundle-select" data-type="bundle">
+                {% for variant in product_upsell.variants %}
+                  {% if variant.available %}
+                    <option value="{{ variant.id }}" data-variant-price="{{ variant.price | money_with_currency }}" data-variant-imgsrc="{{ variant.featured_image | img_url: '100x100' }}">{{ variant.title }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <form method="post" action="/cart/add" id="product-bundle-form" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-bundle-to-cart-form">
+      <input type="hidden" name="form_type" value="product">
+      <input type="hidden" name="utf8" value="✓">
+      <input id="mainProductIdInput" type="hidden" name="items[0][id]" value="{{ product.selected_or_first_available_variant.id}}">
+      <input id="mainProductQuantityInput" type="hidden" name="items[0][quantity]" value="1">
+      <input id="bundleProductIdInput" type="hidden" name="items[1][id]" value="{{ product_upsell.selected_or_first_available_variant.id}}">
+      <input id="bundleProductQuantityInput" type="hidden" name="items[1][quantity]" value="1">
+      <button class="product-form__submit button button--full-width" style="margin-bottom: 0;" type="submit" name="add" aria-haspopup="dialog" data-formid="{{ block.id }}">
+        <span>{{ button_text }}</span>
+        <div class="loading-overlay__spinner hidden">
+          <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+          </svg>
+        </div>
+      </button>
+    </form>
+
+  </div>
+</product-bundle-form>
+{% endif %}

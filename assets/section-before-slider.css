@@ -1,0 +1,64 @@
+#before-image img {
+  width:100%;
+  display:block;
+  max-width: unset;
+}
+
+#after-image img {
+  width:100%;
+  display:block;
+  max-width: unset;
+}
+
+.container-before-after {
+  display:block;
+}
+
+#before-after-slider {
+  width:100%;
+  position:relative;
+  overflow:hidden;
+}
+
+#after-image {
+  display:block
+}
+
+#before-image {
+  position:absolute;
+  height:100%;
+  width:50%;
+  top:0;
+  left:0;
+  overflow:hidden;
+  z-index:1;
+}
+
+#resizer {
+  position:absolute;
+  display:flex;
+  align-items:center;
+  z-index:1;
+  top:0;
+  left:50%;
+  height:100%;
+  width:3px;
+  /*Stop vertical scrolling on touch*/
+  -ms-touch-action: pan-y;
+    touch-action: pan-y;
+}
+
+#resizer:after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-right: 3px solid white;
+  border-left: 3px solid white;
+  display: inline-block;
+  border-top: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(
+  45deg);
+  right: -11px;
+}
