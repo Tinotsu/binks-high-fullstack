@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "2081f0b3-9dad-4d00-a9ff-51b31467247b": {
@@ -436,6 +445,7 @@
             "text": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
             "link_label": "",
             "link": "",
+            "external_video": "",
             "offdesk-bloc": false,
             "show_carrousel_mobile": true,
             "offmob-bloc": false
@@ -449,13 +459,17 @@
             "text": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
             "link_label": "",
             "link": "",
+            "external_video": "",
             "offdesk-bloc": false,
             "show_carrousel_mobile": true,
             "offmob-bloc": false
           }
         }
       },
-      "block_order": ["avis_f8kBrr", "avis_nNgJMH"],
+      "block_order": [
+        "avis_f8kBrr",
+        "avis_nNgJMH"
+      ],
       "settings": {
         "color_scheme": "",
         "color_scheme_2": "",
@@ -508,7 +522,10 @@
           }
         }
       },
-      "block_order": ["collection_dkkNfK", "collection_WCzPwy"],
+      "block_order": [
+        "collection_dkkNfK",
+        "collection_WCzPwy"
+      ],
       "settings": {
         "color_scheme": "",
         "background_style": "primary",
@@ -558,6 +575,12 @@
     "featured_collection_pGALmE",
     "featured_collection_mdCX76",
     "collection_list_P8gaCE",
+    "featured_collection_9nne4w",
+    "featured_collection_gwCzbx",
+    "featured_collection_KwN89x",
+    "featured_collection_yTXmf9",
+    "featured_collection_AwcUCE",
+    "featured_collection_wU9L4K",
     "collection_list_zDFh9R",
     "testimonials_jEKFDb",
     "collection_navigation_3NTWPW",
