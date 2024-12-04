@@ -17,9 +17,14 @@
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
 
+<!-- Inclusion des fichiers CSS : 
+ Charger les styles spécifiques pour les évaluations et les variantes de couleurs. -->
+
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-variant-color-swatch.css' | asset_url | stylesheet_tag }}
-blibli
+
+<!-- Calcul du ratio d'image -->
+
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
@@ -32,6 +37,9 @@ blibli
       assign ratio = 1
     endif
   -%}
+
+<!-- Contenu principal de la carte -->
+
   <div class="card-wrapper underline-links-hover{% if card_product.selected_or_first_available_variant.available == false %} product-out-of-stock{% endif %}" data-product-handle="{{ card_product.handle }}">
     <div
       class="
@@ -45,6 +53,9 @@ blibli
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
+        
+<!-- Affichage de l'image principale et secondaire -->
+
         {%- if card_product.featured_media -%}
           <div class="card__media">
             <div class="media media--transparent media--hover-effect">
@@ -94,6 +105,9 @@ blibli
             </div>
           </div>
         {%- endif -%}
+
+<!-- Badge personnalisé -->
+
         <div class="card__content">
           {% if card_product.metafields.custom.badge %}
             <div class="card__badge {{ settings.badge_position }}">
@@ -102,6 +116,10 @@ blibli
           {% endif %}
         </div>
       </div>
+
+<!-- Informations sur le produit 
+ Affiche le titre, les évaluations (si disponibles), et le prix du produit. -->
+
       <div class="card__content">
         <div class="card__information">
           <h3
@@ -152,6 +170,8 @@ blibli
 
             {% render 'price', product: card_product, price_class: '' %}
 
+<!-- Swatches de variantes de couleur -->
+
             {%- if enable_color_swatch == true -%}
               {%- for productvariant in card_product.variants -%}
                 {% if productvariant.metafields.color.hexcode != blank or productvariant.metafields.color.image != blank %}
@@ -193,7 +213,8 @@ blibli
           </div>
         </div>
 
-        <!-- Bouton d'ajout rapide -->
+<!-- Bouton d'ajout rapide -->
+
         {%- if show_btn_card_product -%}
           {%- if type_btn_card_product == 'enable_quick_add' -%}
             <div class="quick-add">
@@ -272,6 +293,9 @@ blibli
       </div>
     </div>
   </div>
+
+<!-- Contenu alternatif si aucun produit -->
+
 {%- else -%}
   <div class="card-wrapper underline-links-hover">
     <div
