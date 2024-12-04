@@ -58,3 +58,12 @@
     display: block;
   }
 }
+
+.rating-star {
+  --color-icon: #FC7C21; /* Jaune */
+}
+
+.rating-star {
+  --font-size: 1.4; /* Taille des étoiles */
+  --letter-spacing: 0.1; /* Espacement entre les étoiles */
+}
