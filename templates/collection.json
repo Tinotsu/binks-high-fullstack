@@ -1,1 +1,133 @@
-{"sections":{"banner":{"type":"main-collection-banner","settings":{"color_scheme":"background-1","heading_tag":"h2","show_collection_description":false,"show_collection_image":false,"identificateur":"class","offdesk":false,"offmob":false}},"product-grid":{"type":"main-collection-product-grid","blocks":{"card_between_products_3bBaW7":{"type":"card_between_products","settings":{"position":0,"image":"shopify:\/\/shop_images\/Image_Grid_x1_Theme_FullStack_7cd261c5-bcc5-4deb-97e3-ea30b19a0a20.jpg","opacity":30,"cart_height":"full","text":"<p><strong>Voir nos packs<\/strong><\/p>","url":"shopify:\/\/products\/produit-pack-de-produits-style-3"}},"separator_zBnHdV":{"type":"separator","settings":{"position":4,"icon":"truck","content":"Livraison en 48-72h en France","offdesk-bloc":false,"offmob-bloc":false}},"separator_Pe3ckA":{"type":"separator","settings":{"position":9,"icon":"return","content":"Retours offerts - Garantie 14 jours","offdesk-bloc":false,"offmob-bloc":false}}},"block_order":["card_between_products_3bBaW7","separator_zBnHdV","separator_Pe3ckA"],"settings":{"products_per_page":16,"image_ratio":"adapt","show_secondary_image":true,"show_vendor":false,"show_rating":true,"enable_btn_card_product":true,"enable_color_swatch":true,"type_btn_card_product":"enable_quick_add","button_style_secondary":true,"enable_filtering":true,"enable_sorting":true,"color_scheme":"","identificateur":"class","padding_top":30,"padding_bottom":30,"columns_desktop":4,"filter_type":"horizontal","offdesk":false,"columns_mobile":"2","offmob":false}},"rich_text_UjGteE":{"type":"rich-text","blocks":{"heading_P7pXbg":{"type":"heading","settings":{"heading":"<p>Description<\/p>","heading_tag":"h2","heading_size":"h1","offdesk-bloc":false,"offmob-bloc":false}},"text_PzKdp6":{"type":"text","settings":{"text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras luctus id metus sed interdum. Quisque venenatis leo commodo eros eleifend, non cursus magna blandit. Sed tempor aliquet finibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer metus justo, egestas eu mi eget, vulputate tempus dui. <\/p>","offdesk-bloc":false,"offmob-bloc":false}}},"block_order":["heading_P7pXbg","text_PzKdp6"],"settings":{"color_scheme":"scheme-1","card_color_scheme":"","content_alignment":"center","desktop_content_position":"center","full_width":false,"readmore":true,"formread":200,"identificateur":"class","padding_top":30,"padding_bottom":30,"offdesk":false,"offmob":false}}},"order":["banner","product-grid","rich_text_UjGteE"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "color_scheme": "background-1",
+        "heading_tag": "h2",
+        "show_collection_description": false,
+        "show_collection_image": false,
+        "identificateur": "class",
+        "offdesk": false,
+        "offmob": false
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "card_between_products_3bBaW7": {
+          "type": "card_between_products",
+          "settings": {
+            "position": 0,
+            "opacity": 30,
+            "cart_height": "full",
+            "text": "<p><strong>Voir nos packs</strong></p>",
+            "url": "shopify://products/produit-pack-de-produits-style-3"
+          }
+        },
+        "separator_zBnHdV": {
+          "type": "separator",
+          "settings": {
+            "position": 4,
+            "icon": "truck",
+            "content": "Livraison en 48-72h en France",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "separator_Pe3ckA": {
+          "type": "separator",
+          "settings": {
+            "position": 9,
+            "icon": "return",
+            "content": "Retours offerts - Garantie 14 jours",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "card_between_products_3bBaW7",
+        "separator_zBnHdV",
+        "separator_Pe3ckA"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "products_per_page": 16,
+        "image_ratio": "portrait",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_btn_card_product": true,
+        "enable_color_swatch": true,
+        "type_btn_card_product": "enable_quick_add",
+        "button_style_secondary": false,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "columns_desktop": 4,
+        "filter_type": "horizontal",
+        "offdesk": false,
+        "columns_mobile": "2",
+        "offmob": false
+      }
+    },
+    "rich_text_UjGteE": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_P7pXbg": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Description</p>",
+            "heading_tag": "h2",
+            "heading_size": "h1",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "text_PzKdp6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras luctus id metus sed interdum. Quisque venenatis leo commodo eros eleifend, non cursus magna blandit. Sed tempor aliquet finibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer metus justo, egestas eu mi eget, vulputate tempus dui. </p>",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_P7pXbg",
+        "text_PzKdp6"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "",
+        "content_alignment": "center",
+        "desktop_content_position": "center",
+        "full_width": false,
+        "readmore": true,
+        "formread": 200,
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "offdesk": false,
+        "offmob": false
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "rich_text_UjGteE"
+  ]
+}
