@@ -296,9 +296,6 @@
                         >
                           <span>
                             {%- if card_product.selected_or_first_available_variant.available -%}
-
-
-                              wsgZ
                               {{ 'products.product.add_to_cart' | t }}
                             {%- else -%}
                               {{ 'products.product.sold_out' | t }}
@@ -383,6 +380,8 @@
       </div>
     </div>
   </div>
+
+  
   <!-- Swatches de variantes de couleur -->
 
   {%- if enable_color_swatch == true -%}
