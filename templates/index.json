@@ -45,7 +45,7 @@
         "show_description": false,
         "description_style": "uppercase",
         "products_to_show": 4,
-        "show_view_all": true,
+        "show_view_all": false,
         "view_all_style": "solid",
         "image_ratio": "portrait",
         "show_secondary_image": false,
@@ -61,12 +61,12 @@
         "columns_desktop": 4,
         "enable_desktop_slider": true,
         "show_carrousel_desktop": false,
-        "show_arrow_desktop": true,
+        "show_arrow_desktop": false,
         "offdesk": false,
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
@@ -83,7 +83,7 @@
         "show_description": false,
         "description_style": "body",
         "products_to_show": 4,
-        "show_view_all": true,
+        "show_view_all": false,
         "view_all_style": "solid",
         "image_ratio": "square",
         "show_secondary_image": false,
@@ -102,9 +102,9 @@
         "show_arrow_desktop": true,
         "offdesk": false,
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
@@ -154,7 +154,7 @@
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
@@ -187,12 +187,12 @@
         "columns_desktop": 4,
         "enable_desktop_slider": true,
         "show_carrousel_desktop": false,
-        "show_arrow_desktop": true,
+        "show_arrow_desktop": false,
         "offdesk": false,
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
@@ -225,12 +225,12 @@
         "columns_desktop": 4,
         "enable_desktop_slider": true,
         "show_carrousel_desktop": false,
-        "show_arrow_desktop": true,
+        "show_arrow_desktop": false,
         "offdesk": false,
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
@@ -266,9 +266,9 @@
         "show_arrow_desktop": true,
         "offdesk": false,
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
@@ -304,9 +304,9 @@
         "show_arrow_desktop": true,
         "offdesk": false,
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
@@ -342,9 +342,9 @@
         "show_arrow_desktop": true,
         "offdesk": false,
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
@@ -380,9 +380,9 @@
         "show_arrow_desktop": true,
         "offdesk": false,
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
@@ -498,7 +498,7 @@
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
