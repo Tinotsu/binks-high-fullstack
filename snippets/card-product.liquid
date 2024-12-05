@@ -45,106 +45,114 @@
     Affiche le titre, les évaluations (si disponibles), et le prix du produit.
   -->
 
-  <div class="card__content">
-    <div class="card__information">
-      <!-- Titre du produit -->
-      <h3
-        class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
-        {% if card_product.featured_media or settings.card_style == 'card' %}
-          id="title-{{ section_id }}-{{ card_product.id }}"
-        {% endif %}
-      >
-        <a
-          href="{{ card_product.url }}"
-          id="CardLink-{{ section_id }}-{{ card_product.id }}"
-          class="full-unstyled-link"
-          aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
-        >
-          {{ card_product.title | escape }}
-        </a>
-      </h3>
-
-      <!-- Section des notes/avis -->
-      <div
-        class="loox-rating"
-        data-id="{{ card_product.id }}"
-        data-rating="{{ card_product.metafields.loox.avg_rating }}"
-        data-raters="{{ card_product.metafields.loox.num_reviews }}"
-      ></div>
-
-      <div class="card-information">
-        <!-- Nom du vendeur (facultatif) -->
-        {%- if show_vendor -%}
-          <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-          <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
-        {%- endif -%}
-
-        <span class="caption-large light">{{ block.settings.description | escape }}</span>
-
-        <!-- Évaluations du produit -->
-        {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
-          {% liquid
-            assign rating_decimal = 0
-            assign decimal = card_product.metafields.reviews.rating.value.rating | modulo: 1
-            if decimal >= 0.3 and decimal <= 0.7
-              assign rating_decimal = 0.5
-            elsif decimal > 0.7
-              assign rating_decimal = 1
-            endif
-          %}
-
-          <!-- Étoiles des évaluations -->
-          <div
-            class="rating"
-            role="img"
-            aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}"
-          >
+  <div
+    class="
+      card
+      card--{{ settings.card_style }}
+      {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
+      {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
+      {% if extend_height %} card--extend-height{% endif %}
+      {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
+    "
+    style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+  >
+    <div class="card__content">
+      <div class="card__information">
+        <div class="card-information">
+          <!-- Badge Metafield du produit -->
+          {% if card_product.metafields.custom.badge %}
             <span
-              aria-hidden="true"
-              class="rating-star color-icon-{{ settings.accent_icons }}"
-              style="--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
-            ></span>
-          </div>
-
-          <!-- Texte de la note -->
-          <p class="rating-text caption">
-            <span aria-hidden="true">
-              {{- card_product.metafields.reviews.rating.value }} /
-              {{ card_product.metafields.reviews.rating.value.scale_max -}}
+              id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+              class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+            >
+              {{- card_product.metafields.custom.badge -}}
             </span>
-          </p>
+          {% endif %}
 
-          <!-- Nombre d'évaluations -->
-          <p class="rating-count caption">
-            <span aria-hidden="true"
-              >{{ card_product.metafields.reviews.rating_count }} avis
-            </span>
-            <span class="visually-hidden">
-              {{- card_product.metafields.reviews.rating_count }}
-              {{ 'accessibility.total_reviews' | t -}}
-            </span>
-          </p>
-        {%- endif -%}
+          <!-- Titre du produit -->
+          <h3
+            class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
+            {% if card_product.featured_media or settings.card_style == 'card' %}
+              id="title-{{ section_id }}-{{ card_product.id }}"
+            {% endif %}
+          >
+            <a
+              href="{{ card_product.url }}"
+              id="CardLink-{{ section_id }}-{{ card_product.id }}"
+              class="full-unstyled-link"
+              aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
+            >
+              {{ card_product.title | escape }}
+            </a>
+          </h3>
 
-        <!-- Prix du produit -->
-        {% render 'price', product: card_product, price_class: '' %}
+          <!-- Prix du produit -->
+          {% render 'price', product: card_product, price_class: '' %}
 
-        <!-- Contenu principal de la carte -->
-
-        <div
-          class="card-wrapper underline-links-hover{% if card_product.selected_or_first_available_variant.available == false %} product-out-of-stock{% endif %}"
-          data-product-handle="{{ card_product.handle }}"
-        >
+          <!-- Section des notes/avis -->
           <div
-            class="
-              card
-              card--{{ settings.card_style }}
-              {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
-              {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
-              {% if extend_height %} card--extend-height{% endif %}
-              {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
-            "
-            style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+            class="loox-rating"
+            data-id="{{ card_product.id }}"
+            data-rating="{{ card_product.metafields.loox.avg_rating }}"
+            data-raters="{{ card_product.metafields.loox.num_reviews }}"
+          ></div>
+
+          <!-- Nom du vendeur (facultatif) -->
+          {%- if show_vendor -%}
+            <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+            <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
+          {%- endif -%}
+
+          <span class="caption-large light">{{ block.settings.description | escape }}</span>
+
+          <!-- Évaluations du produit -->
+          {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
+            {% liquid
+              assign rating_decimal = 0
+              assign decimal = card_product.metafields.reviews.rating.value.rating | modulo: 1
+              if decimal >= 0.3 and decimal <= 0.7
+                assign rating_decimal = 0.5
+              elsif decimal > 0.7
+                assign rating_decimal = 1
+              endif
+            %}
+
+            <!-- Étoiles des évaluations -->
+            <div
+              class="rating"
+              role="img"
+              aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}"
+            >
+              <span
+                aria-hidden="true"
+                class="rating-star color-icon-{{ settings.accent_icons }}"
+                style="--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
+              ></span>
+            </div>
+
+            <!-- Texte de la note -->
+            <p class="rating-text caption">
+              <span aria-hidden="true">
+                {{- card_product.metafields.reviews.rating.value }} /
+                {{ card_product.metafields.reviews.rating.value.scale_max -}}
+              </span>
+            </p>
+
+            <!-- Nombre d'évaluations -->
+            <p class="rating-count caption">
+              <span aria-hidden="true">{{ card_product.metafields.reviews.rating_count }} avis </span>
+              <span class="visually-hidden">
+                {{- card_product.metafields.reviews.rating_count }}
+                {{ 'accessibility.total_reviews' | t -}}
+              </span>
+            </p>
+          {%- endif -%}
+
+          <!-- Contenu principal de la carte -->
+
+          <div
+            class="card-wrapper underline-links-hover{% if card_product.selected_or_first_available_variant.available == false %} product-out-of-stock{% endif %}"
+            data-product-handle="{{ card_product.handle }}"
           >
             <div
               class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
@@ -203,100 +211,84 @@
               {%- endif -%}
 
               <!-- Badge personnalisé -->
-
-              <div class="card__content">
-                {% if card_product.metafields.custom.badge %}
-                  <div class="card__badge {{ settings.badge_position }}">
-                    <span
-                      id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                      class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-                    >
-                      {{- card_product.metafields.custom.badge -}}
-                    </span>
-                  </div>
-                {% endif %}
-              </div>
-            </div>
-
-            <!-- Swatches de variantes de couleur -->
-
-            {%- if enable_color_swatch == true -%}
-              {%- for productvariant in card_product.variants -%}
-                {% if productvariant.metafields.color.hexcode != blank
-                  or productvariant.metafields.color.image != blank
-                %}
-                  {% assign swatchloop = true %}
-                {% endif %}
-              {%- endfor -%}
-              {% if swatchloop %}
-                <div class="card__colorSwatch{% if settings.card_text_alignment == "center" %} swatch-collection-centered{% endif %}">
-                  {%- for option in card_product.options_with_values -%}
-                    {%- for value in option.values -%}
-                      {% assign optionName = option.name | downcase %}
-                      {% if optionName == 'couleur' or optionName == 'color' %}
-                        {% assign found = false %}
-                        {%- for productvariant in card_product.variants -%}
-                          {%- for variantoption in productvariant.options -%}
-                            {% if variantoption == value and found == false %}
-                              {% assign found = true %}
-
-                              {%- assign background = 'background-color: #f4f4f4' -%}
-                              {% if productvariant.metafields.color.image != blank %}
-                                {%- assign backgroundImage = productvariant.metafields.color.image
-                                  | image_url: width: 100
-                                -%}
-                                {%- assign background = 'background-image: url('
-                                  | append: backgroundImage
-                                  | append: ');'
-                                -%}
-                              {% elsif productvariant.metafields.color.hexcode != blank %}
-                                {%- assign background = 'background-color: '
-                                  | append: productvariant.metafields.color.hexcode
-                                -%}
-                              {% endif %}
-
-                              <a
-                                href="{{ productvariant.url }}"
-                                class="colorSwatch-mini{% if productvariant.metafields.color.image != blank %} colorSwatch-mini--with-image{% endif %}"
-                                style="{{ background }}"
-                              >
-                                {% if productvariant.available == false %}
-                                  <div class="colorSwatch-unavailable-border"></div>
-                                {% endif %}
-                              </a>
-                            {% endif %}
-                          {%- endfor -%}
-                        {%- endfor -%}
-                      {%- endif -%}
-                    {%- endfor -%}
-                  {%- endfor -%}
+              <!--
+                <div class="card__content">
+                  {% if card_product.metafields.custom.badge %}
+                    <div class="card__badge {{ settings.badge_position }}">
+                      <span
+                        id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+                        class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+                      >
+                        {{- card_product.metafields.custom.badge -}}
+                      </span>
+                    </div>
+                  {% endif %}
                 </div>
-              {% endif %}
-            {%- endif -%}
+              -->
+            </div>
           </div>
-        </div>
 
-        <!-- Bouton d'ajout rapide -->
+          <!-- Bouton d'ajout rapide -->
 
-        {%- if show_btn_card_product -%}
-          {%- if type_btn_card_product == 'enable_quick_add' -%}
-            <div class="quick-add">
-              {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
-              {%- if card_product.variants.size == 1 -%}
-                <product-form>
-                  {%- form 'product',
-                    card_product,
-                    id: product_form_id,
-                    class: 'form',
-                    novalidate: 'novalidate',
-                    data-type: 'add-to-cart-form'
-                  -%}
-                    <input
-                      type="hidden"
-                      name="id"
-                      value="{{ card_product.selected_or_first_available_variant.id }}"
-                      disabled
-                    >
+          {%- if show_btn_card_product -%}
+            {%- if type_btn_card_product == 'enable_quick_add' -%}
+              <div class="quick-add">
+                {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
+                {%- if card_product.variants.size == 1 -%}
+                  <product-form>
+                    {%- form 'product',
+                      card_product,
+                      id: product_form_id,
+                      class: 'form',
+                      novalidate: 'novalidate',
+                      data-type: 'add-to-cart-form'
+                    -%}
+                      <input
+                        type="hidden"
+                        name="id"
+                        value="{{ card_product.selected_or_first_available_variant.id }}"
+                        disabled
+                      >
+                      <button
+                        id="{{ product_form_id }}-submit"
+                        type="submit"
+                        name="add"
+                        class="quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                        aria-haspopup="dialog"
+                        aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
+                        aria-live="polite"
+                        data-sold-out-message="true"
+                        {% if card_product.selected_or_first_available_variant.available == false %}
+                          disabled
+                        {% endif %}
+                      >
+                        <span>
+                          {%- if card_product.selected_or_first_available_variant.available -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                          {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- endif -%}
+                        </span>
+                        <span class="sold-out-message hidden">
+                          {{ 'products.product.sold_out' | t }}
+                        </span>
+                        <div class="loading-overlay__spinner hidden">
+                          <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            role="presentation"
+                            class="spinner"
+                            viewBox="0 0 66 66"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                          </svg>
+                        </div>
+                      </button>
+                    {%- endform -%}
+                  </product-form>
+                {%- else -%}
+                  <modal-opener data-modal="#QuickAdd-{{ card_product.id }}">
                     <button
                       id="{{ product_form_id }}-submit"
                       type="submit"
@@ -304,22 +296,9 @@
                       class="quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
                       aria-haspopup="dialog"
                       aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
-                      aria-live="polite"
-                      data-sold-out-message="true"
-                      {% if card_product.selected_or_first_available_variant.available == false %}
-                        disabled
-                      {% endif %}
+                      data-product-url="{{ card_product.url }}"
                     >
-                      <span>
-                        {%- if card_product.selected_or_first_available_variant.available -%}
-                          {{ 'products.product.add_to_cart' | t }}
-                        {%- else -%}
-                          {{ 'products.product.sold_out' | t }}
-                        {%- endif -%}
-                      </span>
-                      <span class="sold-out-message hidden">
-                        {{ 'products.product.sold_out' | t }}
-                      </span>
+                      {{ 'products.product.choose_options' | t }}
                       <div class="loading-overlay__spinner hidden">
                         <svg
                           aria-hidden="true"
@@ -333,80 +312,90 @@
                         </svg>
                       </div>
                     </button>
-                  {%- endform -%}
-                </product-form>
-              {%- else -%}
-                <modal-opener data-modal="#QuickAdd-{{ card_product.id }}">
-                  <button
-                    id="{{ product_form_id }}-submit"
-                    type="submit"
-                    name="add"
-                    class="quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
-                    aria-haspopup="dialog"
-                    aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
-                    data-product-url="{{ card_product.url }}"
-                  >
-                    {{ 'products.product.choose_options' | t }}
-                    <div class="loading-overlay__spinner hidden">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        role="presentation"
-                        class="spinner"
-                        viewBox="0 0 66 66"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                      </svg>
-                    </div>
-                  </button>
-                </modal-opener>
-                <quick-add-modal id="QuickAdd-{{ card_product.id }}" class="quick-add-modal">
-                  <div
-                    role="dialog"
-                    aria-label="{{ 'products.product.choose_product_options' | t: product_name: card_product.title | escape }}"
-                    aria-modal="true"
-                    class="quick-add-modal__content color-{{ section.settings.color_scheme }} global-settings-popup"
-                    tabindex="-1"
-                  >
-                    <button
-                      id="ModalClose-{{ card_product.id }}"
-                      type="button"
-                      class="quick-add-modal__toggle"
-                      aria-label="{{ 'accessibility.close' | t }}"
+                  </modal-opener>
+                  <quick-add-modal id="QuickAdd-{{ card_product.id }}" class="quick-add-modal">
+                    <div
+                      role="dialog"
+                      aria-label="{{ 'products.product.choose_product_options' | t: product_name: card_product.title | escape }}"
+                      aria-modal="true"
+                      class="quick-add-modal__content color-{{ section.settings.color_scheme }} global-settings-popup"
+                      tabindex="-1"
                     >
-                      {% render 'icon-close' %}
-                    </button>
-                    <div id="QuickAddInfo-{{ card_product.id }}" class="quick-add-modal__content-info"></div>
-                  </div>
-                </quick-add-modal>
-              {%- endif -%}
-            </div>
-          {%- elsif type_btn_card_product == 'enable_product_page' -%}
-            <a
-              href="{{ card_product.url }}"
-              class="quick-add quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
-              style="text-decoration: none;"
-              >Voir le produit</a
-            >
+                      <button
+                        id="ModalClose-{{ card_product.id }}"
+                        type="button"
+                        class="quick-add-modal__toggle"
+                        aria-label="{{ 'accessibility.close' | t }}"
+                      >
+                        {% render 'icon-close' %}
+                      </button>
+                      <div id="QuickAddInfo-{{ card_product.id }}" class="quick-add-modal__content-info"></div>
+                    </div>
+                  </quick-add-modal>
+                {%- endif -%}
+              </div>
+            {%- elsif type_btn_card_product == 'enable_product_page' -%}
+              <a
+                href="{{ card_product.url }}"
+                class="quick-add quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                style="text-decoration: none;"
+                >Voir le produit</a
+              >
+            {%- endif -%}
           {%- endif -%}
-        {%- endif -%}
-        {% if card_product.metafields.custom.badge %}
-          <div class="card__badge {{ settings.badge_position }}">
-            <span
-              id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-              class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-            >
-              {{- card_product.metafields.custom.badge -}}
-            </span>
-          </div>
-        {% endif %}
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Contenu alternatif si aucun produit -->
+  <!-- Swatches de variantes de couleur -->
 
+  {%- if enable_color_swatch == true -%}
+    {%- for productvariant in card_product.variants -%}
+      {% if productvariant.metafields.color.hexcode != blank or productvariant.metafields.color.image != blank %}
+        {% assign swatchloop = true %}
+      {% endif %}
+    {%- endfor -%}
+    {% if swatchloop %}
+      <div class="card__colorSwatch{% if settings.card_text_alignment == "center" %} swatch-collection-centered{% endif %}">
+        {%- for option in card_product.options_with_values -%}
+          {%- for value in option.values -%}
+            {% assign optionName = option.name | downcase %}
+            {% if optionName == 'couleur' or optionName == 'color' %}
+              {% assign found = false %}
+              {%- for productvariant in card_product.variants -%}
+                {%- for variantoption in productvariant.options -%}
+                  {% if variantoption == value and found == false %}
+                    {% assign found = true %}
+
+                    {%- assign background = 'background-color: #f4f4f4' -%}
+                    {% if productvariant.metafields.color.image != blank %}
+                      {%- assign backgroundImage = productvariant.metafields.color.image | image_url: width: 100 -%}
+                      {%- assign background = 'background-image: url(' | append: backgroundImage | append: ');' -%}
+                    {% elsif productvariant.metafields.color.hexcode != blank %}
+                      {%- assign background = 'background-color: ' | append: productvariant.metafields.color.hexcode -%}
+                    {% endif %}
+
+                    <a
+                      href="{{ productvariant.url }}"
+                      class="colorSwatch-mini{% if productvariant.metafields.color.image != blank %} colorSwatch-mini--with-image{% endif %}"
+                      style="{{ background }}"
+                    >
+                      {% if productvariant.available == false %}
+                        <div class="colorSwatch-unavailable-border"></div>
+                      {% endif %}
+                    </a>
+                  {% endif %}
+                {%- endfor -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    {% endif %}
+  {%- endif -%}
+
+  <!-- Contenu alternatif si aucun produit -->
 {%- else -%}
   <div class="card-wrapper underline-links-hover">
     <div
