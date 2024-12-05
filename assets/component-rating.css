@@ -73,9 +73,32 @@
   height: 120px;
 }
 
+.button_section_size {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 0;
+}
+
 .placement_badge {
   position: absolute;
   top: 0;
   left: 0;
   transform: translate(10px, -10px);
 }
+
+.card_type_cbd {
+  padding: 1px 10px; 
+  border-radius: 4px; 
+  font-size: 1.2rem;
+  border: solid, #fc7c21, 2px;
+}
+
+.card_object_container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
