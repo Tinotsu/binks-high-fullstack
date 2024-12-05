@@ -31,17 +31,19 @@
     },
     "featured_collection_pGALmE": {
       "type": "featured-collection",
-      "custom_css": [],
+      "custom_css": [
+        ".title {display: inline-block; background-color: #fc7c21; color: black; padding: 10px 20px; font-weight: bold; transform: skew(-10deg); text-align: center;}"
+      ],
       "settings": {
         "collection": "offre-de-la-semaine",
         "color_scheme": "scheme-b4308dfb-e745-48eb-ad2c-4e375e5efbad",
-        "title": "Notre sélection",
+        "title": "NOTRE SÉLECTION",
         "heading_tag": "h2",
         "heading_size": "h1",
         "heading_alignment": "center",
         "description": "",
         "show_description": false,
-        "description_style": "body",
+        "description_style": "uppercase",
         "products_to_show": 4,
         "show_view_all": false,
         "view_all_style": "link",
