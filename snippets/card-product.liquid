@@ -260,7 +260,63 @@
               {% endif %}
             </div>
 
-            <!-- Bouton d'ajout rapide -->
+            <!-- Bouton multi-choix -->
+             
+            {% if card_product.variants.size == 1 %}
+              <div class="form_button_cart">
+                <form method="post" action="/cart/add">
+                  <input type="hidden" name="id" value="{{ card_product.variants.first.id }}">
+                  <button
+                    type="submit"
+                    class="button--full-width button--primary"
+                    aria-live="polite"
+                    {% if card_product.selected_or_first_available_variant.available == false %}
+                      disabled
+                    {% endif %}
+                  >
+                    Ajouter au panier
+                  </button>
+                </form>
+              </div>
+            {% else %}
+              <div class="form_button_cart">
+                <form method="post" action="/cart/add">
+                  <select id="quantity-selector" name="id">
+                    {% for variant in card_product.variants %}
+                      <option
+                        value="{{ variant.id }}"
+                        {% if variant == card_product.selected_or_first_available_variant %}
+                          selected
+                        {% endif %}
+                      >
+                        {{ variant.title }} ({{ variant.price | money }})
+                      </option>
+                    {% endfor %}
+                  </select>
+                  <button
+                    type="submit"
+                    class="button--full-width button--primary"
+                    aria-live="polite"
+                    {% if card_product.selected_or_first_available_variant.available == false %}
+                      disabled
+                    {% endif %}
+                  >
+                    Ajouter
+                    <span></span>
+                  </button>
+                </form>
+              </div>
+            {% endif %}
+            
+
+
+
+
+
+
+
+
+            <!-- Bouton d'ajout rapide ANCIEN 
 
             {%- if show_btn_card_product -%}
               {%- if type_btn_card_product == 'enable_quick_add' -%}
@@ -374,14 +430,15 @@
                   >Voir le produit</a
                 >
               {%- endif -%}
-            {%- endif -%}
-          </div>
+            {%- endif -%} -->
+          </div> 
         </div>
       </div>
     </div>
   </div>
 
-  
+
+
   <!-- Swatches de variantes de couleur -->
 
   {%- if enable_color_swatch == true -%}
@@ -429,10 +486,6 @@
     {% endif %}
   {%- endif -%}
 
-
-
-
-  
   <!-- Contenu alternatif si aucun produit -->
 {%- else -%}
   <div class="card-wrapper underline-links-hover">
