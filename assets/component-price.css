@@ -23,7 +23,17 @@
 }
 
 .price__regular .price-item--regular {
-  margin-right: 0;
+  margin: 20px; 
+}
+
+.price__prefix {
+  font-weight: normal; font-size: 1rem;
+}
+
+.price__box {
+  padding: 1px 5px;
+  border-radius: 6px;
+  border: 2px, solid, #fc7c21;
 }
 
 .price:not(.price--show-badge) .price-item--last:last-of-type {

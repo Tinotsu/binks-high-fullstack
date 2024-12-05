@@ -30,7 +30,7 @@
 }
 
 .rating-star::before {
-  content: '★★★★★';
+  content: "★★★★★";
   background: linear-gradient(
     90deg,
     var(--color-icon) var(--percent),
@@ -47,6 +47,7 @@
 .rating-count {
   display: inline-block;
   margin: 0;
+  font-size: 1.7rem;
 }
 
 @media (forced-colors: active) {
@@ -60,12 +61,12 @@
 }
 
 .rating-star {
-  --color-icon: #FC7C21; /* Jaune */
+  --color-icon: #fc7c21;
 }
 
 .rating-star {
-  --font-size: 1.4; /* Taille des étoiles */
-  --letter-spacing: 0.1; /* Espacement entre les étoiles */
+  --font-size: 2;
+  --letter-spacing: 0.1;
 }
 
 .info_section_size {
