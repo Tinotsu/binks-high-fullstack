@@ -67,3 +67,14 @@
   --font-size: 1.4; /* Taille des étoiles */
   --letter-spacing: 0.1; /* Espacement entre les étoiles */
 }
+
+.info_section_size {
+  height: 120px;
+}
+
+.placement_badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(10px, -10px);
+}
