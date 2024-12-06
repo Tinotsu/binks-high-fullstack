@@ -297,7 +297,7 @@
                         {%- if card_product.selected_or_first_available_variant.available -%}
                           Ajouter au panier |
                           {{ card_product.price | money_with_currency }}
-                          {{ card_product.compare_at_price | money }}                        {%- else -%}
+                        {%- else -%}
                           {{ 'products.product.sold_out' | t }}
                         {%- endif -%}
                       </span>
@@ -320,63 +320,41 @@
                   {%- endform -%}
                 </product-form>
               {% else %}
-                <div class="form_button_cart ">
-                  <form method="post" action="/cart/add">
-                    <select class="quantity-selector" name="id">
-                      {% for variant in card_product.variants %}
-                        <option
-                          value="{{ variant.id }}"
-                          data-price="{{ variant.price | money }}"
-                          {% if variant == card_product.selected_or_first_available_variant %}
-                            selected
-                          {% endif %}
-                        >
-                          {{ variant.title }} : {{ variant.price | money }}
-                        </option>
-                      {% endfor %}
-                    </select>
-                    <button
-                      type="submit"
-                      class="add-to-cart-button"
+                <product-form>
+                  {%- form 'product',
+                    card_product,
+                    id: product_form_id,
+                    class: 'form',
+                    novalidate: 'novalidate',
+                    data-type: 'add-to-cart-form'
+                  -%}
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="{{ card_product.selected_or_first_available_variant.id }}"
+                      disabled
                     >
-                      Ajouter |&nbsp;<span class="price-display"></span>
-                    </button>
-                  </form>
-                </div>
+                    <div class="form_button_cart ">
+                      <form method="post" action="/cart/add">
+                        <select class="quantity-selector" name="id">
+                          {% for variant in card_product.variants %}
+                            <option
+                              value="{{ variant.id }}"
+                              data-price="{{ variant.price | money }}"
+                              {% if variant == card_product.selected_or_first_available_variant %}
+                                selected
+                              {% endif %}
+                            >
+                              {{ variant.title }} : {{ variant.price | money }}
+                            </option>
+                          {% endfor %}
+                        </select>
 
-
-
-                
-              {% endif %}
-            </div>
-
-            <!--  -->
-            Bouton d'ajout rapide ANCIEN
-
-            {%- if show_btn_card_product -%}
-              {%- if type_btn_card_product == 'enable_quick_add' -%}
-                <div class="quick-add">
-                  {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
-                  {%- if card_product.variants.size == 1 -%}
-                    <product-form>
-                      {%- form 'product',
-                        card_product,
-                        id: product_form_id,
-                        class: 'form',
-                        novalidate: 'novalidate',
-                        data-type: 'add-to-cart-form'
-                      -%}
-                        <input
-                          type="hidden"
-                          name="id"
-                          value="{{ card_product.selected_or_first_available_variant.id }}"
-                          disabled
-                        >
                         <button
                           id="{{ product_form_id }}-submit"
                           type="submit"
                           name="add"
-                          class="quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                          class="add-to-cart-button quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
                           aria-haspopup="dialog"
                           aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                           aria-live="polite"
@@ -387,7 +365,7 @@
                         >
                           <span>
                             {%- if card_product.selected_or_first_available_variant.available -%}
-                              {{ 'products.product.add_to_cart' | t }}
+                              Ajouter |&nbsp;<span class="price-display"></span>
                             {%- else -%}
                               {{ 'products.product.sold_out' | t }}
                             {%- endif -%}
@@ -408,8 +386,21 @@
                             </svg>
                           </div>
                         </button>
-                      {%- endform -%}
-                    </product-form>
+                      </form>
+                    </div>
+                  {%- endform -%}
+                </product-form>
+              {% endif %}
+            </div>
+
+            <!--  
+            Bouton d'ajout rapide ANCIEN
+
+            {%- if show_btn_card_product -%}
+              {%- if type_btn_card_product == 'enable_quick_add' -%}
+                <div class="quick-add">
+                  {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
+                  {%- if card_product.variants.size == 1 -%}
                   {%- else -%}
                     <modal-opener data-modal="#QuickAdd-{{ card_product.id }}">
                       <button
@@ -466,6 +457,10 @@
                 >
               {%- endif -%}
             {%- endif -%}
+
+-->
+
+
           </div>
         </div>
       </div>
