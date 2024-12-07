@@ -1,0 +1,63 @@
+.product-promotion-section .product-promotion-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+.product-image img {
+    width: 50%;
+    position: absolute;
+}
+.product-promotion-section .product-promotion-wrapper .product-info {
+    display: flex;
+    flex-direction: column;
+}
+.product-info .button {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 15px;
+    text-decoration: none;
+    width: fit-content;
+    transition: all .25s ease;
+    transform: translateY(0);
+}
+.product-info .button:hover {
+    transform: translateY(-5px);
+}
+.promo-row-reverse {
+    flex-direction: row-reverse;
+}
+.product-promotion-section .product-promotion-wrapper .product-promotion-block {
+        display: flex;
+  padding: 30px;
+    }
+   @media only screen and (min-width: 768px) {
+     .product-promotion-section .product-promotion-wrapper .product-info {
+    width: 92%;
+}
+.product-promotion-section .product-promotion-wrapper .product-image {
+    width: 80%;
+}
+.product-image img {
+    width: 50%;
+    position: absolute;
+}
+     .product-promotion-section .product-promotion-wrapper .product-info {
+    gap: 2rem;
+}
+.product-promotion-section .product-promotion-wrapper .product-promotion-block {
+        width: 48%;
+    }
+   }
+
+
+@media only screen and (max-width: 767px) {
+  .product-promotion-wrapper {
+    flex-direction: column;
+}
+  .product-promotion-section .product-promotion-wrapper .product-info {
+    width: 50%;
+}
+.product-promotion-section .product-promotion-wrapper .product-image {
+    width: 50%;
+}
+}
