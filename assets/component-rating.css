@@ -120,6 +120,9 @@
 .form_button_cart {
   position: relative;
   z-index: 10;
+  -webkit-appearance: none;
+  -moz-appearance: none;   
+  appearance: none; 
 }
 
 .quantity-selector {
