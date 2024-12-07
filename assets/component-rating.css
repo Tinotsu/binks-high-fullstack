@@ -106,3 +106,14 @@
   position: relative;
   z-index: 10;
 }
+
+.quantity-selector {
+  padding: 0.6rem;
+  min-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  border-radius: 9px;
+  text-align: center;
+  border: #000 0.5px solid;
+  margin-bottom: 10px;
+}

@@ -91,7 +91,6 @@
 
             <!-- Prix du produit -->
             {% render 'price', product: card_product, price_class: '' %}
-
             <!-- Section des notes/avis -->
             <div
               class="loox-rating"
@@ -346,8 +345,8 @@
                                 selected
                               {% endif %}
                             >
-                              {{ variant.title }} : 
-                              {{ variant.unit_price | money }}/{{ variant.unit_price_measurement.reference_unit }}
+                              {{ variant.title }} : {{ variant.unit_price | money }}/
+                              {{- variant.unit_price_measurement.reference_unit }}
                             </option>
                           {% endfor %}
                         </select>
