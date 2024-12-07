@@ -146,4 +146,9 @@
     padding: 2px;
     font-size: 1rem;
   }
+  .rating-count {
+    display: inline-block;
+    margin: 0;
+    font-size: 1rem;
+  }
 }

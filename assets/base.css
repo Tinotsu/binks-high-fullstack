@@ -1024,7 +1024,7 @@ summary::-webkit-details-marker {
   }
 
   .grid--peek .grid__item {
-    min-width: 35%;
+    min-width: 45%;
   }
 
   .grid--peek .grid__item.grid__item-full {
