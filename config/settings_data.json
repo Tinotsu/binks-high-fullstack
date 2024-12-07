@@ -305,10 +305,30 @@
               "button_text_remove": "Retirer",
               "placeholder": "Code de réduction"
             }
+          },
+          "progress_nLacTJ": {
+            "type": "progress",
+            "settings": {
+              "color_scheme": "scheme-1",
+              "type": "montant",
+              "step0_text": "",
+              "step1_label": "Livraison gratuite Colissimo en Relais",
+              "step1_value": 39,
+              "step1_text1": "Plus que",
+              "step1_text2": "pour avoir la Livraison gratuite Colissimo en Relais",
+              "step2_label": "Livraison gratuite Colissimo à domicile",
+              "step2_value": 68,
+              "step2_text1": "Livraison gratuite Colissimo à domicile dès",
+              "step2_text2": "",
+              "step3_label": "",
+              "step3_text1": "",
+              "step3_text2": ""
+            }
           }
         },
         "block_order": [
-          "discount_code_cCFW77"
+          "discount_code_cCFW77",
+          "progress_nLacTJ"
         ],
         "settings": {
           "identificateur": "class",
