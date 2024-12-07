@@ -61,15 +61,14 @@
       <div class="card__information">
         <div class="card-information">
           <!-- Badge Metafield du produit -->
-          <div class="placement_badge">
-            {% if card_product.metafields.custom.badge %}
-              <span
-                id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-              >
-                {{- card_product.metafields.custom.badge -}}
-              </span>
-            {% endif %}
+          <div class="badge_box">
+              {% if card_product.metafields.custom.badge %}
+                <span
+                  class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+                >
+                  {{- card_product.metafields.custom.badge -}}
+                </span>
+              {% endif %}
           </div>
           <!-- Titre du produit -->
           <div class="info_section_size">
@@ -89,8 +88,6 @@
               </a>
             </h3>
 
-            <!-- Prix du produit -->
-            {% render 'price', product: card_product, price_class: '' %}
             <!-- Section des notes/avis -->
             <div
               class="loox-rating"
@@ -120,35 +117,39 @@
               %}
 
               <!-- Étoiles des évaluations -->
-              <div
-                class="rating"
-                role="img"
-                aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}"
-              >
-                <span
-                  aria-hidden="true"
-                  class="rating-star color-icon-{{ settings.accent_icons }}"
-                  style="--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
-                ></span>
+              <div class="evaluation_container">
+                <div
+                  class="rating"
+                  role="img"
+                  aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="rating-star color-icon-{{ settings.accent_icons }}"
+                    style="--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
+                  ></span>
+                </div>
+
+                <!-- Texte de la note -->
+                <p class="rating-text caption">
+                  <span aria-hidden="true">
+                    {{- card_product.metafields.reviews.rating.value }} /
+                    {{ card_product.metafields.reviews.rating.value.scale_max -}}
+                  </span>
+                </p>
+
+                <!-- Nombre d'évaluations -->
+                <p class="rating-count caption">
+                  <span aria-hidden="true">{{ card_product.metafields.reviews.rating_count }} avis </span>
+                  <span class="visually-hidden">
+                    {{- card_product.metafields.reviews.rating_count }}
+                    {{ 'accessibility.total_reviews' | t -}}
+                  </span>
+                </p>
               </div>
-
-              <!-- Texte de la note -->
-              <p class="rating-text caption">
-                <span aria-hidden="true">
-                  {{- card_product.metafields.reviews.rating.value }} /
-                  {{ card_product.metafields.reviews.rating.value.scale_max -}}
-                </span>
-              </p>
-
-              <!-- Nombre d'évaluations -->
-              <p class="rating-count caption">
-                <span aria-hidden="true">{{ card_product.metafields.reviews.rating_count }} avis </span>
-                <span class="visually-hidden">
-                  {{- card_product.metafields.reviews.rating_count }}
-                  {{ 'accessibility.total_reviews' | t -}}
-                </span>
-              </p>
             {%- endif -%}
+            <!-- Prix du produit -->
+            {% render 'price_unit', product: card_product, price_class: '' %}
           </div>
 
           <!-- Contenu principal de la carte -->
