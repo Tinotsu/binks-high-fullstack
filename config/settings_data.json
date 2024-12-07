@@ -99,6 +99,7 @@
     "show_pagination": true,
     "background_carrousel": true,
     "size_background_carrousel": 30,
+    "size_icon_carrousel": 6,
     "alignment_carrousel": "btwn",
     "activate_wishlist": false,
     "wishlist_color_scheme": "scheme-1",

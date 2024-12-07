@@ -208,11 +208,13 @@
           }
         }
       },
-      "block_order": ["image-with-text-0", "image-with-text-1"],
+      "block_order": [
+        "image-with-text-0",
+        "image-with-text-1"
+      ],
       "settings": {
         "color_scheme": "background-1",
         "card_color_scheme": "",
-        "image": "shopify://shop_images/Image_Grid_x1_Theme_FullStack.jpg",
         "height": "small",
         "content_layout": "no-overlap",
         "identificateur": "class",
@@ -317,9 +319,7 @@
         },
         "template--14967812063293__ac5ea3c0-c0aa-4173-b914-8e242292f794-1675106667b6f90f7b-1": {
           "type": "image-avis",
-          "settings": {
-            "image": "shopify://shop_images/Image_Grid_x1_Theme_FullStack.jpg"
-          }
+          "settings": {}
         },
         "template--14967812063293__ac5ea3c0-c0aa-4173-b914-8e242292f794-1675106667b6f90f7b-2": {
           "type": "avis",
@@ -337,9 +337,7 @@
         },
         "template--14967812063293__ac5ea3c0-c0aa-4173-b914-8e242292f794-1675106667b6f90f7b-3": {
           "type": "image-avis",
-          "settings": {
-            "image": "shopify://shop_images/Image_Grid_x1_Theme_FullStack.jpg"
-          }
+          "settings": {}
         },
         "fb17d098-f422-4adb-b18d-a861258f9d0a": {
           "type": "avis",
@@ -357,9 +355,7 @@
         },
         "1d2fa4f4-700d-4412-85ae-cc59ceb742c2": {
           "type": "image-avis",
-          "settings": {
-            "image": "shopify://shop_images/Image_Grid_x1_Theme_FullStack.jpg"
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -408,7 +404,7 @@
         "description": "",
         "description_style": "body",
         "heading_tag": "h2",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "heading_alignment": "left",
         "products_to_show": 8,
         "image_ratio": "square",
@@ -418,7 +414,7 @@
         "enable_btn_card_product": false,
         "enable_color_swatch": false,
         "type_btn_card_product": "enable_quick_add",
-        "button_style_secondary": true,
+        "button_style_secondary": false,
         "identificateur": "class",
         "padding_top": 30,
         "padding_bottom": 30,

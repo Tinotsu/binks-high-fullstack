@@ -49,7 +49,7 @@
         "megamenu_mRq9RC"
       ],
       "settings": {
-        "enable_sticky_header": false,
+        "enable_sticky_header": true,
         "color_scheme": "scheme-3",
         "color_scheme_submenu": "scheme-b4308dfb-e745-48eb-ad2c-4e375e5efbad",
         "color_notification_bubble": "#000000",
