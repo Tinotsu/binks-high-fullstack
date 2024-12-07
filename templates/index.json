@@ -108,54 +108,53 @@
         "offmob": false
       }
     },
-    "collection_list_P8gaCE": {
-      "type": "collection-list",
+    "promotion_banners_Wi9tNB": {
+      "type": "promotion-banners",
       "blocks": {
-        "featured_collection_JbekLN": {
-          "type": "featured_collection",
+        "coulmns_KRYRhy": {
+          "type": "coulmns",
           "settings": {
-            "collection": "",
-            "offdesk-bloc": false,
-            "offmob-bloc": false
+            "bg-image": "shopify://shop_images/weed.webp",
+            "layout": "image_first",
+            "heading": "<strong>BOX BINKS</strong>",
+            "heading_size": "h1",
+            "caption": "",
+            "text_style_caption": "caption-with-letter-spacing",
+            "text_size": "medium",
+            "text": "",
+            "text_style_text": "body",
+            "button_label": "DÉCOUVRIR",
+            "button_link": "shopify://collections/pack",
+            "button_style_secondary": false
           }
         },
-        "featured_collection_XMWGKb": {
-          "type": "featured_collection",
+        "coulmns_6Lc7eC": {
+          "type": "coulmns",
           "settings": {
-            "collection": "",
-            "offdesk-bloc": false,
-            "offmob-bloc": false
+            "bg-image": "shopify://shop_images/pre_1.webp",
+            "layout": "image_first",
+            "heading": "<strong>PRÉROLL</strong>",
+            "heading_size": "h1",
+            "caption": "",
+            "text_style_caption": "caption-with-letter-spacing",
+            "text_size": "medium",
+            "text": "",
+            "text_style_text": "body",
+            "button_label": "DÉCOUVRIR",
+            "button_link": "shopify://collections/pre-roll-cbd",
+            "button_style_secondary": false
           }
         }
       },
       "block_order": [
-        "featured_collection_JbekLN",
-        "featured_collection_XMWGKb"
+        "coulmns_KRYRhy",
+        "coulmns_6Lc7eC"
       ],
       "settings": {
-        "color_scheme": "",
-        "title": "Collections",
-        "heading_tag": "h2",
-        "heading_size": "h1",
-        "heading_alignment": "left",
-        "description": "",
-        "description_style": "body",
-        "image_ratio": "square",
-        "show_icon_wrap": false,
-        "show_view_all": false,
-        "identificateur": "class",
-        "padding_top": 30,
-        "padding_bottom": 30,
-        "columns_desktop": 3,
-        "swipe_on_desktop": true,
-        "show_carrousel_desktop": false,
-        "show_arrow_desktop": true,
-        "offdesk": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "show_carrousel_mobile": false,
-        "show_arrow_mobile": false,
-        "offmob": false
+        "color_scheme": "scheme-f63a8316-6059-4a4c-9df0-c7b07ae8be4f",
+        "divider": false,
+        "padding_top": 84,
+        "padding_bottom": 100
       }
     },
     "featured_collection_9nne4w": {
@@ -386,54 +385,102 @@
         "offmob": false
       }
     },
-    "collection_list_zDFh9R": {
-      "type": "collection-list",
+    "promotion_banners_7LgEqg": {
+      "type": "promotion-banners",
       "blocks": {
-        "featured_collection_xTRGck": {
-          "type": "featured_collection",
+        "coulmns_t8rRX4": {
+          "type": "coulmns",
           "settings": {
-            "collection": "",
-            "offdesk-bloc": false,
-            "offmob-bloc": false
+            "bg-image": "shopify://shop_images/fleurs.webp",
+            "layout": "image_first",
+            "heading": "<strong>FLEURS</strong>",
+            "heading_size": "h1",
+            "caption": "",
+            "text_style_caption": "caption-with-letter-spacing",
+            "text_size": "medium",
+            "text": "",
+            "text_style_text": "body",
+            "button_label": "DÉCOUVRIR",
+            "button_link": "shopify://collections/fleurs-cbd",
+            "button_style_secondary": false
           }
         },
-        "featured_collection_kNhxEK": {
-          "type": "featured_collection",
+        "coulmns_PCrRKC": {
+          "type": "coulmns",
           "settings": {
-            "collection": "",
-            "offdesk-bloc": false,
-            "offmob-bloc": false
+            "bg-image": "shopify://shop_images/resine.webp",
+            "layout": "image_first",
+            "heading": "<strong>RÉSINES</strong>",
+            "heading_size": "h1",
+            "caption": "",
+            "text_style_caption": "caption-with-letter-spacing",
+            "text_size": "medium",
+            "text": "",
+            "text_style_text": "body",
+            "button_label": "DÉCOUVRIR",
+            "button_link": "shopify://collections/resines-cbd",
+            "button_style_secondary": false
           }
         }
       },
       "block_order": [
-        "featured_collection_xTRGck",
-        "featured_collection_kNhxEK"
+        "coulmns_t8rRX4",
+        "coulmns_PCrRKC"
       ],
       "settings": {
-        "color_scheme": "",
-        "title": "Collections",
-        "heading_tag": "h2",
-        "heading_size": "h1",
-        "heading_alignment": "left",
-        "description": "",
-        "description_style": "body",
-        "image_ratio": "square",
-        "show_icon_wrap": false,
-        "show_view_all": false,
-        "identificateur": "class",
-        "padding_top": 30,
-        "padding_bottom": 30,
-        "columns_desktop": 3,
-        "swipe_on_desktop": true,
-        "show_carrousel_desktop": false,
-        "show_arrow_desktop": true,
-        "offdesk": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
-        "offmob": false
+        "color_scheme": "scheme-f63a8316-6059-4a4c-9df0-c7b07ae8be4f",
+        "divider": false,
+        "padding_top": 84,
+        "padding_bottom": 100
+      }
+    },
+    "promotion_banners_CFzNkn": {
+      "type": "promotion-banners",
+      "blocks": {
+        "coulmns_YHxnjH": {
+          "type": "coulmns",
+          "settings": {
+            "bg-image": "shopify://shop_images/amonflux_CBD_flowers_growing_in_california_Sunset_colors_GTA__7de4b497-cf6b-435e-8692-88bce5c3748b_0.webp",
+            "layout": "image_first",
+            "heading": "<strong>CALIWEED</strong>",
+            "heading_size": "h1",
+            "caption": "",
+            "text_style_caption": "caption-with-letter-spacing",
+            "text_size": "medium",
+            "text": "",
+            "text_style_text": "body",
+            "button_label": "DÉCOUVRIR",
+            "button_link": "shopify://collections/fleurs-cbd",
+            "button_style_secondary": false
+          }
+        },
+        "coulmns_AdLex8": {
+          "type": "coulmns",
+          "settings": {
+            "bg-image": "shopify://shop_images/pre_1.webp",
+            "layout": "image_first",
+            "heading": "<strong>REJOINS NOUS</strong>",
+            "heading_size": "h1",
+            "caption": "",
+            "text_style_caption": "caption-with-letter-spacing",
+            "text_size": "medium",
+            "text": "",
+            "text_style_text": "body",
+            "button_label": "INSTAGRAM",
+            "button_link": "https://www.instagram.com/binkscbd/",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "coulmns_YHxnjH",
+        "coulmns_AdLex8"
+      ],
+      "settings": {
+        "color_scheme": "scheme-f63a8316-6059-4a4c-9df0-c7b07ae8be4f",
+        "divider": false,
+        "padding_top": 84,
+        "padding_bottom": 100
       }
     },
     "featured_blog_tUbtBX": {
@@ -462,51 +509,44 @@
         "offmob": false
       }
     },
-    "image_banner_9G7kWR": {
-      "type": "image-banner",
+    "collapsible_content_MFpd8x": {
+      "type": "collapsible-content",
       "blocks": {
-        "heading_UVgiWY": {
-          "type": "heading",
+        "collapsible_row_pAbjEJ": {
+          "type": "collapsible_row",
           "settings": {
-            "heading": "BOX BINKS",
-            "heading_tag": "h2",
-            "heading_size": "h1",
-            "offdesk-bloc": false,
-            "offmob-bloc": false
-          }
-        },
-        "buttons_wJhiM6": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Découvrir",
-            "button_link_1": "",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false,
+            "heading": "Pourquoi choisir Binks CBD ?",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "<p>Chez Binks CBD, achète ton CBD de qualité coffee shop en quelques clics. </p><p>Livraison rapide en 2 à 3 jours, avec un service client réactif via WhatsApp. Profite du meilleur CBD de France, choisi avec soin pour une expérience premium et accessible.</p>",
+            "page": "",
             "offdesk-bloc": false,
             "offmob-bloc": false
           }
         }
       },
       "block_order": [
-        "heading_UVgiWY",
-        "buttons_wJhiM6"
+        "collapsible_row_pAbjEJ"
       ],
       "settings": {
-        "color_scheme": "",
-        "image": "shopify://shop_images/weed.webp",
-        "image_overlay_opacity": 0,
-        "image_height": "small",
-        "adapt_height_first_image": false,
-        "clickable": false,
+        "color_scheme": "scheme-1",
+        "caption": "",
+        "heading": "ACHETER DU CBD EN LIGNE ?",
+        "heading_tag": "h2",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "description": "",
+        "descriptions_margin": false,
+        "description_style": "body",
+        "layout": "none",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
         "identificateur": "class",
-        "desktop_content_position": "middle-left",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "desktop_layout": "image_second",
         "offdesk": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": true,
         "offmob": false
       }
     }
@@ -515,15 +555,16 @@
     "2081f0b3-9dad-4d00-a9ff-51b31467247b",
     "featured_collection_pGALmE",
     "featured_collection_mdCX76",
-    "collection_list_P8gaCE",
+    "promotion_banners_Wi9tNB",
     "featured_collection_9nne4w",
     "featured_collection_gwCzbx",
     "featured_collection_KwN89x",
     "featured_collection_yTXmf9",
     "featured_collection_AwcUCE",
     "featured_collection_wU9L4K",
-    "collection_list_zDFh9R",
+    "promotion_banners_7LgEqg",
+    "promotion_banners_CFzNkn",
     "featured_blog_tUbtBX",
-    "image_banner_9G7kWR"
+    "collapsible_content_MFpd8x"
   ]
 }
