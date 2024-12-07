@@ -341,15 +341,16 @@
                             <option
                               value="{{ variant.id }}"
                               data-price="{{ variant.price | money }}"
-                              {% if variant == card_product.selected_or_first_available_variant %}
+                              {% if variant == card_product.selected_or_first_available_variant.unit_price_measurement
+                              %}
                                 selected
                               {% endif %}
                             >
-                              {{ variant.title }} : {{ variant.price | money }}
+                              {{ variant.title }} : 
+                              {{ variant.unit_price | money }}/{{ variant.unit_price_measurement.reference_unit }}
                             </option>
                           {% endfor %}
                         </select>
-
                         <button
                           id="{{ product_form_id }}-submit"
                           type="submit"
@@ -393,74 +394,71 @@
               {% endif %}
             </div>
 
-            <!--  
-            Bouton d'ajout rapide ANCIEN
+            <!--
+              Bouton d'ajout rapide ANCIEN
 
-            {%- if show_btn_card_product -%}
-              {%- if type_btn_card_product == 'enable_quick_add' -%}
-                <div class="quick-add">
-                  {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
-                  {%- if card_product.variants.size == 1 -%}
-                  {%- else -%}
-                    <modal-opener data-modal="#QuickAdd-{{ card_product.id }}">
-                      <button
-                        id="{{ product_form_id }}-submit"
-                        type="submit"
-                        name="add"
-                        class="quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
-                        aria-haspopup="dialog"
-                        aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
-                        data-product-url="{{ card_product.url }}"
-                      >
-                        {{ 'products.product.choose_options' | t }}
-                        <div class="loading-overlay__spinner hidden">
-                          <svg
-                            aria-hidden="true"
-                            focusable="false"
-                            role="presentation"
-                            class="spinner"
-                            viewBox="0 0 66 66"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                          </svg>
-                        </div>
-                      </button>
-                    </modal-opener>
-                    <quick-add-modal id="QuickAdd-{{ card_product.id }}" class="quick-add-modal">
-                      <div
-                        role="dialog"
-                        aria-label="{{ 'products.product.choose_product_options' | t: product_name: card_product.title | escape }}"
-                        aria-modal="true"
-                        class="quick-add-modal__content color-{{ section.settings.color_scheme }} global-settings-popup"
-                        tabindex="-1"
-                      >
+              {%- if show_btn_card_product -%}
+                {%- if type_btn_card_product == 'enable_quick_add' -%}
+                  <div class="quick-add">
+                    {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
+                    {%- if card_product.variants.size == 1 -%}
+                    {%- else -%}
+                      <modal-opener data-modal="#QuickAdd-{{ card_product.id }}">
                         <button
-                          id="ModalClose-{{ card_product.id }}"
-                          type="button"
-                          class="quick-add-modal__toggle"
-                          aria-label="{{ 'accessibility.close' | t }}"
+                          id="{{ product_form_id }}-submit"
+                          type="submit"
+                          name="add"
+                          class="quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                          aria-haspopup="dialog"
+                          aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
+                          data-product-url="{{ card_product.url }}"
                         >
-                          {% render 'icon-close' %}
+                          {{ 'products.product.choose_options' | t }}
+                          <div class="loading-overlay__spinner hidden">
+                            <svg
+                              aria-hidden="true"
+                              focusable="false"
+                              role="presentation"
+                              class="spinner"
+                              viewBox="0 0 66 66"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                            </svg>
+                          </div>
                         </button>
-                        <div id="QuickAddInfo-{{ card_product.id }}" class="quick-add-modal__content-info"></div>
-                      </div>
-                    </quick-add-modal>
-                  {%- endif -%}
-                </div>
-              {%- elsif type_btn_card_product == 'enable_product_page' -%}
-                <a
-                  href="{{ card_product.url }}"
-                  class="quick-add quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
-                  style="text-decoration: none;"
-                  >Voir le produit</a
-                >
+                      </modal-opener>
+                      <quick-add-modal id="QuickAdd-{{ card_product.id }}" class="quick-add-modal">
+                        <div
+                          role="dialog"
+                          aria-label="{{ 'products.product.choose_product_options' | t: product_name: card_product.title | escape }}"
+                          aria-modal="true"
+                          class="quick-add-modal__content color-{{ section.settings.color_scheme }} global-settings-popup"
+                          tabindex="-1"
+                        >
+                          <button
+                            id="ModalClose-{{ card_product.id }}"
+                            type="button"
+                            class="quick-add-modal__toggle"
+                            aria-label="{{ 'accessibility.close' | t }}"
+                          >
+                            {% render 'icon-close' %}
+                          </button>
+                          <div id="QuickAddInfo-{{ card_product.id }}" class="quick-add-modal__content-info"></div>
+                        </div>
+                      </quick-add-modal>
+                    {%- endif -%}
+                  </div>
+                {%- elsif type_btn_card_product == 'enable_product_page' -%}
+                  <a
+                    href="{{ card_product.url }}"
+                    class="quick-add quick-add__submit button--full-width button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                    style="text-decoration: none;"
+                    >Voir le produit</a
+                  >
+                {%- endif -%}
               {%- endif -%}
-            {%- endif -%}
-
--->
-
-
+            -->
           </div>
         </div>
       </div>
