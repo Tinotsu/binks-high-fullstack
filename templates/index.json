@@ -430,8 +430,8 @@
       "settings": {
         "color_scheme": "scheme-f63a8316-6059-4a4c-9df0-c7b07ae8be4f",
         "divider": false,
-        "padding_top": 84,
-        "padding_bottom": 100
+        "padding_top": 64,
+        "padding_bottom": 32
       }
     },
     "promotion_banners_CFzNkn": {
@@ -479,8 +479,8 @@
       "settings": {
         "color_scheme": "scheme-f63a8316-6059-4a4c-9df0-c7b07ae8be4f",
         "divider": false,
-        "padding_top": 84,
-        "padding_bottom": 100
+        "padding_top": 32,
+        "padding_bottom": 64
       }
     },
     "featured_blog_tUbtBX": {
