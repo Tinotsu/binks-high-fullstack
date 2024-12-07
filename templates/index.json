@@ -11,6 +11,7 @@
   "sections": {
     "2081f0b3-9dad-4d00-a9ff-51b31467247b": {
       "type": "image-banner",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-6435fff7-fc48-4e8c-ad26-9ae1ca5e6e7e",
         "image": "shopify://shop_images/PC_1.webp",
@@ -25,6 +26,70 @@
         "desktop_content_alignment": "center",
         "offdesk": false,
         "mobile_content_alignment": "center",
+        "show_text_below": false,
+        "offmob": false
+      }
+    },
+    "slideshow_mfwBUk": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_f4rYDL": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/1.1_generique_destokp.webp",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_tag": "h2",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://collections/fleurs-cbd",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "offdesk-bloc": false,
+            "text_alignment_mobile": "center",
+            "offmob-bloc": false
+          }
+        },
+        "slide_8YyFiY": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/2.1_Cali_Desktop.webp",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_tag": "h2",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "offdesk-bloc": false,
+            "text_alignment_mobile": "center",
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "slide_f4rYDL",
+        "slide_8YyFiY"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "accessibility_info": "",
+        "color_scheme": "",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "identificateur": "class",
+        "offdesk": false,
         "show_text_below": false,
         "offmob": false
       }
@@ -519,7 +584,85 @@
             "color_scheme": "",
             "icon": "none",
             "custom_icon": "",
-            "row_content": "<p>Chez Binks CBD, achète ton CBD de qualité coffee shop en quelques clics. </p><p>Livraison rapide en 2 à 3 jours, avec un service client réactif via WhatsApp. Profite du meilleur CBD de France, choisi avec soin pour une expérience premium et accessible.</p>",
+            "row_content": "<p>Chez Binks CBD<strong>, achète ton CBD de qualité coffee shop en quelques clics</strong>. </p><p>Livraison rapide en 2 à 3 jours, avec un service client réactif via WhatsApp. Profite du meilleur CBD de France, choisi avec soin pour une expérience premium et accessible.</p>",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_kYn6Gc": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Qu'est-ce que le CBD ?",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "<p><strong>Le CBD</strong>, ou cannabidiol, est un composé naturel extrait du chanvre, apprécié pour ses effets apaisants sans effets psychotropes. Contrairement au THC, il ne provoque pas d’état euphorique et est légal en France.</p>",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_pVQtnx": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Le CBD, c’est légal ?",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "<p>Oui, le CBD est légal en France tant que les produits respectent la législation, avec un taux de THC inférieur à 0,3 %. Chez Binks CBD, nos produits sont testés pour garantir une conformité et une qualité irréprochable.</p>",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_CPjBXN": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quels sont les bienfaits du CBD ?",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "<p>Le CBD est réputé pour ses effets relaxants, anti-stress et pour favoriser un sommeil de meilleure qualité. De nombreuses personnes l’utilisent également pour soulager douleurs et inflammations, mais ses bienfaits peuvent varier selon les individus.</p>",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_rWTPhE": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Consommer du CBD, c'est dangereux ?",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "<p>Non, le CBD est considéré comme sûr et n'est pas addictif. Il ne présente pas de risque pour la santé lorsqu’il est consommé dans des doses raisonnables. Cependant, il est toujours conseillé de demander un avis médical si besoin.</p>",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_8NtpHP": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Est-ce que le CBD ça fait planer ?",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "<p>Non, le CBD ne fait pas planer. Contrairement au THC, il n'a aucun effet psychotrope. Il procure une sensation de relaxation sans modifier la perception, ce qui le rend idéal pour un usage quotidien sans impact sur les facultés mentales.</p>",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_fyLAHn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment consommer le CBD ?",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "<p>Le CBD peut se consommer de plusieurs façons : en fleurs à vaporiser, en huiles à prendre sous la langue, en infusions, ou même en e-liquides. Chaque méthode a ses avantages et permet de personnaliser son expérience selon ses préférences.</p>",
             "page": "",
             "offdesk-bloc": false,
             "offmob-bloc": false
@@ -527,7 +670,13 @@
         }
       },
       "block_order": [
-        "collapsible_row_pAbjEJ"
+        "collapsible_row_pAbjEJ",
+        "collapsible_row_kYn6Gc",
+        "collapsible_row_pVQtnx",
+        "collapsible_row_CPjBXN",
+        "collapsible_row_rWTPhE",
+        "collapsible_row_8NtpHP",
+        "collapsible_row_fyLAHn"
       ],
       "settings": {
         "color_scheme": "scheme-1",
@@ -553,6 +702,7 @@
   },
   "order": [
     "2081f0b3-9dad-4d00-a9ff-51b31467247b",
+    "slideshow_mfwBUk",
     "featured_collection_pGALmE",
     "featured_collection_mdCX76",
     "promotion_banners_Wi9tNB",

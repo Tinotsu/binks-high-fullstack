@@ -1,0 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_tag": "h2",
+        "heading_alignment": "left",
+        "active_narrow": true,
+        "hide-head": false,
+        "hide-foot": false,
+        "color_scheme": "",
+        "identificateur": "class",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "offdesk": false,
+        "offmob": false
+      }
+    },
+    "multicolumn_A3Y7ph": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_nXdBEK": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/1._Social_medias.png",
+            "custom_icon": "",
+            "image_width_custom": 0,
+            "title": "1️⃣ Faites lapromotion de Binks CBD sur vos réseaux sociaux",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "column_qUrUky": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/2._Phone.png",
+            "custom_icon": "",
+            "image_width_custom": 0,
+            "title": "2️⃣Le clientpasse par votre lien pour commander sa cons'",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "column_iN6hzw": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/3._Money.png",
+            "custom_icon": "",
+            "image_width_custom": 0,
+            "title": "3️⃣ Touchez une commission pour chaque commande",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "column_nXdBEK",
+        "column_qUrUky",
+        "column_iN6hzw"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "color_scheme_2": "",
+        "title": "L'affiliation avec Binks CBD en 3 étapes",
+        "heading_tag": "h2",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "description": "",
+        "description_style": "body",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "column_alignment": "left",
+        "button_label": "Cliquez ici pour devenir affilié 🤝",
+        "button_link": "https://binkscbd.goaffpro.com",
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 64,
+        "columns_desktop": 3,
+        "swipe_on_desktop": true,
+        "show_carrousel_desktop": false,
+        "show_arrow_desktop": true,
+        "offdesk": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "show_carrousel_mobile": false,
+        "show_arrow_mobile": true,
+        "offmob": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "multicolumn_A3Y7ph"
+  ]
+}

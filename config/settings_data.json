@@ -19,7 +19,7 @@
     "social_youtube_link": "",
     "social_vimeo_link": "",
     "favicon": "shopify://shop_images/Favicon_Theme_FullStack.png",
-    "page_width": 1600,
+    "page_width": 1400,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 16,
     "spacing_grid_vertical": 32,
@@ -344,6 +344,39 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "10605408327587305396": {
+        "type": "shopify://apps/eg-auto-add-to-cart/blocks/app-embed/0f7d4f74-1e89-4820-aec4-6564d7e535d2",
+        "disabled": false,
+        "settings": {
+          "version": "v3"
+        }
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "17699460525988123968": {
+        "type": "shopify://apps/gameball/blocks/gb-widget/4b916a35-b345-4d7d-9eb4-f51fec3f8c05",
+        "disabled": false,
+        "settings": {}
+      },
+      "1768834845299682660": {
+        "type": "shopify://apps/subscriptions/blocks/app-embed-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+        "disabled": true,
+        "settings": {
+          "color_text_title": "#6D7175",
+          "color_text_body": "#6D7175",
+          "dividers_color": "#8F8D8D",
+          "bacgkround_color": "#FFFFFF",
+          "border_thickness": 1,
+          "border_radius": 0,
+          "supporting_text_title": "Purchase options",
+          "subscription_policy_url": ""
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {

@@ -1,0 +1,227 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "judge_me_reviews_preview_badge_yUYbWP": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title-suite": "",
+            "heading_tag": "h1",
+            "heading_size": "h1",
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "price_position": "second",
+            "show_tax": true,
+            "show_badges": true,
+            "price_weight": false,
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "80b25149-0e7d-4001-b165-8295fbb7351d": {
+          "type": "description",
+          "settings": {
+            "readmore": false,
+            "formread": 200,
+            "accordion": false,
+            "accordion-open": false,
+            "accordion-text": "Description",
+            "icon": "none",
+            "custom_icon": "",
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "no_label": false,
+            "show_variant_value_in_label": true,
+            "margin": "avec-bas",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "ade0fe70-d169-4576-99d4-aacda71a3c74": {
+          "type": "stock",
+          "settings": {
+            "stock_orange": 15,
+            "stock_available_text": "En stock",
+            "stockavant": "Attention, il ne reste plus que",
+            "stockapres": "articles en stock !",
+            "stock_outofstock_text": "Victime de son succès",
+            "margin": "avec-bas",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "custom_icon": "",
+            "show_dynamic_checkout": false,
+            "margin": "avec-bas",
+            "sticky": true,
+            "sticky-prix": true,
+            "sticky-titre": false,
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "toggle_cross_sell_wYx4YY": {
+          "type": "toggle_cross_sell",
+          "settings": {
+            "title": "",
+            "description": "",
+            "product_list": [
+              "ocb-slim",
+              "briquet"
+            ],
+            "show_product_image": true,
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_yUYbWP",
+        "title",
+        "price",
+        "80b25149-0e7d-4001-b165-8295fbb7351d",
+        "variant_picker",
+        "ade0fe70-d169-4576-99d4-aacda71a3c74",
+        "buy_buttons",
+        "toggle_cross_sell_wYx4YY"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "hide_variants": true,
+        "enable_video_looping": true,
+        "enable_zoom": true,
+        "breadcrumb": "machine-a-cash",
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "center-content-desktop": "left",
+        "enable_sticky_info": true,
+        "gallery_layout": "thumbnail_slider",
+        "media_size": "small",
+        "offdesk": false,
+        "center-content-mobile": false,
+        "mobile_thumbnails": "show",
+        "offmob": false
+      }
+    },
+    "ss_simple_faq_GKRk8T": {
+      "type": "ss-simple-faq",
+      "blocks": {
+        "text_P44M7C": {
+          "type": "text",
+          "settings": {
+            "question": "Tout savoir sur le produit",
+            "answer": "{{ product.metafields.custom.arome | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "text_P44M7C"
+      ],
+      "settings": {
+        "heading": "",
+        "icon_color": "#fff",
+        "hover_color": "#EFEFEF",
+        "question_color": "#000",
+        "background_color": "#fff",
+        "answer_color": "#000",
+        "answer_bg_color": "#fff",
+        "questions-font-size": 1.5
+      }
+    },
+    "173360423542bf8d56": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_VhYyqc": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_VhYyqc"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "color_scheme": "background-1",
+        "heading": "Vous pouvez également aimer",
+        "description": "",
+        "description_style": "body",
+        "heading_tag": "h2",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "products_to_show": 8,
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_btn_card_product": false,
+        "enable_color_swatch": false,
+        "type_btn_card_product": "enable_quick_add",
+        "button_style_secondary": false,
+        "identificateur": "class",
+        "padding_top": 36,
+        "padding_bottom": 30,
+        "enable_desktop_slider": true,
+        "show_carrousel_desktop": false,
+        "show_arrow_desktop": true,
+        "columns_desktop": 3,
+        "offdesk": false,
+        "swipe_on_mobile": false,
+        "show_carrousel_mobile": false,
+        "show_arrow_mobile": true,
+        "columns_mobile": "2",
+        "offmob": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ss_simple_faq_GKRk8T",
+    "173360423542bf8d56",
+    "product-recommendations"
+  ]
+}

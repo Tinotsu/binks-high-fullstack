@@ -1,0 +1,218 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_tag": "h2",
+        "heading_alignment": "left",
+        "active_narrow": true,
+        "hide-head": false,
+        "hide-foot": false,
+        "color_scheme": "",
+        "identificateur": "class",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "offdesk": false,
+        "offmob": false
+      }
+    },
+    "featured_product_UtEB9w": {
+      "type": "featured-product",
+      "blocks": {
+        "title_km8hBD": {
+          "type": "title",
+          "settings": {
+            "title-suite": "",
+            "heading_tag": "h1",
+            "heading_size": "h1",
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "text_cUGnKH": {
+          "type": "text",
+          "settings": {
+            "show_background_text": false,
+            "color_scheme": "",
+            "text": "{{ section.settings.product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle",
+            "icon": "none",
+            "custom_icon": "",
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "price_QdRGNj": {
+          "type": "price",
+          "settings": {
+            "price_position": "second",
+            "show_tax": false,
+            "show_badges": true,
+            "price_weight": false,
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "variant_picker_HmPnPc": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "no_label": false,
+            "show_variant_value_in_label": true,
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "quantity_selector_ntE3KT": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {
+            "no_label": false,
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "buy_buttons_dR87QF": {
+          "type": "buy_buttons",
+          "settings": {
+            "custom_icon": "",
+            "show_dynamic_checkout": true,
+            "margin": "avec",
+            "sticky": false,
+            "sticky-prix": false,
+            "sticky-titre": false,
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "description_kpwUdg": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "readmore": false,
+            "formread": 200,
+            "accordion": false,
+            "accordion-open": false,
+            "accordion-text": "Description",
+            "icon": "none",
+            "custom_icon": "",
+            "margin": "avec",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "title_km8hBD",
+        "text_cUGnKH",
+        "price_QdRGNj",
+        "variant_picker_HmPnPc",
+        "quantity_selector_ntE3KT",
+        "buy_buttons_dR87QF",
+        "description_kpwUdg"
+      ],
+      "settings": {
+        "product": "abonnement-1-mois",
+        "color_scheme": "",
+        "secondary_background": false,
+        "view-details": false,
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "enable_zoom": false,
+        "breadcrumb": "",
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "center-content-desktop": "left",
+        "enable_sticky_info": true,
+        "offdesk": false,
+        "center-content-mobile": false,
+        "mobile_thumbnails": "hide",
+        "offmob": false
+      }
+    },
+    "rich_text_xDBRAe": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Xqaw4E": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Un abonnement pour des prix imbattables</p>",
+            "heading_tag": "h2",
+            "heading_size": "h1",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "text_eQb48y": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La <strong>Box Abonnement</strong> Binks CBD, c’est le plan parfait pour se faire plaisir chaque mois avec une sélection premium à prix imbattable. 🌟</p><p><strong>3 options, une seule mission : kiffer sans se ruiner !</strong><br/>👉 1 mois, 3 mois ou 6 mois à 29,90€ par mois seulement.</p><p><strong>Dans ta box chaque mois :</strong><br/>🍁 Amnesia (fleur CBD indoor) – 2G : Une légende pour des vibes puissantes et relaxantes.<br/>🍇 <strong>Cali Grape (fleur CBD indoor) – 2G</strong> : Une douceur fruitée pour un chill absolu.<br/>🍫 <strong>Bueno Libanais (Hash CBD) – 2G</strong> : Un hash authentique qui transporte direct au Liban.<br/>🍯 <strong>Caramelo (Hash CBD) – 2G</strong> : Un classique gourmand pour des sessions cosy.</p><p><strong>Pourquoi choisir notre box ?</strong><br/>💥 Rapport qualité/prix phénoménal : Tu profites des meilleures fleurs et résines CBD indoor sans te ruiner.<br/>💰 Économise des sous : Plus tu t’abonnes longtemps, plus tu gagnes !<br/>📦 Livraison mensuelle : Sans prise de tête, direct chez toi, discret et rapide.</p><p>Avec la Box Abonnement Binks CBD, tu prends soin de ton bien-être tout en kiffant des produits de qualité supérieure. Alors, prêt à rejoindre le Binks Gang ?</p>",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "button_6anjU9": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Découvrir",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false,
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Xqaw4E",
+        "text_eQb48y",
+        "button_6anjU9"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "card_color_scheme": "",
+        "content_alignment": "center",
+        "desktop_content_position": "center",
+        "full_width": true,
+        "readmore": false,
+        "formread": 200,
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "offdesk": false,
+        "offmob": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured_product_UtEB9w",
+    "rich_text_xDBRAe"
+  ]
+}
