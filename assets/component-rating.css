@@ -103,6 +103,14 @@
   border: solid, #fc7c21, 2px;
 }
 
+.card_percent_cbd {
+  border-radius: 4px;
+  border: solid, #fc7c21, 2px;
+  padding: 1px, 10px;
+  font-size: 1.2rem;
+  width: 50px;
+}
+
 .card_object_container {
   display: flex;
   width: 100%;
@@ -127,4 +135,15 @@
 
 .evaluation_container {
   display: inline;
+}
+
+@media screen and (max-width: 989px) {
+  .card_type_cbd {
+    padding: 2px;
+    font-size: 1rem;
+  }
+  .card_percent_cbd {
+    padding: 2px;
+    font-size: 1rem;
+  }
 }
