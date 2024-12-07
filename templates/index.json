@@ -111,7 +111,7 @@
     "collection_list_P8gaCE": {
       "type": "collection-list",
       "blocks": {
-        "featured_collection_kQ3g9y": {
+        "featured_collection_JbekLN": {
           "type": "featured_collection",
           "settings": {
             "collection": "",
@@ -119,7 +119,7 @@
             "offmob-bloc": false
           }
         },
-        "featured_collection_JbekLN": {
+        "featured_collection_XMWGKb": {
           "type": "featured_collection",
           "settings": {
             "collection": "",
@@ -129,8 +129,8 @@
         }
       },
       "block_order": [
-        "featured_collection_kQ3g9y",
-        "featured_collection_JbekLN"
+        "featured_collection_JbekLN",
+        "featured_collection_XMWGKb"
       ],
       "settings": {
         "color_scheme": "",
@@ -436,115 +436,6 @@
         "offmob": false
       }
     },
-    "testimonials_jEKFDb": {
-      "type": "testimonials",
-      "blocks": {
-        "avis_f8kBrr": {
-          "type": "avis",
-          "settings": {
-            "star": 5,
-            "title": "John Doe",
-            "text": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
-            "link_label": "",
-            "link": "",
-            "external_video": "",
-            "offdesk-bloc": false,
-            "show_carrousel_mobile": true,
-            "offmob-bloc": false
-          }
-        },
-        "avis_nNgJMH": {
-          "type": "avis",
-          "settings": {
-            "star": 5,
-            "title": "John Doe",
-            "text": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
-            "link_label": "",
-            "link": "",
-            "external_video": "",
-            "offdesk-bloc": false,
-            "show_carrousel_mobile": true,
-            "offmob-bloc": false
-          }
-        }
-      },
-      "block_order": [
-        "avis_f8kBrr",
-        "avis_nNgJMH"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "color_scheme_2": "",
-        "title": "Témoignages",
-        "heading_tag": "h2",
-        "heading_size": "h1",
-        "heading_alignment": "left",
-        "description": "",
-        "description_style": "body",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "column_alignment": "left",
-        "button_label": "Découvrir",
-        "button_link": "",
-        "ancre": "",
-        "identificateur": "class",
-        "padding_top": 30,
-        "padding_bottom": 30,
-        "columns_desktop": 3,
-        "swipe_on_desktop": true,
-        "show_carrousel_desktop": false,
-        "show_arrow_desktop": true,
-        "offdesk": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "show_carrousel_mobile": false,
-        "show_arrow_mobile": false,
-        "offmob": false
-      }
-    },
-    "collection_navigation_3NTWPW": {
-      "type": "collection-navigation",
-      "blocks": {
-        "collection_dkkNfK": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "product": "",
-            "links": "",
-            "content": "Navigation"
-          }
-        },
-        "collection_WCzPwy": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "product": "",
-            "links": "",
-            "content": "Navigation"
-          }
-        }
-      },
-      "block_order": [
-        "collection_dkkNfK",
-        "collection_WCzPwy"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "background_style": "primary",
-        "title": "",
-        "heading_size": "h1",
-        "description": "",
-        "descriptions_margin": false,
-        "description_style": "body",
-        "style": "texte",
-        "button_style_secondary": true,
-        "identificateur": "class",
-        "padding_top": 30,
-        "padding_bottom": 30,
-        "offdesk": false,
-        "offmob": false
-      }
-    },
     "featured_blog_tUbtBX": {
       "type": "featured-blog",
       "settings": {
@@ -570,6 +461,54 @@
         "offdesk": false,
         "offmob": false
       }
+    },
+    "image_banner_9G7kWR": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_UVgiWY": {
+          "type": "heading",
+          "settings": {
+            "heading": "BOX BINKS",
+            "heading_tag": "h2",
+            "heading_size": "h1",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "buttons_wJhiM6": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Découvrir",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false,
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_UVgiWY",
+        "buttons_wJhiM6"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "image": "shopify://shop_images/weed.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "adapt_height_first_image": false,
+        "clickable": false,
+        "identificateur": "class",
+        "desktop_content_position": "middle-left",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "offdesk": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": true,
+        "offmob": false
+      }
     }
   },
   "order": [
@@ -584,8 +523,7 @@
     "featured_collection_AwcUCE",
     "featured_collection_wU9L4K",
     "collection_list_zDFh9R",
-    "testimonials_jEKFDb",
-    "collection_navigation_3NTWPW",
-    "featured_blog_tUbtBX"
+    "featured_blog_tUbtBX",
+    "image_banner_9G7kWR"
   ]
 }
