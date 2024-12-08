@@ -32,7 +32,7 @@
         "title_km8hBD": {
           "type": "title",
           "settings": {
-            "title-suite": "",
+            "title-suite": "Mensuel | 29,90€",
             "heading_tag": "h1",
             "heading_size": "h1",
             "margin": "avec",
@@ -58,6 +58,7 @@
         },
         "price_QdRGNj": {
           "type": "price",
+          "disabled": true,
           "settings": {
             "price_position": "second",
             "show_tax": false,
@@ -144,7 +145,7 @@
         "breadcrumb": "",
         "identificateur": "class",
         "padding_top": 30,
-        "padding_bottom": 30,
+        "padding_bottom": 0,
         "center-content-desktop": "left",
         "enable_sticky_info": true,
         "offdesk": false,
@@ -173,32 +174,17 @@
             "offdesk-bloc": false,
             "offmob-bloc": false
           }
-        },
-        "button_6anjU9": {
-          "type": "button",
-          "disabled": true,
-          "settings": {
-            "button_label": "Découvrir",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false,
-            "offdesk-bloc": false,
-            "offmob-bloc": false
-          }
         }
       },
       "block_order": [
         "heading_Xqaw4E",
-        "text_eQb48y",
-        "button_6anjU9"
+        "text_eQb48y"
       ],
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "card_color_scheme": "",
-        "content_alignment": "center",
-        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "desktop_content_position": "left",
         "full_width": true,
         "readmore": false,
         "formread": 200,

@@ -60,3 +60,14 @@
   background: #fff;
   transform: translate(-50%, -50%) rotate(45deg);
 }
+
+.page_product_variant_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 10px; 
+  align-items: center;
+}
+
+.page_product_variant {
+  
+}

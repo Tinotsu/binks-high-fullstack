@@ -9,27 +9,6 @@
  */
 {
   "sections": {
-    "2081f0b3-9dad-4d00-a9ff-51b31467247b": {
-      "type": "image-banner",
-      "disabled": true,
-      "settings": {
-        "color_scheme": "scheme-6435fff7-fc48-4e8c-ad26-9ae1ca5e6e7e",
-        "image": "shopify://shop_images/PC_1.webp",
-        "image_2": "shopify://shop_images/couverture_final_1.webp",
-        "image_overlay_opacity": 0,
-        "image_height": "medium",
-        "adapt_height_first_image": true,
-        "clickable": false,
-        "identificateur": "class",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "offdesk": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false,
-        "offmob": false
-      }
-    },
     "slideshow_mfwBUk": {
       "type": "slideshow",
       "blocks": {
@@ -38,6 +17,7 @@
           "settings": {
             "color_scheme": "",
             "image": "shopify://shop_images/1.1_generique_destokp.webp",
+            "image_2": "shopify://shop_images/1.3_generique_mobile.webp",
             "image_overlay_opacity": 0,
             "heading": "",
             "heading_tag": "h2",
@@ -59,6 +39,7 @@
           "settings": {
             "color_scheme": "",
             "image": "shopify://shop_images/2.1_Cali_Desktop.webp",
+            "image_2": "shopify://shop_images/2.3_Cali_Mobile.webp",
             "image_overlay_opacity": 0,
             "heading": "",
             "heading_tag": "h2",
@@ -82,11 +63,11 @@
       ],
       "settings": {
         "layout": "full_bleed",
-        "slide_height": "adapt_image",
+        "slide_height": "small",
         "accessibility_info": "",
         "color_scheme": "",
-        "slider_visual": "counter",
-        "auto_rotate": false,
+        "slider_visual": "dots",
+        "auto_rotate": true,
         "change_slides_speed": 5,
         "identificateur": "class",
         "offdesk": false,
@@ -102,8 +83,8 @@
       "settings": {
         "collection": "offre-de-la-semaine",
         "color_scheme": "scheme-b4308dfb-e745-48eb-ad2c-4e375e5efbad",
-        "title": "NOTRE SÉLECTION",
-        "heading_tag": "h2",
+        "title": "Meilleur CBD de France",
+        "heading_tag": "h1",
         "heading_size": "h1",
         "heading_alignment": "center",
         "description": "",
@@ -701,7 +682,6 @@
     }
   },
   "order": [
-    "2081f0b3-9dad-4d00-a9ff-51b31467247b",
     "slideshow_mfwBUk",
     "featured_collection_pGALmE",
     "featured_collection_mdCX76",

@@ -464,7 +464,7 @@
                   {%- for option in product.options_with_values -%}
                       <fieldset class="js product-form__input variant-colorswatch-container">
                         {% unless block.settings.no_label %}
-                        <span class="form__label">{{ option.name }}: {% if block.settings.show_variant_value_in_label %}<span id="selected-value-{{ forloop.index }}">{{ option.selected_value }}</span>{% endif %}</span>
+                        <span class="form__label">{{ option.name }} {% if block.settings.show_variant_value_in_label %}<span id="selected-value-{{ forloop.index }}">{{ option.selected_value }}</span>{% endif %}</span>
                         {% endunless %}
                         <div class="variant_group">
                           {% assign optionName = option.name | downcase %}
@@ -521,6 +521,11 @@
                               {%- endfor -%}
                             {% endif %}
                           {% else %}
+
+
+
+                          
+                          <div class="page_product_variant_container">
                             {%- for value in option.values -%}
                               <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                     name="{{ option.name }}"
@@ -528,10 +533,15 @@
                                     form="{{ product_form_id }}"
                                     {% if option.selected_value == value %}checked{% endif %}
                               >
-                              <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                                {{ value }}
+                              <label class="page_product_variant" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                                {{ value }} {% render 'price_unit', product: product %}
                               </label>
                             {%- endfor -%}
+                          </div>
+
+
+
+                            
                           {% endif %}
                         </div>
                       </fieldset>
