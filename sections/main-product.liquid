@@ -534,7 +534,7 @@
                                     {% if option.selected_value == value %}checked{% endif %}
                               >
                               <label class="page_product_variant" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                                {{ value }} {% render 'price_unit', product: product %}
+                                {{ value }} {{ product.selected_or_first_available_variant.unit_price | money }}
                               </label>
                             {%- endfor -%}
                           </div>
