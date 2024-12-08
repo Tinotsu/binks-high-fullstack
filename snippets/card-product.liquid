@@ -62,13 +62,13 @@
         <div class="card-information">
           <!-- Badge Metafield du produit -->
           <div class="badge_box">
-              {% if card_product.metafields.custom.badge %}
-                <span
-                  class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-                >
-                  {{- card_product.metafields.custom.badge -}}
-                </span>
-              {% endif %}
+            {% if card_product.metafields.custom.badge %}
+              <span
+                class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+              >
+                {{- card_product.metafields.custom.badge -}}
+              </span>
+            {% endif %}
           </div>
           <!-- Titre du produit -->
           <div class="info_section_size">
@@ -150,7 +150,6 @@
                 </p>
               </div>
             {%- endif -%}
-            
           </div>
 
           <!-- Contenu principal de la carte -->
@@ -227,7 +226,8 @@
                 </div>
               {% endif %}
               {% if card_product.metafields.custom.cbd_percentage %}
-                <div class="card_percent_cbd"
+                <div
+                  class="card_percent_cbd"
                   style="
                     background: linear-gradient(
                       90deg,
@@ -347,7 +347,7 @@
                           <span>
                             {%- if card_product.selected_or_first_available_variant.available -%}
                               Ajouter |&nbsp;<s class="price-display"></s>
-                             
+                              {{ variant.unit_price }}
                             {%- else -%}
                               {{ 'products.product.sold_out' | t }}
                             {%- endif -%}
