@@ -88,6 +88,8 @@
               </a>
             </h3>
 
+            <!-- Prix du produit -->
+            {% render 'price_unit', product: card_product, price_class: '' %}
             <!-- Section des notes/avis -->
             <div
               class="loox-rating"
@@ -148,8 +150,7 @@
                 </p>
               </div>
             {%- endif -%}
-            <!-- Prix du produit -->
-            {% render 'price_unit', product: card_product, price_class: '' %}
+            
           </div>
 
           <!-- Contenu principal de la carte -->
@@ -346,10 +347,7 @@
                           <span>
                             {%- if card_product.selected_or_first_available_variant.available -%}
                               Ajouter |&nbsp;<s class="price-display"></s>
-                              <span class="cart-item__final-price product-option"></span>
-                              <span class=" product-option"></span>
-                              price--on-sale
-                              {{- product.unit_price_measurement.reference_value -}}                              
+                             
                             {%- else -%}
                               {{ 'products.product.sold_out' | t }}
                             {%- endif -%}
