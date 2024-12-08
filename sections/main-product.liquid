@@ -527,6 +527,7 @@
                           
                           <div class="page_product_variant_container">
                             {%- for value in option.values -%}
+                              {%- assign variant_for_value = product.variants | where: 'option1', value | first -%}
                               <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                     name="{{ option.name }}"
                                     value="{{ value | escape }}"
@@ -534,10 +535,14 @@
                                     {% if option.selected_value == value %}checked{% endif %}
                               >
                               <label class="page_product_variant" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                                {{ value }} {% render 'price_unit', product: product %}
+                                {{ value }}
+                                {% if variant_for_value %}
+                                  {% render 'price_unit', product: variant_for_value %}
+                                {% endif %}
                               </label>
                             {%- endfor -%}
                           </div>
+                                                
 
 
 
