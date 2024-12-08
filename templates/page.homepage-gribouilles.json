@@ -1,1 +1,726 @@
-{"sections":{"16592640060f4271a3":{"type":"custom-content","blocks":{"e7668041-3762-449c-b552-412a1aa02a7b":{"type":"image","settings":{"taille":"custom-w-50","offdesk-bloc":false,"taillemobile":"custom-mw-100","offmob-bloc":true}},"78956976-b8ac-47c6-b0f8-3e7a95c3c455":{"type":"column","settings":{"color_scheme":"inverse","bgimg":true,"title":"Gardez vos vêtements propres, même gribouillés","heading_tag":"h2","text":"<p>La solution <strong>écologique la plus efficace<\/strong> contre tous types de gribouillis. Économisez <strong>temps<\/strong> et <strong>argent<\/strong> grâce aux Gribouilles.<\/p>","link_label":"Découvrir","link":"shopify:\/\/products\/les-gribouilles","btn-style":"button","heading_size":"h1","column_alignment":"center","image_width":"full","image_ratio":"adapt","taille":"custom-w-50","offdesk-bloc":false,"taillemobile":"custom-mw-100","offmob-bloc":true}},"007fc924-519a-4c08-99ee-b3cbadd992a4":{"type":"heading","settings":{"title":"Gardez vos vêtements propres, même gribouillés","heading_tag":"h2","heading_size":"h1","alignment":"center","taille":"custom-w-100","offdesk-bloc":true,"taillemobile":"custom-mw-100","offmob-bloc":false}},"7ba56ddd-8ec4-496d-8de4-9f73a9e44577":{"type":"content","settings":{"content":"<p>La solution <strong>écologique la plus efficace <\/strong>contre tous types de gribouillis. Économisez <strong>temps<\/strong> et <strong>argent<\/strong> grâce aux Gribouilles.<\/p>","alignment":"center","marg":false,"taille":"custom-w-100","text_size_desk":16,"line_desk":0,"offdesk-bloc":true,"taillemobile":"custom-mw-100","text_size_mob":16,"line_mob":0,"offmob-bloc":false}},"530c153f-2373-4362-904f-ec5d8c26428b":{"type":"button","settings":{"color_scheme":"inverse","button_label":"DÉCOUVRIR","button_link":"shopify:\/\/products\/les-gribouilles","button_style_secondary":false,"alignment":"center","taille":"custom-w-100","offdesk-bloc":true,"taillemobile":"custom-mw-100","offmob-bloc":false}},"fdb3e8a1-4971-4981-9577-b7eabd778881":{"type":"image","settings":{"taille":"custom-w-100","offdesk-bloc":true,"taillemobile":"custom-mw-75","offmob-bloc":false}}},"block_order":["e7668041-3762-449c-b552-412a1aa02a7b","78956976-b8ac-47c6-b0f8-3e7a95c3c455","007fc924-519a-4c08-99ee-b3cbadd992a4","7ba56ddd-8ec4-496d-8de4-9f73a9e44577","530c153f-2373-4362-904f-ec5d8c26428b","fdb3e8a1-4971-4981-9577-b7eabd778881"],"settings":{"color_scheme":"accent-2","alignment_justify":"center","alignment_align":"center","min_height":0,"full_width":false,"identificateur":"class","padding_top":30,"padding_bottom":0,"offdesk":false,"offmob":false}},"16592719469e2f8f2a":{"type":"custom-content","blocks":{"feb7e0bc-6434-4563-88fe-2dc57c4440a1":{"type":"separator","settings":{"bbwidth":1,"bordercolor":"#f4f4f4","mt":10,"mb":10,"taille":"custom-w-100","offdesk-bloc":false,"taillemobile":"custom-mw-100","offmob-bloc":false}},"b943accf-2f8c-4a9d-932f-96d20acdf49a":{"type":"column","settings":{"color_scheme":"accent-2","bgimg":false,"title":"4.7 sur 5","heading_tag":"h2","text":"<p>Clients remplacent leurs lessives par Les Gribouilles.<\/p>","link_label":"","link":"","btn-style":"link","heading_size":"h2","column_alignment":"center","image_width":"full","image_ratio":"adapt","taille":"custom-w-33","offdesk-bloc":false,"taillemobile":"custom-mw-50","offmob-bloc":false}},"c2d8f6e2-cc64-4857-ae68-0e6fd5522fd6":{"type":"custom-liquid","settings":{"custom_liquid":"<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0646\/3799\/3207\/files\/Trustpilot_NEW_logo_ALL_WHITE_Rated_Excellent.png?v=1659272764\" style=\"width:120px;margin-bottom:5px;\">\n<p>Sur plus de 800 avis, les Gribouilles ont reçu 4,7\/5 étoiles<\/p>","taille":"custom-w-33","offdesk-bloc":false,"taillemobile":"custom-mw-50","offmob-bloc":false}},"23143b42-26d4-4c3d-9836-10bbbc0f400e":{"type":"column","settings":{"color_scheme":"accent-2","bgimg":false,"title":"8\/10","heading_tag":"h2","text":"<p>Clients disent que leurs vêtements sont moins gribouilleés grâce aux Gribouilles.<\/p>","link_label":"","link":"","btn-style":"link","heading_size":"h2","column_alignment":"center","image_width":"full","image_ratio":"adapt","taille":"custom-w-33","offdesk-bloc":false,"taillemobile":"custom-mw-100","offmob-bloc":true}}},"block_order":["feb7e0bc-6434-4563-88fe-2dc57c4440a1","b943accf-2f8c-4a9d-932f-96d20acdf49a","c2d8f6e2-cc64-4857-ae68-0e6fd5522fd6","23143b42-26d4-4c3d-9836-10bbbc0f400e"],"settings":{"color_scheme":"accent-2","alignment_justify":"center","alignment_align":"center","min_height":0,"full_width":false,"identificateur":"class","padding_top":0,"padding_bottom":20,"offdesk":false,"offmob":false}},"165927402075d8db0f":{"type":"custom-content","blocks":{"347624c7-e7c9-4f17-97f1-2b63aac9a4cd":{"type":"column_accordion","settings":{"color_scheme":"background-1","title":"Simple comme Bienvenue !","heading_tag":"h2","text":"<p>Une fois dans l’eau, les boules de laine contenues dans la Gargouille vont créer une eau alcaline qui va nettoyer les vêtements des odeurs et gribouillis.<\/p>","link_label":"","link":"","collapse":"Placez votre Gribouille dans la machine","collapse_icon":"dryer","collapse_content":"<p>Pas besoin d'ouvrir quelconque tiroir ou valve à lessive (on ne sait jamais laquelle est faite pour l'adoucissant d'ailleurs !). Jetez simplement votre Gribouille dans la machine et le tour est (presque) joué.<\/p>","collapse1":"Lancez votre programme préféré","collapse_icon1":"lock","collapse_content1":"<p>Vous hésitez ? Nous aussi, tout le temps ! Du coup on se place sur \"Mixte\".<\/p>","collapse2":"Au sêchage ! Et sans Gribouillis 💪","collapse_icon2":"shirt","collapse_content2":"<p>Sechoir ou sêchage naturel, c'est vous qui choisissez ! En tout cas, nous gribouilles ont fait leur travail et sont prêtes pour la prochaine.<\/p>","heading_size":"h1","column_alignment":"left","taille":"custom-w-50","offdesk-bloc":false,"taillemobile":"custom-mw-100","offmob-bloc":false}},"5f238f47-c91f-49df-871b-80472729ba31":{"type":"image","settings":{"taille":"custom-w-50","offdesk-bloc":false,"taillemobile":"custom-mw-100","offmob-bloc":false}}},"block_order":["347624c7-e7c9-4f17-97f1-2b63aac9a4cd","5f238f47-c91f-49df-871b-80472729ba31"],"settings":{"color_scheme":"background-1","alignment_justify":"center","alignment_align":"center","min_height":0,"full_width":false,"identificateur":"class","padding_top":30,"padding_bottom":30,"offdesk":false,"offmob":false}},"multicolumn":{"type":"multicolumn","blocks":{"column2":{"type":"column","settings":{"custom_icon":"","image_width_custom":0,"title":"","text":"","link_label":"","link":"","offdesk-bloc":false,"offmob-bloc":false}},"column1":{"type":"column","settings":{"custom_icon":"","image_width_custom":0,"title":"","text":"","link_label":"","link":"","offdesk-bloc":false,"offmob-bloc":false}},"column3":{"type":"column","settings":{"custom_icon":"","image_width_custom":0,"title":"","text":"","link_label":"","link":"","offdesk-bloc":false,"offmob-bloc":false}},"70e71ee4-1b19-47bd-8c9b-337358681322":{"type":"column","settings":{"custom_icon":"","image_width_custom":0,"title":"","text":"","link_label":"","link":"","offdesk-bloc":false,"offmob-bloc":false}},"ed1811b3-17ed-40e7-837d-319d4dba41d5":{"type":"column","settings":{"custom_icon":"","image_width_custom":0,"title":"","text":"","link_label":"","link":"","offdesk-bloc":false,"offmob-bloc":false}}},"block_order":["column2","column1","column3","70e71ee4-1b19-47bd-8c9b-337358681322","ed1811b3-17ed-40e7-837d-319d4dba41d5"],"settings":{"color_scheme":"background-1","color_scheme_2":"background-1","title":"Ils parlent sans cesse de nous !","heading_tag":"h2","heading_size":"h1","heading_alignment":"center","description":"","description_style":"body","image_width":"full","image_ratio":"adapt","column_alignment":"center","button_label":"","button_link":"","identificateur":"class","padding_top":0,"padding_bottom":30,"columns_desktop":5,"swipe_on_desktop":false,"show_carrousel_desktop":false,"show_arrow_desktop":true,"offdesk":false,"columns_mobile":"2","swipe_on_mobile":true,"show_carrousel_mobile":false,"show_arrow_mobile":true,"offmob":false}},"featured_collection":{"type":"featured-collection","settings":{"collection":"produits","color_scheme":"accent-2","title":"Nos produits","heading_tag":"h2","heading_size":"h1","heading_alignment":"left","description":"","show_description":false,"description_style":"body","products_to_show":8,"show_view_all":true,"view_all_style":"outline","image_ratio":"square","show_secondary_image":true,"show_vendor":false,"show_rating":true,"enable_btn_card_product":true,"type_btn_card_product":"enable_quick_add","button_style_secondary":false,"identificateur":"class","padding_top":30,"padding_bottom":30,"columns_desktop":4,"enable_desktop_slider":true,"show_carrousel_desktop":false,"show_arrow_desktop":true,"offdesk":false,"columns_mobile":"2","swipe_on_mobile":true,"show_carrousel_mobile":false,"show_arrow_mobile":true,"offmob":false}},"16592800990eaa6bdd":{"type":"custom-content","blocks":{"0a444abf-7eb4-433e-be3c-a97d6c51fc69":{"type":"separator","settings":{"bbwidth":1,"bordercolor":"#ffffff","mt":0,"mb":30,"taille":"custom-w-100","offdesk-bloc":false,"taillemobile":"custom-mw-100","offmob-bloc":false}},"02e58865-9ce3-460e-880d-4ef61f6faf91":{"type":"custom-liquid","settings":{"custom_liquid":"<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0646\/3799\/3207\/files\/TshirtBack_a3bd9367-b3e1-41dd-92e6-2876e6864541_800x_copy.tiff?v=1659294439\" style=\"width:72px;margin-bottom: 10px\">\n<h3>Supprime naturellement toutes les gribouilles<\/h3>\n<p>... Sans faire de mal à la planête et sans déchets plastiques !<\/p>","taille":"custom-w-25","offdesk-bloc":false,"taillemobile":"custom-mw-50","offmob-bloc":false}},"13c571b0-e9c8-4794-bc14-caa3b7fd7fb0":{"type":"custom-liquid","settings":{"custom_liquid":"<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0646\/3799\/3207\/files\/image_10_50x_b352477f-6b1e-4c43-805b-ef74fcec3a54.png?v=1659280062\" style=\"width:55px;margin-bottom:15px;\">\n<h3>Une Gribouille peut tenir plus de 1000 lavages<\/h3>\n<p>Et sans forcer ! Nous avons étudié son système pendant des années.<\/p>","taille":"custom-w-25","offdesk-bloc":false,"taillemobile":"custom-mw-50","offmob-bloc":false}},"4a23ce07-9ca0-426a-af5a-09b7d7773514":{"type":"custom-liquid","settings":{"custom_liquid":"<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0646\/3799\/3207\/files\/download-glad-cleaning-cleaning-icon-white-png-png-image-with-no-background-pngkeycom.png?v=1659294533\" style=\"width:75px;margin-bottom:8px;\">\n<h3>Des vêtements doux et aussi propre que neufs<\/h3>\n<p>La double action des gribouilles garanti un résultat comme neuf<\/p>","taille":"custom-w-25","offdesk-bloc":false,"taillemobile":"custom-mw-50","offmob-bloc":false}},"209520be-656e-4564-a37a-de8bc9d66e07":{"type":"custom-liquid","settings":{"custom_liquid":"<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0646\/3799\/3207\/files\/283-2830068_environmental-services-leaf-icon-white-png.png?v=1659294281\" style=\"width:80px;margin-bottom:10px;\">\n<h3>100% naturel, ne contient aucun produit nocif<\/h3>\n<p>Soyez entièrement serein à l'idée d'utiliser une gribouille !<\/p>","taille":"custom-w-25","offdesk-bloc":false,"taillemobile":"custom-mw-50","offmob-bloc":false}}},"block_order":["0a444abf-7eb4-433e-be3c-a97d6c51fc69","02e58865-9ce3-460e-880d-4ef61f6faf91","13c571b0-e9c8-4794-bc14-caa3b7fd7fb0","4a23ce07-9ca0-426a-af5a-09b7d7773514","209520be-656e-4564-a37a-de8bc9d66e07"],"settings":{"color_scheme":"accent-2","alignment_justify":"center","alignment_align":"center","min_height":0,"full_width":false,"identificateur":"class","padding_top":10,"padding_bottom":30,"offdesk":false,"offmob":false}},"1659294967fdaa9f0c":{"type":"custom-content","blocks":{"3f44b515-1a2a-486c-a49e-812799f02cea":{"type":"heading","settings":{"title":"Faites des économies !","heading_tag":"h2","heading_size":"h1","alignment":"center","taille":"custom-w-100","offdesk-bloc":false,"taillemobile":"custom-mw-100","offmob-bloc":false}},"fb371f1b-d88f-455e-9dc0-b464ee36ae8e":{"type":"content","settings":{"content":"<p>Une Gribouille peut servir jusqu'à 1000 machines à laver et des dizaines de milliers de gribouillis. Soit en moyenne 3 anneées d'utilisation. <strong>Économisez jusqu'à 1000 euros de lessive classique.<\/strong><\/p><p><\/p><p>Votre portefeuille et la planête vous remercient !<\/p>","alignment":"center","marg":false,"taille":"custom-w-50","text_size_desk":16,"line_desk":0,"offdesk-bloc":false,"taillemobile":"custom-mw-100","text_size_mob":16,"line_mob":0,"offmob-bloc":false}},"fa9338b7-8474-4fce-be2c-d864d9f8bf6b":{"type":"button","settings":{"color_scheme":"inverse","button_label":"Découvrir","button_link":"shopify:\/\/products\/les-gribouilles","button_style_secondary":false,"alignment":"center","taille":"custom-w-100","offdesk-bloc":false,"taillemobile":"custom-mw-100","offmob-bloc":false}}},"block_order":["3f44b515-1a2a-486c-a49e-812799f02cea","fb371f1b-d88f-455e-9dc0-b464ee36ae8e","fa9338b7-8474-4fce-be2c-d864d9f8bf6b"],"settings":{"color_scheme":"background-1","alignment_justify":"center","alignment_align":"center","min_height":56,"full_width":false,"identificateur":"class","padding_top":30,"padding_bottom":30,"offdesk":false,"offmob":false}},"16588489587b7c6410":{"type":"featured-product","blocks":{"1658848958298d2c25-1":{"type":"title","settings":{"title-suite":"","heading_tag":"h2","heading_size":"h1","margin":"none","offdesk-bloc":false,"offmob-bloc":false}},"35ba467d-c13c-43c7-a253-e84207d651e0":{"type":"custom_liquid","settings":{"custom_liquid":"<div style=\"display:flex;align-items: center;\">\n<img style=\"width:100%;max-width:130px;margin-right:10px;\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0646\/3799\/3207\/files\/5-stars-png-no-background-4.png?v=1659358826\" alt=\"img_stars-gribouille\"><span>872 avis<\/span>\n<\/div>","margin":"avec-bas","offdesk-bloc":false,"offmob-bloc":false}},"1658848958298d2c25-2":{"type":"text","settings":{"show_background_text":false,"text":"{{ section.settings.product.metafields.descriptors.subtitle.value }}","text_style":"subtitle","icon":"none","custom_icon":"","margin":"avec","offdesk-bloc":false,"offmob-bloc":false}},"1658848958298d2c25-3":{"type":"price","settings":{"price_position":"second","show_tax":true,"margin":"avec-haut","offdesk-bloc":false,"offmob-bloc":false}},"771695d2-07e9-44ff-9cfe-247f8ea0cb15":{"type":"collapsible_tab","settings":{"open-default":false,"heading":"Quel pack de Gribouilles choisir ?","icon":"chat_bubble","custom_icon":"","content":"<p>Utilisez 3 Gribouilles jusqu'à 6kg de linge gribouillé, 5 Gribouilles pour + de 9kg de linge gribouillé.<\/p>","page":"","margin":"avec","offdesk-bloc":false,"offmob-bloc":false}},"1658848958298d2c25-4":{"type":"variant_picker","settings":{"picker_type":"button","margin":"avec","offdesk-bloc":false,"offmob-bloc":false}},"5de8d975-5f2f-45a9-88f7-c631f7fc8dc9":{"type":"pack","settings":{"margin":"avec","offdesk-bloc":false,"offmob-bloc":false}},"1658848958298d2c25-5":{"type":"quantity_selector","disabled":true,"settings":{"margin":"avec","offdesk-bloc":false,"offmob-bloc":false}},"2a40968e-fbf3-41bb-affe-772e82db205c":{"type":"stock","settings":{"stock_orange":15,"stock_available_text":"En stock","stockavant":"Attention, il ne reste plus que","stockapres":"articles en stock !","stock_outofstock_text":"Victime de son succès","margin":"none","offdesk-bloc":false,"offmob-bloc":false}},"1658848958298d2c25-6":{"type":"buy_buttons","settings":{"custom_icon":"","show_dynamic_checkout":false,"margin":"none","offdesk-bloc":false,"offmob-bloc":false}},"ed5ca1b9-5b58-475a-801f-33dc728e78db":{"type":"estimation","settings":{"debut":"Livraison estimée entre le","fin":"et le","min":3,"max":5,"date_format":"europe","icon":"stopwatch","margin":"avec","offdesk-bloc":false,"offmob-bloc":false}}},"block_order":["1658848958298d2c25-1","35ba467d-c13c-43c7-a253-e84207d651e0","1658848958298d2c25-2","1658848958298d2c25-3","771695d2-07e9-44ff-9cfe-247f8ea0cb15","1658848958298d2c25-4","5de8d975-5f2f-45a9-88f7-c631f7fc8dc9","1658848958298d2c25-5","2a40968e-fbf3-41bb-affe-772e82db205c","1658848958298d2c25-6","ed5ca1b9-5b58-475a-801f-33dc728e78db"],"settings":{"product":"produit-gribouilles","color_scheme":"background-1","secondary_background":false,"view-details":false,"hide_variants":false,"enable_video_looping":false,"enable_zoom":false,"breadcrumb":"","identificateur":"class","padding_top":30,"padding_bottom":30,"center-content-desktop":"left","enable_sticky_info":true,"offdesk":false,"center-content-mobile":false,"mobile_thumbnails":"points","offmob":false}},"165933903173026f1c":{"type":"video-banner","settings":{"video_url":"https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc","width-min":160,"height-min":180,"image_overlay_opacity":0,"image_height":"medium","desktop_content_position":"middle-center","show_text_box":true,"desktop_content_alignment":"center","color_scheme":"accent-2","mobile_content_alignment":"center","show_text_below":true,"identificateur":"class","offdesk":false,"offmob":false}}},"order":["16592640060f4271a3","16592719469e2f8f2a","165927402075d8db0f","multicolumn","featured_collection","16592800990eaa6bdd","1659294967fdaa9f0c","16588489587b7c6410","165933903173026f1c"]}
+{
+  "sections": {
+    "16592640060f4271a3": {
+      "type": "custom-content",
+      "blocks": {
+        "e7668041-3762-449c-b552-412a1aa02a7b": {
+          "type": "image",
+          "settings": {
+            "taille": "custom-w-50",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": true
+          }
+        },
+        "78956976-b8ac-47c6-b0f8-3e7a95c3c455": {
+          "type": "column",
+          "settings": {
+            "color_scheme": "inverse",
+            "bgimg": true,
+            "title": "Gardez vos vêtements propres, même gribouillés",
+            "heading_tag": "h2",
+            "text": "<p>La solution <strong>écologique la plus efficace</strong> contre tous types de gribouillis. Économisez <strong>temps</strong> et <strong>argent</strong> grâce aux Gribouilles.</p>",
+            "link_label": "Découvrir",
+            "link": "shopify://products/les-gribouilles",
+            "btn-style": "button",
+            "heading_size": "h1",
+            "column_alignment": "center",
+            "image_width": "full",
+            "image_ratio": "adapt",
+            "taille": "custom-w-50",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": true
+          }
+        },
+        "007fc924-519a-4c08-99ee-b3cbadd992a4": {
+          "type": "heading",
+          "settings": {
+            "title": "Gardez vos vêtements propres, même gribouillés",
+            "heading_tag": "h2",
+            "heading_size": "h1",
+            "alignment": "center",
+            "taille": "custom-w-100",
+            "offdesk-bloc": true,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": false
+          }
+        },
+        "7ba56ddd-8ec4-496d-8de4-9f73a9e44577": {
+          "type": "content",
+          "settings": {
+            "content": "<p>La solution <strong>écologique la plus efficace </strong>contre tous types de gribouillis. Économisez <strong>temps</strong> et <strong>argent</strong> grâce aux Gribouilles.</p>",
+            "alignment": "center",
+            "marg": false,
+            "taille": "custom-w-100",
+            "text_size_desk": 16,
+            "line_desk": 0,
+            "offdesk-bloc": true,
+            "taillemobile": "custom-mw-100",
+            "text_size_mob": 16,
+            "line_mob": 0,
+            "offmob-bloc": false
+          }
+        },
+        "530c153f-2373-4362-904f-ec5d8c26428b": {
+          "type": "button",
+          "settings": {
+            "color_scheme": "inverse",
+            "button_label": "DÉCOUVRIR",
+            "button_link": "shopify://products/les-gribouilles",
+            "button_style_secondary": false,
+            "alignment": "center",
+            "taille": "custom-w-100",
+            "offdesk-bloc": true,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": false
+          }
+        },
+        "fdb3e8a1-4971-4981-9577-b7eabd778881": {
+          "type": "image",
+          "settings": {
+            "taille": "custom-w-100",
+            "offdesk-bloc": true,
+            "taillemobile": "custom-mw-75",
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "e7668041-3762-449c-b552-412a1aa02a7b",
+        "78956976-b8ac-47c6-b0f8-3e7a95c3c455",
+        "007fc924-519a-4c08-99ee-b3cbadd992a4",
+        "7ba56ddd-8ec4-496d-8de4-9f73a9e44577",
+        "530c153f-2373-4362-904f-ec5d8c26428b",
+        "fdb3e8a1-4971-4981-9577-b7eabd778881"
+      ],
+      "settings": {
+        "color_scheme": "accent-2",
+        "alignment_justify": "center",
+        "alignment_align": "center",
+        "min_height": 0,
+        "full_width": false,
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 0,
+        "offdesk": false,
+        "offmob": false
+      }
+    },
+    "16592719469e2f8f2a": {
+      "type": "custom-content",
+      "blocks": {
+        "feb7e0bc-6434-4563-88fe-2dc57c4440a1": {
+          "type": "separator",
+          "settings": {
+            "bbwidth": 1,
+            "bordercolor": "#f4f4f4",
+            "mt": 10,
+            "mb": 10,
+            "taille": "custom-w-100",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": false
+          }
+        },
+        "b943accf-2f8c-4a9d-932f-96d20acdf49a": {
+          "type": "column",
+          "settings": {
+            "color_scheme": "accent-2",
+            "bgimg": false,
+            "title": "4.7 sur 5",
+            "heading_tag": "h2",
+            "text": "<p>Clients remplacent leurs lessives par Les Gribouilles.</p>",
+            "link_label": "",
+            "link": "",
+            "btn-style": "link",
+            "heading_size": "h2",
+            "column_alignment": "center",
+            "image_width": "full",
+            "image_ratio": "adapt",
+            "taille": "custom-w-33",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-50",
+            "offmob-bloc": false
+          }
+        },
+        "c2d8f6e2-cc64-4857-ae68-0e6fd5522fd6": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https://cdn.shopify.com/s/files/1/0646/3799/3207/files/Trustpilot_NEW_logo_ALL_WHITE_Rated_Excellent.png?v=1659272764\" style=\"width:120px;margin-bottom:5px;\">\n<p>Sur plus de 800 avis, les Gribouilles ont reçu 4,7/5 étoiles</p>",
+            "taille": "custom-w-33",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-50",
+            "offmob-bloc": false
+          }
+        },
+        "23143b42-26d4-4c3d-9836-10bbbc0f400e": {
+          "type": "column",
+          "settings": {
+            "color_scheme": "accent-2",
+            "bgimg": false,
+            "title": "8/10",
+            "heading_tag": "h2",
+            "text": "<p>Clients disent que leurs vêtements sont moins gribouilleés grâce aux Gribouilles.</p>",
+            "link_label": "",
+            "link": "",
+            "btn-style": "link",
+            "heading_size": "h2",
+            "column_alignment": "center",
+            "image_width": "full",
+            "image_ratio": "adapt",
+            "taille": "custom-w-33",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": true
+          }
+        }
+      },
+      "block_order": [
+        "feb7e0bc-6434-4563-88fe-2dc57c4440a1",
+        "b943accf-2f8c-4a9d-932f-96d20acdf49a",
+        "c2d8f6e2-cc64-4857-ae68-0e6fd5522fd6",
+        "23143b42-26d4-4c3d-9836-10bbbc0f400e"
+      ],
+      "settings": {
+        "color_scheme": "accent-2",
+        "alignment_justify": "center",
+        "alignment_align": "center",
+        "min_height": 0,
+        "full_width": false,
+        "identificateur": "class",
+        "padding_top": 0,
+        "padding_bottom": 20,
+        "offdesk": false,
+        "offmob": false
+      }
+    },
+    "165927402075d8db0f": {
+      "type": "custom-content",
+      "blocks": {
+        "347624c7-e7c9-4f17-97f1-2b63aac9a4cd": {
+          "type": "column_accordion",
+          "settings": {
+            "color_scheme": "background-1",
+            "title": "Simple comme Bienvenue !",
+            "heading_tag": "h2",
+            "text": "<p>Une fois dans l’eau, les boules de laine contenues dans la Gargouille vont créer une eau alcaline qui va nettoyer les vêtements des odeurs et gribouillis.</p>",
+            "link_label": "",
+            "link": "",
+            "collapse": "Placez votre Gribouille dans la machine",
+            "collapse_icon": "dryer",
+            "collapse_content": "<p>Pas besoin d'ouvrir quelconque tiroir ou valve à lessive (on ne sait jamais laquelle est faite pour l'adoucissant d'ailleurs !). Jetez simplement votre Gribouille dans la machine et le tour est (presque) joué.</p>",
+            "collapse1": "Lancez votre programme préféré",
+            "collapse_icon1": "lock",
+            "collapse_content1": "<p>Vous hésitez ? Nous aussi, tout le temps ! Du coup on se place sur \"Mixte\".</p>",
+            "collapse2": "Au sêchage ! Et sans Gribouillis 💪",
+            "collapse_icon2": "shirt",
+            "collapse_content2": "<p>Sechoir ou sêchage naturel, c'est vous qui choisissez ! En tout cas, nous gribouilles ont fait leur travail et sont prêtes pour la prochaine.</p>",
+            "heading_size": "h1",
+            "column_alignment": "left",
+            "taille": "custom-w-50",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": false
+          }
+        },
+        "5f238f47-c91f-49df-871b-80472729ba31": {
+          "type": "image",
+          "settings": {
+            "taille": "custom-w-50",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "347624c7-e7c9-4f17-97f1-2b63aac9a4cd",
+        "5f238f47-c91f-49df-871b-80472729ba31"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "alignment_justify": "center",
+        "alignment_align": "center",
+        "min_height": 0,
+        "full_width": false,
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "offdesk": false,
+        "offmob": false
+      }
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "blocks": {
+        "column2": {
+          "type": "column",
+          "settings": {
+            "custom_icon": "",
+            "image_width_custom": 0,
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "column1": {
+          "type": "column",
+          "settings": {
+            "custom_icon": "",
+            "image_width_custom": 0,
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "column3": {
+          "type": "column",
+          "settings": {
+            "custom_icon": "",
+            "image_width_custom": 0,
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "70e71ee4-1b19-47bd-8c9b-337358681322": {
+          "type": "column",
+          "settings": {
+            "custom_icon": "",
+            "image_width_custom": 0,
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "ed1811b3-17ed-40e7-837d-319d4dba41d5": {
+          "type": "column",
+          "settings": {
+            "custom_icon": "",
+            "image_width_custom": 0,
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "column2",
+        "column1",
+        "column3",
+        "70e71ee4-1b19-47bd-8c9b-337358681322",
+        "ed1811b3-17ed-40e7-837d-319d4dba41d5"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "color_scheme_2": "background-1",
+        "title": "Ils parlent sans cesse de nous !",
+        "heading_tag": "h2",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "description": "",
+        "description_style": "body",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "column_alignment": "center",
+        "button_label": "",
+        "button_link": "",
+        "identificateur": "class",
+        "padding_top": 0,
+        "padding_bottom": 30,
+        "columns_desktop": 5,
+        "swipe_on_desktop": false,
+        "show_carrousel_desktop": false,
+        "show_arrow_desktop": true,
+        "offdesk": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "show_carrousel_mobile": false,
+        "show_arrow_mobile": true,
+        "offmob": false
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "produits",
+        "color_scheme": "accent-2",
+        "title": "Nos produits",
+        "heading_tag": "h2",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "view_all_style": "outline",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_btn_card_product": true,
+        "type_btn_card_product": "enable_quick_add",
+        "button_style_secondary": false,
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "show_carrousel_desktop": false,
+        "show_arrow_desktop": true,
+        "offdesk": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "show_carrousel_mobile": false,
+        "show_arrow_mobile": true,
+        "offmob": false
+      }
+    },
+    "16592800990eaa6bdd": {
+      "type": "custom-content",
+      "blocks": {
+        "0a444abf-7eb4-433e-be3c-a97d6c51fc69": {
+          "type": "separator",
+          "settings": {
+            "bbwidth": 1,
+            "bordercolor": "#ffffff",
+            "mt": 0,
+            "mb": 30,
+            "taille": "custom-w-100",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": false
+          }
+        },
+        "02e58865-9ce3-460e-880d-4ef61f6faf91": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https://cdn.shopify.com/s/files/1/0646/3799/3207/files/TshirtBack_a3bd9367-b3e1-41dd-92e6-2876e6864541_800x_copy.tiff?v=1659294439\" style=\"width:72px;margin-bottom: 10px\">\n<h3>Supprime naturellement toutes les gribouilles</h3>\n<p>... Sans faire de mal à la planête et sans déchets plastiques !</p>",
+            "taille": "custom-w-25",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-50",
+            "offmob-bloc": false
+          }
+        },
+        "13c571b0-e9c8-4794-bc14-caa3b7fd7fb0": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https://cdn.shopify.com/s/files/1/0646/3799/3207/files/image_10_50x_b352477f-6b1e-4c43-805b-ef74fcec3a54.png?v=1659280062\" style=\"width:55px;margin-bottom:15px;\">\n<h3>Une Gribouille peut tenir plus de 1000 lavages</h3>\n<p>Et sans forcer ! Nous avons étudié son système pendant des années.</p>",
+            "taille": "custom-w-25",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-50",
+            "offmob-bloc": false
+          }
+        },
+        "4a23ce07-9ca0-426a-af5a-09b7d7773514": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https://cdn.shopify.com/s/files/1/0646/3799/3207/files/download-glad-cleaning-cleaning-icon-white-png-png-image-with-no-background-pngkeycom.png?v=1659294533\" style=\"width:75px;margin-bottom:8px;\">\n<h3>Des vêtements doux et aussi propre que neufs</h3>\n<p>La double action des gribouilles garanti un résultat comme neuf</p>",
+            "taille": "custom-w-25",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-50",
+            "offmob-bloc": false
+          }
+        },
+        "209520be-656e-4564-a37a-de8bc9d66e07": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"text-align: center;padding:0 5px;\">\n<img src=\"https://cdn.shopify.com/s/files/1/0646/3799/3207/files/283-2830068_environmental-services-leaf-icon-white-png.png?v=1659294281\" style=\"width:80px;margin-bottom:10px;\">\n<h3>100% naturel, ne contient aucun produit nocif</h3>\n<p>Soyez entièrement serein à l'idée d'utiliser une gribouille !</p>",
+            "taille": "custom-w-25",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-50",
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "0a444abf-7eb4-433e-be3c-a97d6c51fc69",
+        "02e58865-9ce3-460e-880d-4ef61f6faf91",
+        "13c571b0-e9c8-4794-bc14-caa3b7fd7fb0",
+        "4a23ce07-9ca0-426a-af5a-09b7d7773514",
+        "209520be-656e-4564-a37a-de8bc9d66e07"
+      ],
+      "settings": {
+        "color_scheme": "accent-2",
+        "alignment_justify": "center",
+        "alignment_align": "center",
+        "min_height": 0,
+        "full_width": false,
+        "identificateur": "class",
+        "padding_top": 10,
+        "padding_bottom": 30,
+        "offdesk": false,
+        "offmob": false
+      }
+    },
+    "1659294967fdaa9f0c": {
+      "type": "custom-content",
+      "blocks": {
+        "3f44b515-1a2a-486c-a49e-812799f02cea": {
+          "type": "heading",
+          "settings": {
+            "title": "Faites des économies !",
+            "heading_tag": "h2",
+            "heading_size": "h1",
+            "alignment": "center",
+            "taille": "custom-w-100",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": false
+          }
+        },
+        "fb371f1b-d88f-455e-9dc0-b464ee36ae8e": {
+          "type": "content",
+          "settings": {
+            "content": "<p>Une Gribouille peut servir jusqu'à 1000 machines à laver et des dizaines de milliers de gribouillis. Soit en moyenne 3 anneées d'utilisation. <strong>Économisez jusqu'à 1000 euros de lessive classique.</strong></p><p></p><p>Votre portefeuille et la planête vous remercient !</p>",
+            "alignment": "center",
+            "marg": false,
+            "taille": "custom-w-50",
+            "text_size_desk": 16,
+            "line_desk": 0,
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "text_size_mob": 16,
+            "line_mob": 0,
+            "offmob-bloc": false
+          }
+        },
+        "fa9338b7-8474-4fce-be2c-d864d9f8bf6b": {
+          "type": "button",
+          "settings": {
+            "color_scheme": "inverse",
+            "button_label": "Découvrir",
+            "button_link": "shopify://products/les-gribouilles",
+            "button_style_secondary": false,
+            "alignment": "center",
+            "taille": "custom-w-100",
+            "offdesk-bloc": false,
+            "taillemobile": "custom-mw-100",
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "3f44b515-1a2a-486c-a49e-812799f02cea",
+        "fb371f1b-d88f-455e-9dc0-b464ee36ae8e",
+        "fa9338b7-8474-4fce-be2c-d864d9f8bf6b"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "alignment_justify": "center",
+        "alignment_align": "center",
+        "min_height": 56,
+        "full_width": false,
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "offdesk": false,
+        "offmob": false
+      }
+    },
+    "16588489587b7c6410": {
+      "type": "featured-product",
+      "blocks": {
+        "1658848958298d2c25-1": {
+          "type": "title",
+          "settings": {
+            "title-suite": "",
+            "heading_tag": "h2",
+            "heading_size": "h1",
+            "margin": "none",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "35ba467d-c13c-43c7-a253-e84207d651e0": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"display:flex;align-items: center;\">\n<img style=\"width:100%;max-width:130px;margin-right:10px;\" src=\"https://cdn.shopify.com/s/files/1/0646/3799/3207/files/5-stars-png-no-background-4.png?v=1659358826\" alt=\"img_stars-gribouille\"><span>872 avis</span>\n</div>",
+            "margin": "avec-bas",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "1658848958298d2c25-2": {
+          "type": "text",
+          "settings": {
+            "show_background_text": false,
+            "text": "{{ section.settings.product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle",
+            "icon": "none",
+            "custom_icon": "",
+            "margin": "avec",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "1658848958298d2c25-3": {
+          "type": "price",
+          "settings": {
+            "price_position": "second",
+            "show_tax": true,
+            "margin": "avec-haut",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "771695d2-07e9-44ff-9cfe-247f8ea0cb15": {
+          "type": "collapsible_tab",
+          "settings": {
+            "open-default": false,
+            "heading": "Quel pack de Gribouilles choisir ?",
+            "icon": "chat_bubble",
+            "custom_icon": "",
+            "content": "<p>Utilisez 3 Gribouilles jusqu'à 6kg de linge gribouillé, 5 Gribouilles pour + de 9kg de linge gribouillé.</p>",
+            "page": "",
+            "margin": "avec",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "1658848958298d2c25-4": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "margin": "avec",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "5de8d975-5f2f-45a9-88f7-c631f7fc8dc9": {
+          "type": "pack",
+          "settings": {
+            "margin": "avec",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "1658848958298d2c25-5": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {
+            "margin": "avec",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "2a40968e-fbf3-41bb-affe-772e82db205c": {
+          "type": "stock",
+          "settings": {
+            "stock_orange": 15,
+            "stock_available_text": "En stock",
+            "stockavant": "Attention, il ne reste plus que",
+            "stockapres": "articles en stock !",
+            "stock_outofstock_text": "Victime de son succès",
+            "margin": "none",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "1658848958298d2c25-6": {
+          "type": "buy_buttons",
+          "settings": {
+            "custom_icon": "",
+            "show_dynamic_checkout": false,
+            "margin": "none",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "ed5ca1b9-5b58-475a-801f-33dc728e78db": {
+          "type": "estimation",
+          "settings": {
+            "debut": "Livraison estimée entre le",
+            "fin": "et le",
+            "min": 3,
+            "max": 5,
+            "date_format": "europe",
+            "icon": "stopwatch",
+            "margin": "avec",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "1658848958298d2c25-1",
+        "35ba467d-c13c-43c7-a253-e84207d651e0",
+        "1658848958298d2c25-2",
+        "1658848958298d2c25-3",
+        "771695d2-07e9-44ff-9cfe-247f8ea0cb15",
+        "1658848958298d2c25-4",
+        "5de8d975-5f2f-45a9-88f7-c631f7fc8dc9",
+        "1658848958298d2c25-5",
+        "2a40968e-fbf3-41bb-affe-772e82db205c",
+        "1658848958298d2c25-6",
+        "ed5ca1b9-5b58-475a-801f-33dc728e78db"
+      ],
+      "settings": {
+        "product": "produit-gribouilles",
+        "color_scheme": "background-1",
+        "secondary_background": false,
+        "view-details": false,
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "enable_zoom": false,
+        "breadcrumb": "",
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "center-content-desktop": "left",
+        "enable_sticky_info": true,
+        "offdesk": false,
+        "center-content-mobile": false,
+        "mobile_thumbnails": "points",
+        "offmob": false
+      }
+    },
+    "165933903173026f1c": {
+      "type": "video-banner",
+      "settings": {
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "width-min": 160,
+        "height-min": 180,
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "accent-2",
+        "mobile_content_alignment": "center",
+        "show_text_below": true,
+        "identificateur": "class",
+        "offdesk": false,
+        "offmob": false
+      }
+    }
+  },
+  "order": [
+    "16592640060f4271a3",
+    "16592719469e2f8f2a",
+    "165927402075d8db0f",
+    "multicolumn",
+    "featured_collection",
+    "16592800990eaa6bdd",
+    "1659294967fdaa9f0c",
+    "16588489587b7c6410",
+    "165933903173026f1c"
+  ]
+}

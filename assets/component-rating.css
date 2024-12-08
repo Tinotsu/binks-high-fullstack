@@ -100,12 +100,12 @@
   padding: 1px 5px;
   border-radius: 4px;
   font-size: 1.2rem;
-  border: solid, #fc7c21, 2px;
+  border: solid #fc7c21 2px;
 }
 
 .card_percent_cbd {
   border-radius: 4px;
-  border: solid, #fc7c21, 2px;
+  border: solid #fc7c21 2px;
   padding: 1px, 10px;
   font-size: 1.2rem;
   width: 50px;
@@ -130,10 +130,15 @@
   min-width: 100%;
   box-sizing: border-box;
   display: flex;
+  background-color: white;
+  color: #000;
   border-radius: 9px;
   text-align: center;
   border: #000 0.5px solid;
   margin-bottom: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .evaluation_container {
