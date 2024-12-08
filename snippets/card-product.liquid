@@ -313,7 +313,7 @@
                       value="{{ card_product.selected_or_first_available_variant.id }}"
                       disabled
                     >
-                    <div class="form_button_cart ">
+                    <div class="form_button_cart">
                       <form method="post" action="/cart/add">
                         <select class="quantity-selector" name="id">
                           {% for variant in card_product.variants %}
