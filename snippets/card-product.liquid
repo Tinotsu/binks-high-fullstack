@@ -345,7 +345,11 @@
                         >
                           <span>
                             {%- if card_product.selected_or_first_available_variant.available -%}
-                              Ajouter |&nbsp;<span class="price-display"></span>
+                              Ajouter |&nbsp;<s class="price-display"></s>
+                              <span class="cart-item__final-price product-option"></span>
+                              <span class=" product-option"></span>
+                              price--on-sale
+                              {{- product.unit_price_measurement.reference_value -}}                              
                             {%- else -%}
                               {{ 'products.product.sold_out' | t }}
                             {%- endif -%}
