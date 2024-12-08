@@ -79,7 +79,7 @@
         "show_icon_notif": false,
         "offdesk": false,
         "padding_mobile": 15,
-        "mega-first-mob": true,
+        "mega-first-mob": false,
         "show_search_drawer": true,
         "search_modal_drawer": true,
         "show_icon_wishlist_mobile": false,

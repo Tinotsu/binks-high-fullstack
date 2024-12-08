@@ -9,6 +9,63 @@
  */
 {
   "sections": {
+    "collection_navigation_BkQEXp": {
+      "type": "collection-navigation",
+      "blocks": {
+        "collection_XzpHKP": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "product": "blue-gelato-cbd",
+            "links": "",
+            "image": "shopify://shop_images/1_5.BlueGelat-Edit.webp",
+            "content": "{{ block.settings.collection.title }}"
+          }
+        },
+        "collection_APCVab": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "product": "bubble-hash-cbd",
+            "links": "",
+            "content": "{{ block.settings.collection.title }}"
+          }
+        },
+        "collection_Xw6ieF": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "product": "floki-cbd",
+            "links": "",
+            "content": "{{ block.settings.collection.title }}"
+          }
+        }
+      },
+      "block_order": [
+        "collection_XzpHKP",
+        "collection_APCVab",
+        "collection_Xw6ieF"
+      ],
+      "custom_css": [
+        ".title-wrapper-with-link {display: flex; justify-content: center;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-b90c7363-237d-4357-ba3b-3866c3e38b6e",
+        "background_style": "none",
+        "title": "NAVIGUER ENTRE LES PRODUITS",
+        "heading_size": "h2",
+        "description": "",
+        "descriptions_margin": false,
+        "description_style": "body",
+        "style": "texte",
+        "button_style_secondary": true,
+        "identificateur": "class",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "offdesk": false,
+        "offmob": false
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -112,6 +169,21 @@
             "offdesk-bloc": false,
             "offmob-bloc": false
           }
+        },
+        "collapsible_tab_yNUeDN": {
+          "type": "collapsible_tab",
+          "settings": {
+            "open-default": false,
+            "heading": "DESCRIPTION",
+            "icon": "none",
+            "custom_icon": "",
+            "content": "{{ product.metafields.custom.arome | metafield_tag }}",
+            "page": "",
+            "margin": "none",
+            "identificateur": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
         }
       },
       "block_order": [
@@ -122,7 +194,8 @@
         "variant_picker",
         "ade0fe70-d169-4576-99d4-aacda71a3c74",
         "buy_buttons",
-        "toggle_cross_sell_wYx4YY"
+        "toggle_cross_sell_wYx4YY",
+        "collapsible_tab_yNUeDN"
       ],
       "settings": {
         "color_scheme": "scheme-1",
@@ -143,29 +216,88 @@
         "offmob": false
       }
     },
-    "ss_simple_faq_GKRk8T": {
-      "type": "ss-simple-faq",
+    "ss_feature_1_KbBt9a": {
+      "type": "ss-feature-1",
       "blocks": {
-        "text_P44M7C": {
-          "type": "text",
+        "image_fmyhVr": {
+          "type": "image",
           "settings": {
-            "question": "Tout savoir sur le produit",
-            "answer": "{{ product.metafields.custom.arome | metafield_tag }}"
+            "feature_title": "Conseiller disponible",
+            "feature_text": "<p>+33 7 71 52 34 66 (Appel Gratuit)</p>",
+            "feature_image": "shopify://shop_images/image_2024-12-08_071728883.png",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_Vxw6qM": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Commande traitée sous 24h",
+            "feature_text": "<p>Livrée sous 3 jours ouvrés</p>",
+            "feature_image": "shopify://shop_images/image_2024-12-08_071807700.png",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_R6dzaL": {
+          "type": "image",
+          "settings": {
+            "feature_title": "2 échantillons offerts",
+            "feature_text": "<p>Pour chaque commande</p>",
+            "feature_image": "shopify://shop_images/image_2024-12-08_071843371.png",
+            "feature_url": "",
+            "hide_image": false
           }
         }
       },
       "block_order": [
-        "text_P44M7C"
+        "image_fmyhVr",
+        "image_Vxw6qM",
+        "image_R6dzaL"
       ],
       "settings": {
-        "heading": "",
-        "icon_color": "#fff",
-        "hover_color": "#EFEFEF",
-        "question_color": "#000",
-        "background_color": "#fff",
-        "answer_color": "#000",
-        "answer_bg_color": "#fff",
-        "questions-font-size": 1.5
+        "feature_row": 3,
+        "feature_row_mobile": 1,
+        "feature_gap": 20,
+        "feature_gap_mobile": 20,
+        "feature_padding_horizontal": 0,
+        "feature_padding_vertical": 0,
+        "feature_radius": 16,
+        "feature_border_thickness": 0,
+        "feature_shadow": false,
+        "feature_heading_custom": false,
+        "feature_heading_font": "josefin_sans_n4",
+        "feature_heading_size": 14,
+        "feature_heading_size_mobile": 12,
+        "feature_heading_height": 130,
+        "feature_heading_mt": 8,
+        "feature_text_custom": true,
+        "feature_text_font": "josefin_sans_n4",
+        "feature_text_size": 12,
+        "feature_text_size_mobile": 12,
+        "feature_text_height": 130,
+        "feature_text_mt": 4,
+        "feature_icon_size": 42,
+        "feature_icon_size_mobile": 42,
+        "feature_bg": "#FFFFFF",
+        "feature_border_color": "#000000",
+        "feature_shadow_color": "#000000",
+        "feature_heading_color": "#000000",
+        "feature_text_color": "#000000",
+        "feature_icon_color": "#000000",
+        "background_color": "#FFFFFF",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
       }
     },
     "173360423542bf8d56": {
@@ -219,8 +351,9 @@
     }
   },
   "order": [
+    "collection_navigation_BkQEXp",
     "main",
-    "ss_simple_faq_GKRk8T",
+    "ss_feature_1_KbBt9a",
     "173360423542bf8d56",
     "product-recommendations"
   ]
