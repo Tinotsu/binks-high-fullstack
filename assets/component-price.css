@@ -108,3 +108,9 @@
 .card-information .price .price-item {
   margin: 0 0.5rem 0 0;
 }
+
+@media screen and (max-width: 989px) {
+  .unit-price {
+    font-size: 1rem;
+  }
+}

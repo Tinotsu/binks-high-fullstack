@@ -104,7 +104,6 @@
 
 .card__information {
   grid-row-start: 2;
-  padding: 1.3rem 1rem;
 }
 
 .card:not(.ratio) > .card__content {
@@ -299,12 +298,6 @@
   margin-top: 0.4rem;
 }
 
-.card-information
-  > *:not(.visually-hidden:first-child)
-  + *:not(.rating) {
-  margin-top: 0.7rem;
-}
-
 .card-information .caption {
   letter-spacing: 0.07rem;
 }
@@ -318,8 +311,21 @@
   margin-top: .5rem;
 }
 
+.card_title_container {
+  font-size: 2rem;
+  height: 36px;
+}
+
+.card_titleandprice {
+  height: 60px;
+}
+
 @media screen and (max-width: 749px) {
   .card__heading {
     font-size: {{ settings.card_text-size | minus:2 }}px;
+  }
+  .card_title_container {
+    font-size: 1.2rem;
+    height: 36px;
   }
 }
