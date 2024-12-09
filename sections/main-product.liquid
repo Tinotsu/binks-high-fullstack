@@ -536,9 +536,9 @@
                                     {% if option.selected_value == value %}checked{% endif %}
                               >
                               <label class="page_product_variant" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                                <span>{{ value }}</span>
-                                <span>{{ variant_for_value.unit_price | money }}</span>
-                                <span>{{ variant_for_value.metafields.custom.variant_size }}</span>
+                                <span class="main_product_value">{{ value }}</span>
+                                <span class="main_product_unit_price">{{ variant_for_value.unit_price | money }}</span>
+                                <span class="main_product_meta">{{ variant_for_value.metafields.custom.variant_size }}</span>
                                 {% if variant_for_value %}
                                   {% render 'price_unit', product: variant_for_value %}
                                 {% endif %}
