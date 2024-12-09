@@ -832,10 +832,6 @@
                     {%- endfor -%}
                   </ul>
 
-                  {% unless section.settings.mega-first-mob %}
-                    {{ megamenu-mobile }}
-                  {% endunless %}
-
                   {%- for block in section.blocks -%}
                     {%- case block.type -%}
                       <!-- Bouton header -->
@@ -1136,6 +1132,9 @@
             	{%- if block.type == "megamenu" -%}
                 <details-disclosure>
                   <header-menu>
+
+
+                  <!--
                     <details class="mega-menu-wrapper">
                       <summary class="header__menu-item list-menu__item link focus-inset">
                         <span class="underline">{{ block.settings.megamenutitre }}</span>
@@ -1223,6 +1222,9 @@
                         {%- endif -%}
                       </div>
                     </details>
+-->
+
+
                   </header-menu>
                 </details-disclosure>
             	{% endif -%}

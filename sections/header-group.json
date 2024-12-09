@@ -34,7 +34,7 @@
         "megamenu_mRq9RC": {
           "type": "megamenu",
           "settings": {
-            "megamenutitre": "Menu",
+            "megamenutitre": "iobyub",
             "mega-menu": "main-menu",
             "mega-menu2": "footer",
             "mega-element-titre": "Titre du produit",
@@ -80,8 +80,8 @@
         "offdesk": false,
         "padding_mobile": 15,
         "mega-first-mob": false,
-        "show_search_drawer": true,
-        "search_modal_drawer": true,
+        "show_search_drawer": false,
+        "search_modal_drawer": false,
         "show_icon_wishlist_mobile": false,
         "show_icon_notif_mobile": false,
         "offmob": false

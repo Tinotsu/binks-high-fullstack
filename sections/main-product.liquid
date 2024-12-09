@@ -425,27 +425,6 @@
             {% comment %} Prix {% endcomment %}
             {%- when 'price' -%}
 
-              prix:{{ product.price | money }}<br>
-              prix réduit:{{ product.compare_at_price | money }}<br>
-              prix variante par unité:{{ product.selected_or_first_available_variant.unit_price | money }}<br>
-              prix variante:{{ product.selected_or_first_available_variant.price | money }}<br>
-              unité de la variant:{{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}<br>
-              {% if product.price_varies %}
-                Ce produit a plusieurs prix.
-              {% endif %}<br>
-              {% if product.compare_at_price_varies %}
-                Les prix de comparaison varient.
-                {%  else %} pas de prix de variation entre les prix de comparaison
-              {% endif %} <br>
-              Le prix de la variante est {{ product.selected_or_first_available_variant.price | money }}.              <br>
-              {% for discount in line_item.discounts %}
-                <p>Discount : {{ discount.title }}</p>
-                <p>Amount : {{ discount.amount | money }}</p>
-              {% endfor %}
-              
-
-
-
             <div class="product-can-be-centered product-block-margin-{{ block.settings.margin }}{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}{% if block.settings.identificateur != blank %} {{ block.settings.identificateur }}{% endif %}">
               <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                 {%- render 'price', product: product, use_variant: true, show_badges: block.settings.show_badges, price_class: 'price--large', price_position: block.settings.price_position == 'first', price_position: block.settings.price_position == 'second', bold_price: block.settings.price_weight -%}
@@ -557,7 +536,9 @@
                                     {% if option.selected_value == value %}checked{% endif %}
                               >
                               <label class="page_product_variant" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                                {{ value }}
+                                <span>{{ value }}</span>
+                                <span>{{ variant_for_value.unit_price | money }}</span>
+                                <span>{{ variant_for_value.metafields.custom.variant_size }}</span>
                                 {% if variant_for_value %}
                                   {% render 'price_unit', product: variant_for_value %}
                                 {% endif %}
