@@ -26,9 +26,9 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "product": "bubble-hash-cbd",
-            "links": "",
-            "content": "{{ block.settings.collection.title }}"
+            "product": "",
+            "links": "{{ block.settings.collection.url }}",
+            "content": "{{ product.title }}"
           }
         },
         "collection_Xw6ieF": {
@@ -279,13 +279,13 @@
         "feature_text_mt": 4,
         "feature_icon_size": 42,
         "feature_icon_size_mobile": 42,
-        "feature_bg": "#FFFFFF",
+        "feature_bg": "#ffffff",
         "feature_border_color": "#000000",
         "feature_shadow_color": "#000000",
         "feature_heading_color": "#000000",
         "feature_text_color": "#000000",
         "feature_icon_color": "#000000",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,

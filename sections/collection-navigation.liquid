@@ -19,86 +19,91 @@
 <div class="color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %} {% if section.settings.identificateur != blank %}{{ section.settings.identificateur }}{% endif %}">
   <div class="page-width section-{{ section.id }}-padding isolate">
     {%- unless section.settings.title == blank -%}
-    <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin {% if section.settings.description != blank %}title-wrapper--small-margin{% endif %}">
-      <h2 class="title {{ section.settings.heading_size }}">
-        {{ section.settings.title | escape }}
-      </h2>
-    </div>
+      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin {% if section.settings.description != blank %}title-wrapper--small-margin{% endif %}">
+        <h2 class="title {{ section.settings.heading_size }} navigation_title_center">
+          {{ section.settings.title | escape }}
+        </h2>
+      </div>
     {%- endunless -%}
     {%- if section.settings.description != blank -%}
-      <div class="section-description {{ section.settings.heading_alignment }} {{ section.settings.description_style }} {% if section.settings.descriptions_margin %} description-no-margin {% endif %}">{{ section.settings.description }}</div>
+      <div class="section-description {{ section.settings.heading_alignment }} {{ section.settings.description_style }} {% if section.settings.descriptions_margin %} description-no-margin {% endif %}">
+        {{ section.settings.description }}
+      </div>
     {%- endif -%}
-       
+
     <div class="collection_navigation">
       {%- for block in section.blocks -%}
-      {%- liquid
-      	if block.settings.collection != blank
-          if block.settings.content != blank
-          	assign titlecol = block.settings.content
+        {%- liquid
+          if block.settings.collection != blank
+            if block.settings.content != blank
+              assign titlecol = block.settings.content
+            else
+              assign titlecol = block.settings.collection.title
+            endif
+            if block.settings.links != blank
+              assign linkcol = block.settings.links
+            else
+              assign linkcol = block.settings.collection.url
+            endif
+            if block.settings.image.src != blank
+              assign img = block.settings.image.src | img_url: '720x'
+            elsif block.settings.collection.image != blank
+              assign img = block.settings.collection.image | img_url: '720x'
+            else
+              assign img = block.settings.collection.products.first.featured_media.preview_image | img_url: '720x'
+            endif
+          elsif block.settings.product != blank
+            if block.settings.content != blank
+              assign titlecol = block.settings.content
+            else
+              assign titlecol = block.settings.product.title
+            endif
+            if block.settings.links != blank
+              assign linkcol = block.settings.links
+            else
+              assign linkcol = block.settings.product.url
+            endif
+            if block.settings.image.src != blank
+              assign img = block.settings.image.src | img_url: '720x'
+            else
+              assign img = block.settings.product.featured_media.src | img_url: '720x'
+            endif
           else
-            assign titlecol = block.settings.collection.title
+            assign titlecol = block.settings.content
+            assign linkcol = block.settings.links
+            assign img = block.settings.image.src | img_url: '720x'
           endif
-          if block.settings.links != blank
-          	assign linkcol = block.settings.links
-          else
-            assign linkcol = block.settings.collection.url
-          endif
-          if block.settings.image.src != blank
-          	assign img = block.settings.image.src | img_url:'720x'
-          elsif block.settings.collection.image != blank
-          	assign img = block.settings.collection.image | img_url:'720x'
-          else
-            assign img = block.settings.collection.products.first.featured_media.preview_image | img_url:'720x'
-          endif
-        elsif block.settings.product != blank
-          if block.settings.content != blank
-          	assign titlecol = block.settings.content
-          else
-            assign titlecol = block.settings.product.title
-          endif
-          if block.settings.links != blank
-          	assign linkcol = block.settings.links
-          else
-            assign linkcol = block.settings.product.url
-          endif
-          if block.settings.image.src != blank
-          	assign img = block.settings.image.src | img_url:'720x'
-          else
-            assign img = block.settings.product.featured_media.src | img_url:'720x'
-          endif
-        else
-          assign titlecol = block.settings.content
-          assign linkcol = block.settings.links
-          assign img = block.settings.image.src | img_url:'720x'
-        endif
-      -%}
-      {% if section.settings.style == "story" or section.settings.style == "bulle" %}
-      <div class="story_contain {% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
-        {% if section.settings.style != "bulle" %}
-          <div class="story_circle">
+        -%}
+        {% if section.settings.style == 'story' or section.settings.style == 'bulle' %}
+          <div class="story_contain {% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
+            {% if section.settings.style != 'bulle' %}
+              <div class="story_circle">
+            {% endif %}
         {% endif %}
-      {% endif %}
-          <a class="{% if section.settings.style == "texte" %}button color-{{ section.settings.color_scheme }}{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}{% else %}a_collec_story_item{% endif %}{% if request.path contains linkcol %} selected_collec_item{% endif %}" href="{{ linkcol }}" style="{% if section.settings.style == "story" or section.settings.style == "bulle" %}background-image: url('{{ img }}');{% endif %}">
-            {% if section.settings.style == "texte" %}
+        <a
+          class="collection_navigation_button collection_navigation_pipe {% if section.settings.style == "texte" %} color-{{ section.settings.color_scheme }}{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}{% else %}a_collec_story_item{% endif %}{% if request.path contains linkcol %} selected_collec_item{% endif %}"
+          href="{{ linkcol }}"
+          style="{% if section.settings.style == "story" or section.settings.style == "bulle" %}background-image: url('{{ img }}');{% endif %}"
+        >
+          {% if section.settings.style == 'texte' %}
             <div class="collection_card_nav">
               {{ titlecol }}
             </div>
-            {% endif %}
-          </a>
-        {% if section.settings.style == "story" or section.settings.style == "bulle" %}
-          {% if section.settings.style != "bulle" %}
-          </div>
+          {% endif %}
+        </a>
+        {% if section.settings.style == 'story' or section.settings.style == 'bulle' %}
+          {% if section.settings.style != 'bulle' %}
+            </div>
           {% endif %}
           <div class="collection_card_nav">
             {{ titlecol }}
           </div>
         {% endif %}
-      {% if section.settings.style == "story" or section.settings.style == "bulle" %}
-      </div>
-      {% endif %}
+        {% if section.settings.style == 'story' or section.settings.style == 'bulle' %}
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
-
   </div>
 </div>
 
@@ -169,7 +174,7 @@
       "id": "descriptions_margin",
       "label": "Marges moins large pour les descriptions",
       "default": false
-    }, 
+    },
     {
       "type": "select",
       "id": "description_style",
@@ -278,7 +283,7 @@
       "name": "collection",
       "type": "collection",
       "settings": [
-		    {
+        {
           "id": "collection",
           "type": "collection",
           "label": "Collection"
@@ -299,7 +304,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image",
-		      "info": "Prend le dessus sur tout."
+          "info": "Prend le dessus sur tout."
         },
         {
           "type": "text",
@@ -309,7 +314,7 @@
           "info": "Prend le dessus sur tout."
         }
       ]
-	  }
+    }
   ],
   "presets": [
     {
