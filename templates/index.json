@@ -16,8 +16,8 @@
           "type": "slide",
           "settings": {
             "color_scheme": "",
-            "image": "shopify://shop_images/1.1_generique_destokp.webp",
-            "image_2": "shopify://shop_images/1.3_generique_mobile.webp",
+            "image": "shopify://shop_images/Desktopgenerique_v3.webp",
+            "image_2": "shopify://shop_images/Mobilegenerique_v3.webp",
             "image_overlay_opacity": 0,
             "heading": "",
             "heading_tag": "h2",
@@ -38,8 +38,8 @@
           "type": "slide",
           "settings": {
             "color_scheme": "",
-            "image": "shopify://shop_images/2.1_Cali_Desktop.webp",
-            "image_2": "shopify://shop_images/2.3_Cali_Mobile.webp",
+            "image": "shopify://shop_images/Desktopcali_V3.webp",
+            "image_2": "shopify://shop_images/Mobilecali_V3.webp",
             "image_overlay_opacity": 0,
             "heading": "",
             "heading_tag": "h2",
