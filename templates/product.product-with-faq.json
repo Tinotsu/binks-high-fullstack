@@ -348,6 +348,104 @@
         "columns_mobile": "2",
         "offmob": false
       }
+    },
+    "collapsible_content_CicFdm": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_H4aNed": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Rangée pliante",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_tr64Qa": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Rangée pliante",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_JPzKLc": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Rangée pliante",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_HcnXjG": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Rangée pliante",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_zkVDy8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Rangée pliante",
+            "color_scheme": "",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_H4aNed",
+        "collapsible_row_tr64Qa",
+        "collapsible_row_JPzKLc",
+        "collapsible_row_HcnXjG",
+        "collapsible_row_zkVDy8"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "scheme-0cc8bd48-c473-4b92-9f8c-db5e2f4d939b",
+        "caption": "",
+        "heading": "Contenu réductible",
+        "heading_tag": "h2",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "description": "",
+        "descriptions_margin": false,
+        "description_style": "body",
+        "layout": "none",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "identificateur": "",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "desktop_layout": "image_second",
+        "offdesk": false,
+        "offmob": false
+      }
     }
   },
   "order": [
@@ -355,6 +453,7 @@
     "main",
     "ss_feature_1_KbBt9a",
     "173360423542bf8d56",
-    "product-recommendations"
+    "product-recommendations",
+    "collapsible_content_CicFdm"
   ]
 }
