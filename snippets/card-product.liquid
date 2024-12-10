@@ -335,7 +335,8 @@
                           {% for variant in card_product.variants %}
                             <option
                               value="{{ variant.id }}"
-                              data-price="{{ variant.price | money }} {{ variant.compare_at_price | money_with_currency }}"
+                              data-price="{{ variant.price | money }}"
+                              data-compare-price="{{ variant.compare_at_price | money }}"
                               {% if variant == card_product.selected_or_first_available_variant.unit_price_measurement
                               %}
                                 selected

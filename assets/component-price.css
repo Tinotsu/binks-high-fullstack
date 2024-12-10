@@ -173,3 +173,19 @@
     font-size: 1rem;
   }
 }
+.compare-price {
+  position: relative;
+  display: inline-block;
+}
+
+.compare-price::after {
+  content: '';
+  position: absolute;
+  top: 50%; 
+  left: 0;
+  width: 100%;
+  height: 2px; 
+  background-color: red; 
+  transform: rotate(-5deg);
+  transform-origin: center;
+}
