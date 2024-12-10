@@ -4,9 +4,10 @@
     {%- if show_prefix != false -%}
       <span class="price__prefix">À partir de </span>
     {%- endif -%}
-    <span>{%- assign half_price = product.selected_or_first_available_variant.unit_price | divided_by: 2 -%}
-      {{ half_price | money }}
-      </span><span aria-hidden="true">/</span
+    <span>
+      {% assign cheapest_variant = product.variants | sort: "unit_price" | first %}
+      {{ cheapest_variant.unit_price | money }}
+            </span><span aria-hidden="true">/</span
     ><span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span
     ><span>
       {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}

@@ -283,7 +283,7 @@
                           {%- if card_product.selected_or_first_available_variant.available -%}
                             Ajouter |
                             <span class="compare-price">{{ card_product.compare_at_price | money }}</span>
-                            <span class="price-color">{{ card_product.price | money }}</span>
+                            <span class="{% if card_product.compare_at_price != null %}  price-color {% endif %}">{{ card_product.price | money }}</span>
                           {%- else -%}
                             {{ 'products.product.sold_out' | t }}
                           {%- endif -%}
