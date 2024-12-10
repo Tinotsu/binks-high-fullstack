@@ -15,7 +15,7 @@
         "slide_f4rYDL": {
           "type": "slide",
           "settings": {
-            "color_scheme": "",
+            "color_scheme": "scheme-0cc8bd48-c473-4b92-9f8c-db5e2f4d939b",
             "image": "shopify://shop_images/Desktopgenerique_v5.webp",
             "image_2": "shopify://shop_images/Mobilegenerique_v5.webp",
             "image_overlay_opacity": 0,
@@ -65,7 +65,7 @@
         "layout": "full_bleed",
         "slide_height": "small",
         "accessibility_info": "",
-        "color_scheme": "",
+        "color_scheme": "scheme-0cc8bd48-c473-4b92-9f8c-db5e2f4d939b",
         "slider_visual": "dots",
         "auto_rotate": true,
         "change_slides_speed": 5,
