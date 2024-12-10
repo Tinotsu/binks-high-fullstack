@@ -16,8 +16,8 @@
           "type": "slide",
           "settings": {
             "color_scheme": "",
-            "image": "shopify://shop_images/Desktopgenerique_v3.webp",
-            "image_2": "shopify://shop_images/Mobilegenerique_v3.webp",
+            "image": "shopify://shop_images/Desktopgenerique_v5.webp",
+            "image_2": "shopify://shop_images/Mobilegenerique_v5.webp",
             "image_overlay_opacity": 0,
             "heading": "",
             "heading_tag": "h2",
@@ -38,8 +38,8 @@
           "type": "slide",
           "settings": {
             "color_scheme": "",
-            "image": "shopify://shop_images/Desktopcali_V3.webp",
-            "image_2": "shopify://shop_images/Mobilecali_V3.webp",
+            "image": "shopify://shop_images/DesktopCali_v4.webp",
+            "image_2": "shopify://shop_images/Mobile_cali_v6.webp",
             "image_overlay_opacity": 0,
             "heading": "",
             "heading_tag": "h2",
@@ -503,7 +503,7 @@
         "coulmns_AdLex8": {
           "type": "coulmns",
           "settings": {
-            "bg-image": "shopify://shop_images/pre_1.webp",
+            "bg-image": "shopify://shop_images/rejoins_instagram.webp",
             "layout": "image_first",
             "heading": "<strong>REJOINS NOUS</strong>",
             "heading_size": "h1",

@@ -355,11 +355,11 @@
         "collapsible_row_H4aNed": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Rangée pliante",
+            "heading": "Quels sont les effets de la fleur de CBD ?",
             "color_scheme": "",
             "icon": "none",
             "custom_icon": "",
-            "row_content": "",
+            "row_content": "<p><strong>Les fleurs de CBD</strong> offrent une expérience de détente sans l’effet planant du THC. Grâce à un taux élevé de cannabidiol, tu peux t'attendre à des bienfaits tels que la réduction du stress, une meilleure gestion des douleurs, et une sensation de relaxation globale. Parfait pour se poser après une longue journée ou pour chiller avec des potes. La richesse des arômes et des saveurs comme la Lemon Haze rend chaque session agréable et apaisante.</p>",
             "page": "",
             "offdesk-bloc": false,
             "offmob-bloc": false
@@ -368,11 +368,11 @@
         "collapsible_row_tr64Qa": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Rangée pliante",
+            "heading": "Pourquoi ne pas fumer les fleurs de CBD ?",
             "color_scheme": "",
             "icon": "none",
             "custom_icon": "",
-            "row_content": "",
+            "row_content": "<p>Bien que certains aiment fumer les fleurs de CBD pour profiter de l’effet rapide, il est important de savoir que la combustion peut irriter les poumons, comme pour tout ce qu'on fume. Pour un mode de consommation plus sain, pense à la vaporisation ou à l'infusion en tisane. La vape permet de profiter des bienfaits du CBD sans les risques associés à la combustion. Chez Binks CBD, on t'offre des produits de qualité pour toutes les envies.</p>",
             "page": "",
             "offdesk-bloc": false,
             "offmob-bloc": false
@@ -381,11 +381,11 @@
         "collapsible_row_JPzKLc": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Rangée pliante",
+            "heading": "Pourquoi le CBD n'est plus légal ?",
             "color_scheme": "",
             "icon": "none",
             "custom_icon": "",
-            "row_content": "",
+            "row_content": "<p>T'inquiète, le CBD est toujours légal en France, tant que les produits respectent un taux de THC inférieur à 0,3%. Chez Binks CBD, on s'assure que toutes nos fleurs de CBD respectent cette législation stricte. Alors, pas de stress ! Tant que tu achètes du CBD dans les règles, t’es tranquille. La législation évolue, mais nous, on reste au top pour te proposer du cannabidiol de qualité, toujours légal.</p>",
             "page": "",
             "offdesk-bloc": false,
             "offmob-bloc": false
@@ -394,11 +394,11 @@
         "collapsible_row_HcnXjG": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Rangée pliante",
+            "heading": "Est-ce que le CBD se fume ?",
             "color_scheme": "",
             "icon": "none",
             "custom_icon": "",
-            "row_content": "",
+            "row_content": "<p>Oui, tu peux fumer les fleurs de CBD, comme tu le ferais avec du cannabis classique, mais sans les effets planants du THC. Fumer te permet de ressentir l'effet rapidement, mais si tu veux préserver ta santé, la vaporisation est une meilleure option. Quoi qu’il en soit, chez Binks CBD, on a ce qu’il te faut pour kiffer ta fleur de CBD comme tu l’entends !</p>",
             "page": "",
             "offdesk-bloc": false,
             "offmob-bloc": false
@@ -407,11 +407,24 @@
         "collapsible_row_zkVDy8": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Rangée pliante",
+            "heading": "Puis-je conduire après avoir consommé du CBD ?",
             "color_scheme": "",
             "icon": "none",
             "custom_icon": "",
-            "row_content": "",
+            "row_content": "<p>Contrairement au THC, le CBD n'a pas d'effet psychoactif et n'affecte pas votre capacité à conduire. Cependant, nous vous recommandons de faire preuve de prudence et de respecter les lois locales en matière de conduite. Si vous avez des préoccupations ou des questions spécifiques, nous vous encourageons à consulter un professionnel de la santé ou à contacter notre équipe pour obtenir des conseils supplémentaires.</p>",
+            "page": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
+        },
+        "collapsible_row_TBQerm": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quels sont les risques de prendre du CBD ?",
+            "color_scheme": "scheme-1",
+            "icon": "none",
+            "custom_icon": "",
+            "row_content": "<p>Le CBD est globalement considéré comme sûr, avec peu d'effets secondaires. Toutefois, en prendre en trop grande quantité peut causer de la fatigue, une légère somnolence ou un inconfort digestif. Pas d’inquiétude, respecte les doses et tu profiteras des bienfaits sans souci. Si tu ressens quoi que ce soit d’inhabituel, prends une pause et réévalue tes besoins.</p>",
             "page": "",
             "offdesk-bloc": false,
             "offmob-bloc": false
@@ -423,13 +436,14 @@
         "collapsible_row_tr64Qa",
         "collapsible_row_JPzKLc",
         "collapsible_row_HcnXjG",
-        "collapsible_row_zkVDy8"
+        "collapsible_row_zkVDy8",
+        "collapsible_row_TBQerm"
       ],
       "custom_css": [],
       "settings": {
         "color_scheme": "scheme-0cc8bd48-c473-4b92-9f8c-db5e2f4d939b",
         "caption": "",
-        "heading": "Contenu réductible",
+        "heading": "Question fréquentes à propos de ce produit",
         "heading_tag": "h2",
         "heading_size": "h1",
         "heading_alignment": "center",
