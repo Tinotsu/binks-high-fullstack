@@ -29,6 +29,7 @@
 .price__prefix {
   font-weight: normal;
   font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .price__box {
@@ -182,6 +183,8 @@
 .compare-price {
   position: relative;
   display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
 }
 
 .compare-price::after {

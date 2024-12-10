@@ -109,6 +109,7 @@
     "cookstxt-refuse": "Refuser",
     "cookie_storage_duration": 30,
     "arrowtop": false,
+    "color_scheme_arrowtop": "",
     "posarrow": 30,
     "enable-right-clic": false,
     "enable-text-selection": false,
@@ -393,7 +394,7 @@
           "background": "#ffffff",
           "background_gradient": "",
           "text": "#121212",
-          "button": "#fc7c21",
+          "button": "#121212",
           "button_label": "#121212",
           "secondary_button_label": "#fc7c21",
           "shadow": "#121212"
