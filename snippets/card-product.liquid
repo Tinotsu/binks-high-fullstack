@@ -91,7 +91,11 @@
               </h3>
 
               <!-- Prix du produit -->
-              {% render 'price_unit', product: card_product, price_class: '' %}
+              {% if card_product.variants.size > 1 %}
+                <div class="card_product_price">
+                  {% render 'price_unit', product: card_product, price_class: '' %}
+                </div>
+              {% endif %}
               <!-- Section des notes/avis -->
               <div
                 class="loox-rating"

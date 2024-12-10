@@ -227,11 +227,13 @@ fieldset.product-form__input .form__label {
   border: 3px solid rgb(0, 0, 0, 0.1);
   background-color: white;
   color: rgba(var(--color-foreground));
-  border-radius: 6px;
+  border-radius: 10px;
   color: rgb(var(--color-foreground));
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0.7rem 0.5rem 0.2rem 0;
-  padding: 1rem 2rem;
+  padding: 2rem 0.5rem;
   font-size: 1.4rem;
   letter-spacing: 0.1rem;
   line-height: 1;
@@ -374,7 +376,9 @@ a.product__text {
 }
 
 .product .price__container {
-  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
 }
 
 .product .price dl {

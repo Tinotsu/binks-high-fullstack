@@ -23,11 +23,12 @@
 }
 
 .price__regular .price-item--regular {
-  margin: 20px; 
+  margin: 20px;
 }
 
 .price__prefix {
-  font-weight: normal; font-size: 1rem;
+  font-weight: normal;
+  font-size: 1rem;
 }
 
 .price__box {
@@ -80,9 +81,13 @@
 }
 
 .price--on-sale .price__sale {
-  display: initial;
+  gap: 5px;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
 
 .price--center {
@@ -109,15 +114,56 @@
   margin: 0 0.5rem 0 0;
 }
 
-@media screen and (max-width: 989px) {
-  .unit-price {
-    font-size: 1rem;
-  }
+.card_product_price {
+  border: #fc7c21 solid 2px;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.price_crossed {
+font-size: 1.2rem;
+display: flex;
+justify-content: flex-start;
+}
+
+.badge_and_price_crossed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page_product_variant_container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 10px; 
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
   align-items: center;
+  justify-content: space-between;
+}
+.main_product-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main_product_value {
+  font-size: 2.4rem;
+  font-weight: 900 !important;
+}
+.main_product_unit_price {
+  font-weight: 100 !important;
+}
+.main_product_meta {
+  position: absolute;
+  top: -8px;
+  background-color: #000;
+  color: #fff;
+  white-space: nowrap;
+  border-radius: 12px;
+  padding: 4px 8px;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+@media screen and (max-width: 989px) {
+  .unit-price {
+    font-size: 1rem;
+  }
 }
