@@ -369,6 +369,7 @@ a.product__text {
 
 .product .price .badge {
   margin-bottom: 0.5rem;
+  margin-top: 0.2rem;
 }
 
 .bold-price {

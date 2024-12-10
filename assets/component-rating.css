@@ -70,15 +70,15 @@
 }
 
 .info_section_size {
-  height: 100px;
+  height: auto;
+  min-height: 65px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
 }
 
 .button_section_size {
-  height: 120px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -143,6 +143,7 @@
 
 .evaluation_container {
   display: inline;
+  margin-top: 2px;
 }
 
 @media screen and (max-width: 989px) {

@@ -1,7 +1,7 @@
 .quick-add {
   position: relative;
   grid-row-start: 4;
-  margin: 0 0 1rem;
+  margin: 0 0 0.2rem;
   z-index: 1;
 }
 
@@ -200,6 +200,7 @@ quick-add-modal .product-form__buttons {
   padding: 0.8rem;
   min-width: 100%;
   box-sizing: border-box;
+  color: #fff;
 }
 
 @media screen and (max-width: 989px) {
