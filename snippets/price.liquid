@@ -51,9 +51,11 @@
         - div.price__sale: Displayed when a variant is a sale
     {%- endcomment -%}
     <div class="price__regular">
-      <span class="price__prefix">À partir de </span>
+      {%- if show_prefix != false -%}
+        <span class="price__prefix">À partir de </span>
+      {%- endif -%}
       <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-      <span class="price-item price-item--regular {% if bold_price %} bold-price {% endif %}">
+      <span class="price-item price-item--regular {% if bold_price %} bold-price {% endif %}{% if small_price %} quick-add__submit {% endif %}">
         {{ money_price }}
       </span>
     </div>

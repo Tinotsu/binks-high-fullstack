@@ -90,6 +90,12 @@
   font-size: 2rem;
 }
 
+.card_product_price_button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
 .price--center {
   display: initial;
   justify-content: center;
@@ -120,9 +126,9 @@
   border-radius: 6px;
 }
 .price_crossed {
-font-size: 1.2rem;
-display: flex;
-justify-content: flex-start;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .badge_and_price_crossed {

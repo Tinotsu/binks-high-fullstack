@@ -2679,10 +2679,10 @@ details-disclosure > details {
   border: 1px solid transparent;
   border-radius: var(--badge-corner-radius);
   display: inline-block;
-  font-size: 1rem;
+  font-size: 0.8rem;
   letter-spacing: 0.1rem;
   line-height: 1;
-  padding: 0.5rem 1rem 0.6rem 1rem;
+  padding: 0.4rem 0.8rem 0.3rem 0.8rem;
   text-align: center;
   background-color:  #ff0000;
   border-color: rgba(var(--color-badge-border), var(--alpha-badge-border));

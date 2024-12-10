@@ -435,7 +435,6 @@
                     price_class: 'price--large',  
                     bold_price: block.settings.price_weight 
                 -%}
-
               {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
                 {%- if block.settings.show_tax != true -%}
                   <div class="product__tax caption rte{% if block.settings.offdesk-bloc %} offdesk{% endif %}{% if block.settings.offmob-bloc %} offmob{% endif %}">
@@ -720,7 +719,9 @@
                               use_variant: true, 
                               show_badges: block.settings.show_badges, 
                               price_class: 'price--large',  
-                              bold_price: block.settings.price_weight 
+                              bold_price: block.settings.price_weight,
+                              show_badges: true,
+                              price__prefix: false
                             -%}
 
                           {%- else -%}
@@ -986,7 +987,6 @@
               endunless
             -%}
           {%- endfor -%}
-          </div>
           </div>
         </div>
       </div>

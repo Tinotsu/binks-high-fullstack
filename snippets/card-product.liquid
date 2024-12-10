@@ -25,6 +25,7 @@
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-variant-color-swatch.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'card-product.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 
 <!-- Calcul du ratio d'image -->
 
@@ -279,10 +280,18 @@
                         disabled
                       {% endif %}
                     >
-                      <span>
+                      <span class="card_product_price_button">
                         {%- if card_product.selected_or_first_available_variant.available -%}
                           Ajouter |
-                          {{ card_product.price | money_with_currency }}
+                          {%- render 'price',
+                            product: card_product,
+                            use_variant: true,
+                            show_badges: block.settings.show_badges,
+                            price_class: 'price--large',
+                            show_badges: true,
+                            show_prefix: false,
+                            small_price: true
+                          -%}
                         {%- else -%}
                           {{ 'products.product.sold_out' | t }}
                         {%- endif -%}
@@ -326,7 +335,7 @@
                           {% for variant in card_product.variants %}
                             <option
                               value="{{ variant.id }}"
-                              data-price="{{ variant.price | money }}"
+                              data-price="{{ variant.price | money }} {{ variant.compare_at_price | money_with_currency }}"
                               {% if variant == card_product.selected_or_first_available_variant.unit_price_measurement
                               %}
                                 selected
@@ -353,7 +362,7 @@
                           <span>
                             {%- if card_product.selected_or_first_available_variant.available -%}
                               Ajouter |&nbsp;<span class="price-display"></span>
-                              {{ variant.unit_price }}
+
                             {%- else -%}
                               {{ 'products.product.sold_out' | t }}
                             {%- endif -%}
