@@ -283,15 +283,8 @@
                       <span class="card_product_price_button">
                         {%- if card_product.selected_or_first_available_variant.available -%}
                           Ajouter |
-                          {%- render 'price',
-                            product: card_product,
-                            use_variant: true,
-                            show_badges: block.settings.show_badges,
-                            price_class: 'price--large',
-                            show_badges: true,
-                            show_prefix: false,
-                            small_price: true
-                          -%}
+                          <span class="compare-price">{{ card_product.compare_at_price | money }}</span>
+                          <span>{{ card_product.price | money }}</span>
                         {%- else -%}
                           {{ 'products.product.sold_out' | t }}
                         {%- endif -%}

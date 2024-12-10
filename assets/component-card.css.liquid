@@ -277,9 +277,10 @@
   overflow: hidden;
 }
 
+/*
 .card-information > * + * {
   margin-top: 0.5rem;
-}
+} */
 
 .card-information {
   width: 100%;
@@ -316,16 +317,13 @@
   height: 36px;
 }
 
-.card_titleandprice {
-  height: 60px;
-}
-
 @media screen and (max-width: 749px) {
   .card__heading {
     font-size: {{ settings.card_text-size | minus:2 }}px;
   }
   .card_title_container {
     font-size: 1.6rem;
-    height: 42px;
+    min-height: 42px;
+    height: auto;
   }
 }
