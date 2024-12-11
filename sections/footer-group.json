@@ -109,11 +109,26 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "image_eAHcgr": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image_svg": "",
+            "image_width": 50,
+            "alignment": "",
+            "offdesk-bloc": false,
+            "offmob-bloc": false,
+            "description_heading": "",
+            "description_subtext": "<p>Support disponible du lundi au samedi de 9h à 18h.</p><p><a href=\"mailto:info@binkscbd.fr\"><span style=\"text-decoration:underline\"> info@binkscbd.fr</span></a></p><p>+33 7 45 68 72 61</p>",
+            "text-offdesk-bloc": false,
+            "text-offmob-bloc": false
+          }
+        },
         "429343a9-6926-40c2-b0eb-7ee145cea279": {
           "type": "text",
           "settings": {
             "heading": "Contactez-nous",
-            "subtext": "<p>Support disponible du lundi au samedi de 9h à 18h.</p><p><a href=\"mailto:info@binkscbd.fr\"><span style=\"text-decoration:underline\"> info@binkscbd.fr</span></a></p><p><a href=\"https://wa.me/message/OC653TLCAGKKL1\" target=\"_blank\"><span style=\"text-decoration:underline\"> ‪+33 7 71 52 34 66‬</span></a></p>",
+            "subtext": "<p>Support disponible du lundi au samedi de 9h à 18h.</p><p><a href=\"mailto:info@binkscbd.fr\"><span style=\"text-decoration:underline\"> info@binkscbd.fr</span></a></p><p>+33 7 45 68 72 61</p>",
             "offdesk-bloc": false,
             "offmob-bloc": false
           }
@@ -152,6 +167,7 @@
         }
       },
       "block_order": [
+        "image_eAHcgr",
         "429343a9-6926-40c2-b0eb-7ee145cea279",
         "6d52be3d-3b80-4052-b9b0-966e4f47bba3",
         "62ece60f-0dee-4f3f-9998-e4a93f1c5230",

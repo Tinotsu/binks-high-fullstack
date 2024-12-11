@@ -314,14 +314,14 @@
               "color_scheme": "scheme-1",
               "type": "montant",
               "step0_text": "",
-              "step1_label": "Livraison gratuite Colissimo en Relais",
-              "step1_value": 39,
+              "step1_label": "Livraison gratuite Colissimo",
+              "step1_value": 69,
               "step1_text1": "Plus que",
               "step1_text2": "pour avoir la Livraison gratuite Colissimo en Relais",
-              "step2_label": "Livraison gratuite Colissimo à domicile",
-              "step2_value": 68,
-              "step2_text1": "Livraison gratuite Colissimo à domicile dès",
-              "step2_text2": "",
+              "step2_label": "10G Offerts",
+              "step2_value": 89,
+              "step2_text1": "Plus que",
+              "step2_text2": "pour recevoir 10G gratos",
               "step3_label": "",
               "step3_text1": "",
               "step3_text2": ""
@@ -384,6 +384,11 @@
       },
       "6607131285250420404": {
         "type": "shopify://apps/tagfly-gtm-tracking/blocks/app-embed-block/cc137db9-6e43-4e97-92fc-26c3df1983b0",
+        "disabled": false,
+        "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {}
       }

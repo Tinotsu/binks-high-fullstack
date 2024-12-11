@@ -7,6 +7,7 @@
   align-items: center;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
   white-space: nowrap;
+  font-size: 1rem;
 }
 
 .discounts__discount svg {
@@ -28,4 +29,7 @@
   width: 1.2rem;
   height: 1.2rem;
   margin-right: 0.7rem;
+}
+.discount_title {
+  margin-top: 0;
 }
