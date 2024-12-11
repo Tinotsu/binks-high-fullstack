@@ -532,7 +532,7 @@
     "featured_blog_tUbtBX": {
       "type": "featured-blog",
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "color_scheme_2": "",
         "blog": "news",
         "heading": "Nos derniers articles",

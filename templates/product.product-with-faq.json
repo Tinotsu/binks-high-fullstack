@@ -212,7 +212,7 @@
         "media_size": "small",
         "offdesk": false,
         "center-content-mobile": false,
-        "mobile_thumbnails": "show",
+        "mobile_thumbnails": "points",
         "offmob": false
       }
     },
