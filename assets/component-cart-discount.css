@@ -31,6 +31,7 @@ cart-discount {
   padding: 0 20px;
   width: max-content;
   position: relative;
+  border-radius: 4px;
 }
 
 .cart-discount_input-container {
@@ -40,12 +41,14 @@ cart-discount {
 
 .cart-discount_input {
   appearance: none;
-  border-radius: var(--inputs-radius);
+  border-radius: 4px;
   color: rgb(var(--color-foreground));
-  min-height: calc(4.5rem + var(--buttons-border-width) * 2);
-  border: var(--inputs-border-width) solid rgb(var(--color-foreground));
+  min-height: calc(3.5rem + var(--buttons-border-width) * 2);
+  border: 0.2px solid #5e5e5e;
   padding: 0 20px;
   width: 100%;
+  background-color: #1E1E1E;
+  font-size: 1.8rem;
 }
 
 .cart-discount_input:focus {

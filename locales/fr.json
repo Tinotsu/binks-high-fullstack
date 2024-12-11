@@ -301,7 +301,7 @@
       "empty": "Votre panier est vide",
       "cart_error": "Une erreur est survenue lors de l’actualisation de votre panier. Veuillez réessayer.",
       "cart_quantity_error_html": "Vous ne pouvez pas ajouter plus de {{ quantity }} de ce produit à votre panier.",
-      "subtotal": "Sous-total",
+      "subtotal": "Total",
       "taxes_included_and_shipping_policy_html": "Taxes incluses. Les <a href=\"{{ link }}\">frais de port</a> sont calculés lors du paiement.",
       "headings": {
         "product": "Produit",
@@ -511,7 +511,7 @@
       "tracking_url": "Lien de suivi",
       "tracking_company": "Transporteur",
       "tracking_number": "Numéro de suivi",
-      "subtotal": "Sous-total",
+      "subtotal": "Total",
       "total_duties": "Frais de douane",
       "total_refunded": "Remboursé"
     }
