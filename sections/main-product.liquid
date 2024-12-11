@@ -1,7 +1,7 @@
 <section id="MainProduct-{{ section.id }}" class="color-{{ section.settings.color_scheme }}{% if section.settings.offdesk %} offdesk{% endif %}{% if section.settings.offmob %} offmob{% endif %}" data-product-handle="{{ product.handle }}" data-section="{{ section.id }}">
 
   <script src="{{ 'stock-control.js' | asset_url }}" defer="defer"></script>
-  
+  <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
@@ -1097,8 +1097,6 @@
     }
   </script>
 
-  <script src="{{ 'card-product.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 </section>
 
 {% schema %}

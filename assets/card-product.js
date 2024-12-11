@@ -1,10 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const quantitySelectors = document.querySelectorAll('.quantity-selector');
+  const observer = new MutationObserver(() => {
+    const quantitySelectors = document.querySelectorAll('.quantity-selector');
+    if (quantitySelectors.length > 0) {
+      console.log('Elements found:', quantitySelectors);
+      observer.disconnect(); // Arrêter l'observation une fois les éléments trouvés
+      initScript(quantitySelectors); // Lancer ton script ici
+    }
+  });
 
+  observer.observe(document.body, { childList: true, subtree: true });
+});
+
+function initScript(quantitySelectors) {
   quantitySelectors.forEach((selector) => {
-    const container = selector.closest('.form_button_cart'); 
-    const addToCartButton = container.querySelector('.add-to-cart-button');
-    const priceDisplay = container.querySelector('.price-display');
+    const container = selector.closest('.form_button_cart');
+    const addToCartButton = container?.querySelector('.add-to-cart-button');
+    const priceDisplay = container?.querySelector('.price-display');
 
     if (selector && addToCartButton && priceDisplay) {
       const updateButtonText = () => {
@@ -13,10 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const selectedComparePrice = selectedOption.getAttribute('data-compare-price');
 
         if (selectedPrice || selectedComparePrice) {
-          // Clear existing content
           priceDisplay.innerHTML = '';
 
-          // Add compare price with styling if available
           if (selectedComparePrice) {
             const comparePriceSpan = document.createElement('span');
             comparePriceSpan.classList.add('compare-price');
@@ -24,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
             priceDisplay.appendChild(comparePriceSpan);
           }
 
-          // Add regular price
           if (selectedPrice) {
             const priceSpan = document.createElement('span');
             priceSpan.classList.add('current-price');
@@ -37,8 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
       };
 
       updateButtonText();
-
       selector.addEventListener('change', updateButtonText);
     }
   });
-});
+}
