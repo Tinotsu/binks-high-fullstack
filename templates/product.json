@@ -103,51 +103,6 @@
             "offmob-bloc": false
           }
         },
-        "ad281699-4c4a-4cb9-8d77-0aaef3e332ee": {
-          "type": "text",
-          "settings": {
-            "show_background_text": false,
-            "color_scheme": "",
-            "text": "Bloc de texte",
-            "text_style": "body",
-            "icon": "banana",
-            "custom_icon": "",
-            "margin": "avec",
-            "identificateur": "",
-            "offdesk-bloc": false,
-            "offmob-bloc": false
-          }
-        },
-        "babb6c55-c39e-48b0-a9ab-e952626e4b8f": {
-          "type": "collapsible_tab",
-          "settings": {
-            "open-default": true,
-            "heading": "Livraison et retours",
-            "icon": "question_mark",
-            "custom_icon": "",
-            "content": "<p>Partagez les informations de contact, les détails du magasin et le contenu de la marque avec vos clients.</p>",
-            "page": "",
-            "margin": "avec-haut",
-            "identificateur": "",
-            "offdesk-bloc": false,
-            "offmob-bloc": false
-          }
-        },
-        "d00ed246-d022-44b3-9f68-0f129c16b9cb": {
-          "type": "collapsible_tab",
-          "settings": {
-            "open-default": false,
-            "heading": "Caractéristiques techniques",
-            "icon": "check_mark",
-            "custom_icon": "",
-            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras luctus id metus sed interdum. Quisque venenatis leo commodo eros eleifend, non cursus magna blandit.</p>",
-            "page": "",
-            "margin": "none",
-            "identificateur": "",
-            "offdesk-bloc": false,
-            "offmob-bloc": false
-          }
-        },
         "9282aee9-f8ee-4672-ae8b-673b58058c5c": {
           "type": "web_stories",
           "settings": {}
@@ -161,9 +116,6 @@
         "ade0fe70-d169-4576-99d4-aacda71a3c74",
         "buy_buttons",
         "80b25149-0e7d-4001-b165-8295fbb7351d",
-        "ad281699-4c4a-4cb9-8d77-0aaef3e332ee",
-        "babb6c55-c39e-48b0-a9ab-e952626e4b8f",
-        "d00ed246-d022-44b3-9f68-0f129c16b9cb",
         "9282aee9-f8ee-4672-ae8b-673b58058c5c"
       ],
       "settings": {
@@ -188,13 +140,13 @@
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {
-        "color_scheme": "background-1",
+        "color_scheme": "scheme-2",
         "heading": "Vous pouvez également aimer",
         "description": "",
         "description_style": "body",
         "heading_tag": "h2",
         "heading_size": "h2",
-        "heading_alignment": "left",
+        "heading_alignment": "center",
         "products_to_show": 8,
         "image_ratio": "square",
         "show_secondary_image": true,
@@ -212,7 +164,7 @@
         "show_arrow_desktop": true,
         "columns_desktop": 4,
         "offdesk": false,
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "show_carrousel_mobile": false,
         "show_arrow_mobile": true,
         "columns_mobile": "2",
