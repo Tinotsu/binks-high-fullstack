@@ -394,7 +394,7 @@
                                     {{ discount.title }}
                                   </li>
                                 {%- endfor -%}
-                              </ul>sss
+                              </ul>
                             </div>
                             <cart-remove-button
                               id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
@@ -555,170 +555,6 @@
           </div>
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
-      </cart-drawer-items>
-      <div class="drawer__footer">
-        {% for block in section.blocks %}
-          {% if block.type == 'annonce' %}
-            {% if block.settings.text != blank %}
-              <div class="annonceContainer color-{{ block.settings.color_scheme }}">
-                <p>{{ block.settings.text }}</p>
-              </div>
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-
-        {%- assign hasUpsell = false -%}
-        {% for block in section.blocks %}
-          {% if block.type == 'upsell' %}
-            {%- assign hasUpsell = true -%}
-          {% endif %}
-        {% endfor %}
-
-        {%- if hasUpsell -%}
-          <div
-            class="cart-drawer-upsell-wrapper"
-            data-current-slide="0"
-            data-prev-slide="0"
-            data-next-slide="0"
-            data-vertical-margin="{{ section.settings.vertical_margin }}"
-          >
-            <button class="sliderButton" id="sliderPrev" onclick="prevSlide()">{% render 'icon-caret' %}</button>
-            <button class="sliderButton" id="sliderNext" onclick="nextSlide()">{% render 'icon-caret' %}</button>
-            {% for block in section.blocks %}
-              {% if block.type == 'upsell' %}
-                <div
-                  class="cart-drawer-upsell_container color-{{ block.settings.color_scheme }}"
-                  style="display: none;"
-                >
-                  <div class="cart-drawer-upsell_left">
-                    <form
-                      method="post"
-                      action="/cart/add"
-                      class="product-upsell-template"
-                      id="product-upsell-template-{{ forloop.index }}--{{section.id}}"
-                      accept-charset="UTF-8"
-                      class="form"
-                      enctype="multipart/form-data"
-                      novalidate="novalidate"
-                      data-type="add-upsell-to-cart-form"
-                    >
-                      <input type="hidden" name="form_type" value="product">
-                      <input type="hidden" name="utf8" value="✓">
-                      <input
-                        id="formUpsellId"
-                        type="hidden"
-                        name="id"
-                        value="{{ block.settings.product.selected_or_first_available_variant.id}}"
-                      >
-                      <div class="cart-drawer-upsell_image-container">
-                        <img
-                          src="{{ block.settings.product.featured_image | image_url }}"
-                          alt=""
-                          class="cart-drawer-upsell_image"
-                        >
-                      </div>
-                      <div class="cart-drawer-upsell_content">
-                        <div class="cart-drawer-upsell_content-titlePrice">
-                          <p
-                            class="cart-drawer-upsell_title"
-                            data-id="{{ block.settings.product.selected_or_first_available_variant.id}}"
-                          >
-                            {% if block.settings.title != blank %}
-                              {{ block.settings.title }}
-                            {% else %}
-                              {{ block.settings.product.title }}
-                            {% endif %}
-                          </p>
-                          <p class="cart-drawer-upsell_price">{{ block.settings.product.price | money }}</p>
-                        </div>
-                        {% if block.settings.product.variants.size > 1 %}
-                          <div class="cart-drawer-upsell_variant-selector-container">
-                            <select
-                              onchange="changeVariantEvent(this)"
-                              name="upsell-variant-selector"
-                              id="upsell-variant-selector"
-                              class="cart-drawer-upsell_variant-selector"
-                            >
-                              {% for variant in block.settings.product.variants %}
-                                {% if variant.available %}
-                                  <option
-                                    value="{{ variant.id }}"
-                                    {% if variant.id == block.settings.product.selected_or_first_available_variant.id %}
-                                      selected
-                                    {% endif %}
-                                  >
-                                    {{ variant.title }}
-                                  </option>
-                                {% endif %}
-                              {% endfor %}
-                            </select>
-                          </div>
-                        {% endif %}
-                      </div>
-                    </form>
-                  </div>
-                  <div class="cart-drawer-upsell_right">
-                    <button
-                      onclick="addUpsellToCart(this)"
-                      id="addUpsellToCart"
-                      name="add"
-                      class="cart-drawer-upsell_atc button"
-                      data-formid="{{ forloop.index }}"
-                      aria-haspopup="dialog"
-                    >
-                      <span>{{ block.settings.atc_content }}</span>
-                      <div class="loading-overlay__spinner hidden">
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          role="presentation"
-                          class="spinner"
-                          viewBox="0 0 66 66"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                        </svg>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        {%- endif -%}
-
-        {%- if settings.show_cart_note -%}
-          <details id="Details-CartDrawer">
-            <summary>
-              <span class="summary__title">
-                {{ 'sections.cart.note' | t }}
-                {% render 'icon-caret' %}
-              </span>
-            </summary>
-            <cart-note class="cart__note field">
-              <label class="visually-hidden" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
-              <textarea
-                id="CartDrawer-Note"
-                class="text-area text-area--resize-vertical field__input"
-                name="note"
-                placeholder="{{ 'sections.cart.note' | t }}"
-              >{{ cart.note }}</textarea>
-            </cart-note>
-          </details>
-        {%- endif -%}
-
-        <!-- Start blocks -->
-        <!-- Subtotals -->
-        {% comment %} boucle pour recuperer la sommes des compare at price de tout les items avec leurs quantités {% endcomment %}
-        {% assign totalCompareAtPrice = 0 %}
-        {% for lineItem in cart.items %}
-          {% if lineItem.variant.compare_at_price != blank %}
-            {% assign lineItemTotalCompareAtPrice = lineItem.variant.compare_at_price | times: lineItem.quantity %}
-          {% else %}
-            {% assign lineItemTotalCompareAtPrice = lineItem.original_line_price %}
-          {% endif %}
-          {% assign totalCompareAtPrice = totalCompareAtPrice | plus: lineItemTotalCompareAtPrice %}
-        {% endfor %}
 
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
           {%- for block in section.blocks -%}
@@ -820,24 +656,185 @@
 
           <hr class="checkout_line full_line">
 
+          {% for block in section.blocks %}
+            {% if block.type == 'annonce' %}
+              {% if block.settings.text != blank %}
+                <div class="annonceContainer color-{{ block.settings.color_scheme }}">
+                  <p>{{ block.settings.text }}</p>
+                </div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+  
+          {%- assign hasUpsell = false -%}
+          {% for block in section.blocks %}
+            {% if block.type == 'upsell' %}
+              {%- assign hasUpsell = true -%}
+            {% endif %}
+          {% endfor %}
+  
+          {%- if hasUpsell -%}
+            <div
+              class="cart-drawer-upsell-wrapper"
+              data-current-slide="0"
+              data-prev-slide="0"
+              data-next-slide="0"
+              data-vertical-margin="{{ section.settings.vertical_margin }}"
+            >
+              <button class="sliderButton" id="sliderPrev" onclick="prevSlide()">{% render 'icon-caret' %}</button>
+              <button class="sliderButton" id="sliderNext" onclick="nextSlide()">{% render 'icon-caret' %}</button>
+              {% for block in section.blocks %}
+                {% if block.type == 'upsell' %}
+                  <div
+                    class="cart-drawer-upsell_container color-{{ block.settings.color_scheme }}"
+                    style="display: none;"
+                  >
+                    <div class="cart-drawer-upsell_left">
+                      <form
+                        method="post"
+                        action="/cart/add"
+                        class="product-upsell-template"
+                        id="product-upsell-template-{{ forloop.index }}--{{section.id}}"
+                        accept-charset="UTF-8"
+                        class="form"
+                        enctype="multipart/form-data"
+                        novalidate="novalidate"
+                        data-type="add-upsell-to-cart-form"
+                      >
+                        <input type="hidden" name="form_type" value="product">
+                        <input type="hidden" name="utf8" value="✓">
+                        <input
+                          id="formUpsellId"
+                          type="hidden"
+                          name="id"
+                          value="{{ block.settings.product.selected_or_first_available_variant.id}}"
+                        >
+                        <div class="cart-drawer-upsell_image-container">
+                          <img
+                            src="{{ block.settings.product.featured_image | image_url }}"
+                            alt=""
+                            class="cart-drawer-upsell_image"
+                          >
+                        </div>
+                        <div class="cart-drawer-upsell_content">
+                          <div class="cart-drawer-upsell_content-titlePrice">
+                            <p
+                              class="cart-drawer-upsell_title"
+                              data-id="{{ block.settings.product.selected_or_first_available_variant.id}}"
+                            >
+                              {% if block.settings.title != blank %}
+                                {{ block.settings.title }}
+                              {% else %}
+                                {{ block.settings.product.title }}
+                              {% endif %}
+                            </p>
+                            <p class="cart-drawer-upsell_price">{{ block.settings.product.price | money }}</p>
+                          </div>
+                          {% if block.settings.product.variants.size > 1 %}
+                            <div class="cart-drawer-upsell_variant-selector-container">
+                              <select
+                                onchange="changeVariantEvent(this)"
+                                name="upsell-variant-selector"
+                                id="upsell-variant-selector"
+                                class="cart-drawer-upsell_variant-selector"
+                              >
+                                {% for variant in block.settings.product.variants %}
+                                  {% if variant.available %}
+                                    <option
+                                      value="{{ variant.id }}"
+                                      {% if variant.id == block.settings.product.selected_or_first_available_variant.id %}
+                                        selected
+                                      {% endif %}
+                                    >
+                                      {{ variant.title }}
+                                    </option>
+                                  {% endif %}
+                                {% endfor %}
+                              </select>
+                            </div>
+                          {% endif %}
+                        </div>
+                      </form>
+                    </div>
+                    <div class="cart-drawer-upsell_right">
+                      <button
+                        onclick="addUpsellToCart(this)"
+                        id="addUpsellToCart"
+                        name="add"
+                        class="cart-drawer-upsell_atc button"
+                        data-formid="{{ forloop.index }}"
+                        aria-haspopup="dialog"
+                      >
+                        <span>{{ block.settings.atc_content }}</span>
+                        <div class="loading-overlay__spinner hidden">
+                          <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            role="presentation"
+                            class="spinner"
+                            viewBox="0 0 66 66"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                          </svg>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {%- endif -%}
+  
+          {%- if settings.show_cart_note -%}
+            <details id="Details-CartDrawer">
+              <summary>
+                <span class="summary__title">
+                  {{ 'sections.cart.note' | t }}
+                  {% render 'icon-caret' %}
+                </span>
+              </summary>
+              <cart-note class="cart__note field">
+                <label class="visually-hidden" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
+                <textarea
+                  id="CartDrawer-Note"
+                  class="text-area text-area--resize-vertical field__input"
+                  name="note"
+                  placeholder="{{ 'sections.cart.note' | t }}"
+                >{{ cart.note }}</textarea>
+              </cart-note>
+            </details>
+          {%- endif -%}
+  
+          <!-- Start blocks -->
+          <!-- Subtotals -->
+          {% comment %} boucle pour recuperer la sommes des compare at price de tout les items avec leurs quantités {% endcomment %}
+          {% assign totalCompareAtPrice = 0 %}
+          {% for lineItem in cart.items %}
+            {% if lineItem.variant.compare_at_price != blank %}
+              {% assign lineItemTotalCompareAtPrice = lineItem.variant.compare_at_price | times: lineItem.quantity %}
+            {% else %}
+              {% assign lineItemTotalCompareAtPrice = lineItem.original_line_price %}
+            {% endif %}
+            {% assign totalCompareAtPrice = totalCompareAtPrice | plus: lineItemTotalCompareAtPrice %}
+          {% endfor %}
+
           <div class="cart_reduction_container">
             <div class="discount_container">
               <p class="discount_title">Remises</p>
-              <ul>
-                {%- for item in cart.items -%}
-                  <li>{{ item.product.title }}</li>
+              {%- for item in cart.items -%}
+                {%- for discount in item.discounts -%}
+                  <li class="discounts__discount all_discounts">
+                    {%- render 'icon-discount' -%}
+                    {{ discount.title }}
+                  </li>
                 {%- endfor -%}
-              </ul>
-              
-
-              
-
+              {%- endfor -%}
             </div>
-            {% if totalCompareAtPrice > cart.total_price %}
+            {% if cart.totalCompareAtPrice > cart.total_price %}
               <s class="totals__subtotal-value">{{ totalCompareAtPrice | money_with_currency }}</s>
             {% endif %}
           </div>
-          
 
           <hr class="checkout_line">
 
@@ -876,6 +873,9 @@
             </small>
           -->
         </div>
+      </cart-drawer-items>
+      <div class="drawer__footer">
+
 
         <!-- CTAs -->
 
