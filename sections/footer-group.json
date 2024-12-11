@@ -97,12 +97,12 @@
         "columns_desktop": 4,
         "swipe_on_desktop": true,
         "show_carrousel_desktop": false,
-        "show_arrow_desktop": true,
+        "show_arrow_desktop": false,
         "offdesk": false,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
         "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
+        "show_arrow_mobile": false,
         "offmob": false
       }
     },
