@@ -300,6 +300,24 @@
       "cart-drawer": {
         "type": "cart-drawer",
         "blocks": {
+          "upsell_tyJ8Hc": {
+            "type": "upsell",
+            "settings": {
+              "color_scheme": "scheme-b4308dfb-e745-48eb-ad2c-4e375e5efbad",
+              "product": "ocb-slim",
+              "title": "",
+              "atc_content": "Ajouter"
+            }
+          },
+          "upsell_di7K7K": {
+            "type": "upsell",
+            "settings": {
+              "color_scheme": "scheme-b4308dfb-e745-48eb-ad2c-4e375e5efbad",
+              "product": "briquet",
+              "title": "",
+              "atc_content": "Ajouter"
+            }
+          },
           "discount_code_cCFW77": {
             "type": "discount_code",
             "settings": {
@@ -329,6 +347,8 @@
           }
         },
         "block_order": [
+          "upsell_tyJ8Hc",
+          "upsell_di7K7K",
           "discount_code_cCFW77",
           "progress_nLacTJ"
         ],

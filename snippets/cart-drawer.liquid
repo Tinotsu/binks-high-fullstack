@@ -556,6 +556,127 @@
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
 
+        {%- assign hasUpsell = false -%}
+        {% for block in section.blocks %}
+          {% if block.type == 'upsell' %}
+            {%- assign hasUpsell = true -%}
+          {% endif %}
+        {% endfor %}
+        {%- if hasUpsell -%}
+          <div class="title_upsell">T'as pensé à ça ?</div>
+          <div
+            class="cart-drawer-upsell-wrapper"
+            data-current-slide="0"
+            data-prev-slide="0"
+            data-next-slide="0"
+            data-vertical-margin="{{ section.settings.vertical_margin }}"
+          >
+            <button class="sliderButton" id="sliderPrev" onclick="prevSlide()">{% render 'icon-caret' %}</button>
+            <button class="sliderButton" id="sliderNext" onclick="nextSlide()">{% render 'icon-caret' %}</button>
+            {% for block in section.blocks %}
+              {% if block.type == 'upsell' %}
+                <div
+                  class="cart-drawer-upsell_container color-{{ block.settings.color_scheme }}"
+                  style="display: flex;"
+                >
+                  <div class="cart-drawer-upsell_left">
+                    <form
+                      method="post"
+                      action="/cart/add"
+                      class="product-upsell-template"
+                      id="product-upsell-template-{{ forloop.index }}--{{section.id}}"
+                      accept-charset="UTF-8"
+                      class="form"
+                      enctype="multipart/form-data"
+                      novalidate="novalidate"
+                      data-type="add-upsell-to-cart-form"
+                    >
+                      <input type="hidden" name="form_type" value="product">
+                      <input type="hidden" name="utf8" value="✓">
+                      <input
+                        id="formUpsellId"
+                        type="hidden"
+                        name="id"
+                        value="{{ block.settings.product.selected_or_first_available_variant.id}}"
+                      >
+                      <div class="cart-drawer-upsell_image-container">
+                        <img
+                          src="{{ block.settings.product.featured_image | image_url }}"
+                          alt=""
+                          class="cart-drawer-upsell_image"
+                        >
+                      </div>
+                      <div class="cart-drawer-upsell_content">
+                        <div class="cart-drawer-upsell_content-titlePrice">
+                          <p
+                            class="cart-drawer-upsell_title"
+                            data-id="{{ block.settings.product.selected_or_first_available_variant.id}}"
+                          >
+                            {% if block.settings.title != blank %}
+                              {{ block.settings.title }}
+                            {% else %}
+                              {{ block.settings.product.title }}
+                            {% endif %}
+                          </p>
+                          <p class="cart-drawer-upsell_price">{{ block.settings.product.price | money }}</p>
+                        </div>
+                        {% if block.settings.product.variants.size > 1 %}
+                          <div class="cart-drawer-upsell_variant-selector-container">
+                            <select
+                              onchange="changeVariantEvent(this)"
+                              name="upsell-variant-selector"
+                              id="upsell-variant-selector"
+                              class="cart-drawer-upsell_variant-selector"
+                            >
+                              {% for variant in block.settings.product.variants %}
+                                {% if variant.available %}
+                                  <option
+                                    value="{{ variant.id }}"
+                                    {% if variant.id == block.settings.product.selected_or_first_available_variant.id %}
+                                      selected
+                                    {% endif %}
+                                  >
+                                    {{ variant.title }}
+                                  </option>
+                                {% endif %}
+                              {% endfor %}
+                            </select>
+                          </div>
+                        {% endif %}
+                      </div>
+                    </form>
+                  </div>
+                  <div class="cart-drawer-upsell_right">
+                    <button
+                      onclick="addUpsellToCart(this)"
+                      id="addUpsellToCart"
+                      name="add"
+                      class="cart-drawer-upsell_atc button"
+                      data-formid="{{ forloop.index }}"
+                      aria-haspopup="dialog"
+                    >
+                      <span>{{ block.settings.atc_content }}</span>
+                      <div class="loading-overlay__spinner hidden">
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          role="presentation"
+                          class="spinner"
+                          viewBox="0 0 66 66"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {%- endif -%}
+
+
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
           {%- for block in section.blocks -%}
             {%- if block.type == 'discount_code' -%}
@@ -666,126 +787,6 @@
             {% endif %}
           {% endfor %}
   
-          {%- assign hasUpsell = false -%}
-          {% for block in section.blocks %}
-            {% if block.type == 'upsell' %}
-              {%- assign hasUpsell = true -%}
-            {% endif %}
-          {% endfor %}
-  
-          {%- if hasUpsell -%}
-            <div
-              class="cart-drawer-upsell-wrapper"
-              data-current-slide="0"
-              data-prev-slide="0"
-              data-next-slide="0"
-              data-vertical-margin="{{ section.settings.vertical_margin }}"
-            >
-              <button class="sliderButton" id="sliderPrev" onclick="prevSlide()">{% render 'icon-caret' %}</button>
-              <button class="sliderButton" id="sliderNext" onclick="nextSlide()">{% render 'icon-caret' %}</button>
-              {% for block in section.blocks %}
-                {% if block.type == 'upsell' %}
-                  <div
-                    class="cart-drawer-upsell_container color-{{ block.settings.color_scheme }}"
-                    style="display: none;"
-                  >
-                    <div class="cart-drawer-upsell_left">
-                      <form
-                        method="post"
-                        action="/cart/add"
-                        class="product-upsell-template"
-                        id="product-upsell-template-{{ forloop.index }}--{{section.id}}"
-                        accept-charset="UTF-8"
-                        class="form"
-                        enctype="multipart/form-data"
-                        novalidate="novalidate"
-                        data-type="add-upsell-to-cart-form"
-                      >
-                        <input type="hidden" name="form_type" value="product">
-                        <input type="hidden" name="utf8" value="✓">
-                        <input
-                          id="formUpsellId"
-                          type="hidden"
-                          name="id"
-                          value="{{ block.settings.product.selected_or_first_available_variant.id}}"
-                        >
-                        <div class="cart-drawer-upsell_image-container">
-                          <img
-                            src="{{ block.settings.product.featured_image | image_url }}"
-                            alt=""
-                            class="cart-drawer-upsell_image"
-                          >
-                        </div>
-                        <div class="cart-drawer-upsell_content">
-                          <div class="cart-drawer-upsell_content-titlePrice">
-                            <p
-                              class="cart-drawer-upsell_title"
-                              data-id="{{ block.settings.product.selected_or_first_available_variant.id}}"
-                            >
-                              {% if block.settings.title != blank %}
-                                {{ block.settings.title }}
-                              {% else %}
-                                {{ block.settings.product.title }}
-                              {% endif %}
-                            </p>
-                            <p class="cart-drawer-upsell_price">{{ block.settings.product.price | money }}</p>
-                          </div>
-                          {% if block.settings.product.variants.size > 1 %}
-                            <div class="cart-drawer-upsell_variant-selector-container">
-                              <select
-                                onchange="changeVariantEvent(this)"
-                                name="upsell-variant-selector"
-                                id="upsell-variant-selector"
-                                class="cart-drawer-upsell_variant-selector"
-                              >
-                                {% for variant in block.settings.product.variants %}
-                                  {% if variant.available %}
-                                    <option
-                                      value="{{ variant.id }}"
-                                      {% if variant.id == block.settings.product.selected_or_first_available_variant.id %}
-                                        selected
-                                      {% endif %}
-                                    >
-                                      {{ variant.title }}
-                                    </option>
-                                  {% endif %}
-                                {% endfor %}
-                              </select>
-                            </div>
-                          {% endif %}
-                        </div>
-                      </form>
-                    </div>
-                    <div class="cart-drawer-upsell_right">
-                      <button
-                        onclick="addUpsellToCart(this)"
-                        id="addUpsellToCart"
-                        name="add"
-                        class="cart-drawer-upsell_atc button"
-                        data-formid="{{ forloop.index }}"
-                        aria-haspopup="dialog"
-                      >
-                        <span>{{ block.settings.atc_content }}</span>
-                        <div class="loading-overlay__spinner hidden">
-                          <svg
-                            aria-hidden="true"
-                            focusable="false"
-                            role="presentation"
-                            class="spinner"
-                            viewBox="0 0 66 66"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                          </svg>
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          {%- endif -%}
-  
           {%- if settings.show_cart_note -%}
             <details id="Details-CartDrawer">
               <summary>
@@ -833,7 +834,7 @@
             </div>
             {% if cart.totalCompareAtPrice > cart.total_price %}
               <s class="totals__subtotal-value">{{ totalCompareAtPrice | money_with_currency }}</s>
-            {% endif %}
+            {% endif %}hhh
           </div>
 
           <hr class="checkout_line">

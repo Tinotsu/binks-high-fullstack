@@ -81,7 +81,7 @@
   position: relative;
   margin-left: -1.5rem;
   padding: 0 1.5rem;
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
+ /* border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2); */
 }
 
 .sliderButton {
@@ -175,6 +175,8 @@ img.cart-drawer-upsell_image {
   justify-content: space-between;
   margin-left: 20px;
   margin-right: 20px;
+  background-color: #121212;
+  border-radius: 9px;
 }
 
 .cart-drawer-upsell_content {

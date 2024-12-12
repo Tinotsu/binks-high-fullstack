@@ -33,7 +33,10 @@
         },
         "04e9c93f-dd57-4135-9fbe-97a167028de6": {
           "type": "subtotal",
-          "settings": { "offdesk-bloc": false, "offmob-bloc": false }
+          "settings": {
+            "offdesk-bloc": false,
+            "offmob-bloc": false
+          }
         },
         "discount_code_JtUUbh": {
           "type": "discount_code",
@@ -60,51 +63,15 @@
       ],
       "settings": {
         "identificateur": "class",
-        "color_scheme": "",
+        "color_scheme": "scheme-3",
         "padding_top": 36,
         "padding_bottom": 36,
         "offdesk": false,
         "offmob": false
       }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "all",
-        "color_scheme": "background-1",
-        "title": "Collection en vedette",
-        "heading_tag": "h2",
-        "heading_size": "h1",
-        "heading_alignment": "left",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "products_to_show": 4,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "image_ratio": "square",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": true,
-        "enable_btn_card_product": true,
-        "enable_color_swatch": false,
-        "type_btn_card_product": "enable_quick_add",
-        "button_style_secondary": true,
-        "identificateur": "class",
-        "padding_top": 30,
-        "padding_bottom": 30,
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "show_carrousel_desktop": false,
-        "show_arrow_desktop": true,
-        "offdesk": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "show_carrousel_mobile": false,
-        "show_arrow_mobile": true,
-        "offmob": false
-      }
     }
   },
-  "order": ["main-cart", "featured-collection"]
+  "order": [
+    "main-cart"
+  ]
 }

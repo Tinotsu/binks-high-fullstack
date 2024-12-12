@@ -31,7 +31,6 @@ cart-discount {
   padding: 0 20px;
   width: max-content;
   position: relative;
-  border-radius: 4px;
 }
 
 .cart-discount_input-container {
@@ -41,7 +40,7 @@ cart-discount {
 
 .cart-discount_input {
   appearance: none;
-  border-radius: 4px;
+  border-radius: 9px;
   color: rgb(var(--color-foreground));
   min-height: calc(3.5rem + var(--buttons-border-width) * 2);
   border: 0.2px solid #5e5e5e;

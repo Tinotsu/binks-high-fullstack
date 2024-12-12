@@ -446,6 +446,7 @@ cart-drawer-items::-webkit-scrollbar-track-piece {
 .quantity_total {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 .remove_button {
   background: none;
@@ -476,4 +477,12 @@ cart-drawer-items::-webkit-scrollbar-track-piece {
   flex-direction: column;
   align-items: start;
   justify-content: start;
+}
+
+.title_upsell {
+  color: #fff;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
 }
