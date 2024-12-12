@@ -571,8 +571,10 @@
             data-next-slide="0"
             data-vertical-margin="{{ section.settings.vertical_margin }}"
           >
+          <!--
             <button class="sliderButton" id="sliderPrev" onclick="prevSlide()">{% render 'icon-caret' %}</button>
             <button class="sliderButton" id="sliderNext" onclick="nextSlide()">{% render 'icon-caret' %}</button>
+          -->
             {% for block in section.blocks %}
               {% if block.type == 'upsell' %}
                 <div
