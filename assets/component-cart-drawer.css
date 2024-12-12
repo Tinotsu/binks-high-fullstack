@@ -226,7 +226,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-item__image {
-  max-width: 100%;
+  max-width: 120px;
 }
 
 .cart-drawer .cart-items thead {

@@ -628,7 +628,7 @@
                     </div>
                   </cart-discount>
 
-                {%- when 'subtotal' -%}
+                {%- when 'subtotal' -%}ss
                   {% assign totalCompareAtPrice = 0 %}
                   {% for lineItem in cart.items %}
                     {% if lineItem.variant.compare_at_price != blank %}

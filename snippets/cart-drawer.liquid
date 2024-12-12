@@ -37,7 +37,7 @@
   }
 
   .drawer__cart-items-wrapper {
-    padding: 2rem {{ section.settings.horizontal_margin }}px!important;
+    padding: 2rem 15px 2rem 0px!important;
   }
 
   .annonceContainer {
@@ -298,7 +298,7 @@
                             <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true"> </a>
                             <img
                               class="cart-item__image"
-                              src="{{ item.image | image_url: width: 300 }}"
+                              src="{{ item.image | image_url: width: 400 }}"
                               alt="{{ item.image.alt | escape }}"
                               loading="lazy"
                               width="150"
@@ -676,7 +676,6 @@
           </div>
         {%- endif -%}
 
-
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
           {%- for block in section.blocks -%}
             {%- if block.type == 'discount_code' -%}
@@ -786,7 +785,7 @@
               {% endif %}
             {% endif %}
           {% endfor %}
-  
+
           {%- if settings.show_cart_note -%}
             <details id="Details-CartDrawer">
               <summary>
@@ -806,7 +805,7 @@
               </cart-note>
             </details>
           {%- endif -%}
-  
+
           <!-- Start blocks -->
           <!-- Subtotals -->
           {% comment %} boucle pour recuperer la sommes des compare at price de tout les items avec leurs quantités {% endcomment %}
@@ -832,9 +831,11 @@
                 {%- endfor -%}
               {%- endfor -%}
             </div>
-            {% if cart.totalCompareAtPrice > cart.total_price %}
-              <s class="totals__subtotal-value">{{ totalCompareAtPrice | money_with_currency }}</s>
-            {% endif %}hhh
+            <div class="totals__subtotal-values">
+              {% if totalCompareAtPrice > cart.total_price %}
+                <s class="totals__subtotal-value">{{ totalCompareAtPrice | money_with_currency }}</s>
+              {% endif %}
+            </div>
           </div>
 
           <hr class="checkout_line">
@@ -876,8 +877,6 @@
         </div>
       </cart-drawer-items>
       <div class="drawer__footer">
-
-
         <!-- CTAs -->
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
